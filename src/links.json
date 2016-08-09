@@ -1,5 +1,12 @@
 {
   "sugos": "https://github.com/realglobe-Inc/sugos",
+  "sugo-hub": "https://github.com/realglobe-Inc/sugo-hub",
+  "sugo-actor": "https://github.com/realglobe-Inc/sugo-actor",
+  "sugo-caller": "https://github.com/realglobe-Inc/sugo-caller",
+  "sugo": "https://github.com/realglobe-Inc/sugos",
   "realglobe": "http://realglobe.jp/",
-  "node": "https://nodejs.org/en/"
+  "node": "https://nodejs.org/en/",
+  "promise": "https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+  "socket-io": "http://socket.io/",
+  "event-emitter": "https://nodejs.org/api/events.html#events_events"
 }
