@@ -1,0 +1,52 @@
+{
+  "name": "sugos-tutorial",
+  "version": "1.0.0",
+  "description": "Tutorial for SUGOS",
+  "main": "lib",
+  "scripts": {
+    "test": "./ci/test.js",
+    "prepublish": "./ci/build.js && ./ci/assets.js"
+  },
+  "repository": "realglobe-Inc/sugos-tutorial",
+  "keywords": [
+    "SUGOS",
+    "tutorial"
+  ],
+  "author": {
+    "name": "Taka Okunishi",
+    "email": "okunishitaka.com@gmail.com",
+    "url": "http://okunishitaka.com"
+  },
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/realglobe-Inc/sugos-tutorial/issues"
+  },
+  "homepage": "https://github.com/realglobe-Inc/sugos-tutorial#readme",
+  "dependencies": {
+    "co": "^4.6.0"
+  },
+  "devDependencies": {
+    "aglob": "^1.0.1",
+    "ape-covering": "^3.0.3",
+    "ape-formatting": "^1.0.2",
+    "ape-releasing": "^4.0.1",
+    "ape-reporting": "^3.0.1",
+    "ape-tasking": "^4.0.3",
+    "ape-testing": "^4.0.1",
+    "ape-tmpl": "^5.0.12",
+    "ape-updating": "^4.0.4",
+    "coz": "^6.0.5",
+    "filecopy": "^2.0.2",
+    "injectmock": "^2.0.0",
+    "sugos-assets": "^2.0.3",
+    "sugos-index": "^1.0.3",
+    "unorm": "^1.4.1"
+  },
+  "engines": {
+    "node": ">=6",
+    "npm": ">=3"
+  },
+  "publishConfig": {
+    "registry": "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-local"
+  }
+}

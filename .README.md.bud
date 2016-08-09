@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+'use strict'
+
+const path = require('path')
+const aglob = require('aglob')
+const unorm = require('unorm')
+
+module.exports = {
+  force: true,
+  mode: '444',
+  data: {
+    pkg: require('./package.json'),
+    get drafts () {
+      let contents = (pattern) => aglob.sync(pattern, {
+        cwd: __dirname
+      }).map((filename) => ({
+        name: path.basename(filename, '.md'),
+        filename: path.join(path.dirname(filename), encodeURIComponent(unorm.nfc(path.basename(filename, '.md'))) + '.md')
+      }))
+      return [
+        { title: 'Ja Contents', contents: contents('dist/markdown/ja/*.md') },
+      ]
+    }
+  }
+}
+
+if (!module.parent) {
+  require('coz').render(__filename)
+}

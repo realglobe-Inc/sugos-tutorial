@@ -1,0 +1,15 @@
+{{pkg.name}}
+=============
+
+{{pkg.description}}
+
+{{#each drafts}}
+
+{{{title}}}
+---------
+
+{{#each contents}}
++ [{{name}}]({{{filename}}})
+{{/each}}
+
+{{/each}}
