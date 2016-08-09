@@ -8,5 +8,7 @@
   "node": "https://nodejs.org/en/",
   "promise": "https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise",
   "socket-io": "http://socket.io/",
-  "event-emitter": "https://nodejs.org/api/events.html#events_events"
+  "koa": "https://github.com/koajs/koa",
+  "event-emitter": "https://nodejs.org/api/events.html#events_events",
+  "async-await": "https://github.com/yortus/asyncawait#guide-to-asyncawait-v10"
 }

@@ -1,18 +1,18 @@
 # 【SUGOS】チュートリアル001: SUGOSことはじめ
 
 
-### これはなんですか
+## これはなにか
 
 [SUGOS]({{{links.sugos}}})とは
 
-+ RPC(Remote Procedure Call)フレームワーク
-+ モジュール定義を動的に共有することで、ネットワーク透過的な関数呼び出しを実現する
++ High-levelなRPC(Remote Procedure Call)フレームワーク
++ Module定義を動的に共有することで、ネットワーク透過的な関数呼び出しを実現する
 + 主に[Node.js]({{{links.node}}})で実装されている
 + [EventEmitter]({{{links.eventemitter}}})形式による双方向通信をサポート
 + [株式会社リアルグローブ]({{{links.realglobe}}})が開発
 
 
-### できること
+## これでできること
 
 SUGOSを使うと、あるクライアント上で定義した関数が、他のクライアントからいきなり使えるようになります。
 
@@ -21,10 +21,10 @@ SUGOSを使うと、あるクライアント上で定義した関数が、他の
 />
 
 
-例えば、宣言側クライアント（Actor) に置いて
+例えば、宣言側クライアント（Actor) において、
 
-+ メソッドを持つモジュールを宣言 ( `tableTennis#ping` )
-+ クライアント名(key)を宣言し、hubサーバに接続 ( `my-actor-01@example.sugo-hub.com` )
++ メソッドを持つModuleを宣言 ( `tableTennis#ping` )
++ クライアント名(key)を宣言し、仲介となるhubサーバに接続 ( `my-actor-01@example.sugo-hub.com` )
 
 ```javascript
 {{{read 'example/simple-actor.js'}}}
@@ -32,30 +32,48 @@ SUGOSを使うと、あるクライアント上で定義した関数が、他の
 
 すると、
 
-同じhubサーバに接続した呼び出し側クライアント (Caller)がActorにアクセスできるようになります。
+同じhubサーバに接続した呼び出し側クライアント (Caller)から、Actorが提供するModuleにアクセスできるようになります。
 
 
 ```javascript
 {{{read 'example/simple-caller.js'}}}
 ```
 
-メソッド呼び出しは基本的にJavascriptの[Promise]({{{links.promise}}})を介して行われ、
-ネットワーク越してあることをあまり意識せずに使えるようになっています
-
+`.ping()`自体はCaller側のJavascriptではどこにも宣言されていませんが、Actorから受け取った定義を基にして動的に生成されます。
 
 また、一方的な関数呼び出しだけではなく、 Node.jsの[EventEmitter]({{{links.event-emitter}}})を用いたイベント通知もサポートしています。
 
 
+## これはどういう仕組みか
 
-### どういう仕組みか
+### 主なコンポネーント
 
-基本的には[Socket.IO]({{{links.socket-io}}})のラッパーです。
-
-+ 中央サーバである[SUGO-Hub]({{{links.sugo-hub}}})がWebSocket通信で、定義の共有や命令の中継を行なう
-+ 提供側クライアントである[SUGO-Actor]({{{links.sugo-actor}}})が、モジュール定義の通知や、命令実行を行なう
-+ 実行側クライアントである[SUGO-Caller]({{{links.sugo-actor}}})が、モジュール定義に沿って動的生成や、命令の呼び出しを行なう
-
-
-
+| コンポーネント | 役割 |
+| ------------ | :---: |
+| [SUGO-Hub]({{{links.sugo-hub}}}) | ActorとCallerの通信をとり持つサーバ。内部的には[Socket.IO]({{{links.socket-io}}})と[Koa]({{{links.koa}}})を利用している |
+| [SUGO-Actor]({{{links.sugo-actor}}}) | 関数実行を担うクライアント。`key`によって一意に識別される。 |
+| [SUGO-Caller]({{{links.sugo-caller}}}) | 関数呼び出しを担うクライアント。接続先のActorに合わせて動的にJavascriptの関数を生成する |
 
 
+ActorとCallerはそれぞれWebSocketでHubと接続します。
+Callerは接続時にActorからModuleの定義情報を受け取り、それを元にJavascript関数を動的に生成します。
+
+Caller側で関数を実行すると、関数名や引数などの情報が裏でJSONに変換され、Hubを介して接続先のActorに届きます。
+Actor側では受けとった情報を元に対象の関数を呼び出し、その結果をまたCaller側に返します。
+
+それぞれの関数はJavascriptの[async/await](https://github.com/yortus/asyncawait#guide-to-asyncawait-v10)を沿って実装されており、
+ネットワークの時差をあまり意識せずにプログラムがかけるようになっています。
+
+## これの利点
+
++ 機能単位でWebアプリケーション設計が簡単
++ ネットワークをあまり意識しなくていい
++ Javascriptだけで直感的にかける
+
+## これに関するリンク
+
++ [SUGOS]({{{links.sugos}}}
++ [SUGO-Hub]({{{links.sugo-hub}}}
++ [SUGO-Actor]({{{links.sugo-actor}}}
++ [SUGO-Caller]({{{links.sugo-caller}}}
++ [Realglobe,Inc]({{{links.realglobe}}}
