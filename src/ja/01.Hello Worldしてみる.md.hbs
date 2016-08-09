@@ -2,7 +2,7 @@
 
 
 このチュートリアルでは、SUGOSを使ったもっとも簡単な例を実装します。
-Actor側で定義し、関数をCallerから呼び出すところまでをやります
+Actor側で定義し、関数をCallerから呼び出すところまでをやります。
 
 ## 事前準備
 
@@ -21,7 +21,7 @@ SUGOSは基本的にNode.js上で稼働します。 [nvm]({{{nvm}}})などを利
 {{{read 'example/tutorial-01/init-project.sh'}}}
 ```
 
-次に、必要なパッケージをインストールします
+次に、必要なパッケージをインストールします。
 
 
 ```bash
@@ -51,22 +51,22 @@ Nodeで実行します。
 ### Moduleを宣言する
 
 次にActorにつなぐためのModuleを宣言します。
-ここではPingを打つとPongを返すだけの簡単間のを用意します。
+ここではPingを打つとPongを返すだけの簡単なものを用意します。
 
 **modules/table-tennis.js**
 ```javascript
-{{{read 'example/tutorial-01/modules/tabel-tennis.js'}}}
+{{{read 'example/tutorial-01/modules/table-tennis.js'}}}
 ```
 
 モジュールで宣言したメソッドは後でActorを通じてCaller側に公開されます。
 
-なお、メソッドの戻り値に[Promise]({{{links.promise}}}オブジェクトを渡すことで非同期に処理を扱えるようになります。
+なお、メソッドの戻り値に[Promise]({{{links.promise}}})オブジェクトを渡すことで非同期に処理を扱えるようになります。
 ここではより直感的な記述的にするために、[co]({{{links.co}}})パッケージを利用しています。
 
 
 ### ActorにModuleを載せてHubにつなぐ
 
-Moduleが用意できたら、それを[SUGO-Actor]({{{links.sugo-actor}}}に載せます。
+Moduleが用意できたら、それを[SUGO-Actor]({{{links.sugo-actor}}})に載せます。
 
 接続先となるhubのhost名と、自身の識別子となる`key`項目、使うモジュールを渡してactorインスタンスを生成します。
 
@@ -94,8 +94,17 @@ Callerからは`.connect()`メッソドに、keyを指定することで特定�
 
 このスクリプトを実行し、無事pongが帰ってきたら成功です。
 
+## まとめ
+
++ hub / actor / callerの三つで最小構成となる
++ actorはkeyによって判別される
++ actor側で宣言された関数はcaller側で使えるようになる
++ actorの実行結果はPromiseで返ってくる
+
 
 ## おまけ
+
+### 余談: standard JSを使ってコーディング標準化する
 
 今回でてきたスクリプトを含め、SUGOSチームではコーディング規約として[standard JS]({{{links.standard-js}}})を採用しています。
 これはソースコードの中でインテンドをいくつにするか、セミコロンをどうすると行ったルールを規程し、チェックするものです。

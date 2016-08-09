@@ -18,5 +18,5 @@ co(function * () {
 
   let pong = yield tableTennis.ping('hello world!')
   console.log(`Pong from myActor01/tableTennis: "${pong}"`)
-
 }).catch((err) => console.error(err))
+
