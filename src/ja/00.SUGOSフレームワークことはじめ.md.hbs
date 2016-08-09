@@ -1,19 +1,19 @@
-# 【SUGOS】チュートリアル001: SUGOSフレームワークことはじめ 
+# 【SUGOS】チュートリアル001: SUGOSことはじめ
 
 
 ## これはなんですか
 
-[SUGOS][sugos_url]とは
+[SUGOS][{{{links.sugos}}}]とは
 
 + RPC(Remote Procedure Call)フレームワーク
 + モジュール定義を動的に共有することで、ネットワーク透過的な関数呼び出しを実現する
-+ 主にNode.jsで実装されている
-+ [株式会社リアルグローブ][rg_url]が開発
++ 主に[Node.js][{{{links.node}}}で実装されている
++ [株式会社リアルグローブ][{{{links.realglobe}}}]が開発
 
 
 ## できること
 
-SUGOSを使うと、あるクライアント上で定義したモジュールを、他のクライアントから使えるようになります。
+SUGOSを使うと、あるクライアント上で定義した関数が、他のクライアントからいきなり使えるようになります。
 
 <img src="{{{imgDir}}}/sugos-overview.png"
      alt="Overview"
@@ -29,8 +29,10 @@ SUGOSを使うと、あるクライアント上で定義したモジュールを
 {{{read 'example/simple-actor.js'}}}
 ```
 
-を行なうと、呼び出し側クライアント (Caller)から先に宣言したActor上のモジュールに
-いきなりアクセスできるようになります
+すると、
+
+同じhubサーバに接続した呼び出し側クライアント (Caller)がActorにアクセスできるようになります。
+
 
 ```javascript
 {{{read 'example/simple-caller.js'}}}

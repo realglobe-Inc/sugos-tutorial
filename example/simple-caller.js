@@ -10,8 +10,8 @@ co(function * () {
   // Connect to an actor with key
   let actor01 = yield caller.connect('my-actor-01')
 
-  // Using call-return function
   {
+    // Get a module of the actor
     let tableTennis = actor01.get('tableTennis')
     let pong = yield tableTennis.ping('hey!')
     console.log(pong) // -> `"hey!" from call!`

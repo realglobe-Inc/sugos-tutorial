@@ -7,13 +7,9 @@ const { Module } = sugoActor
 co(function * () {
   // Define a module with methods
   let tableTennis = new Module({
-    ping (pong = 'default pong!') {
-      return co(function * () {
-        /* ... */
-        return `"${pong}" from actor!`
-      })
-    },
-    /* ... */
+    ping (pong) {
+      return `"${pong}" from actor!`
+    }
   })
 
   // Create an actor client instance
