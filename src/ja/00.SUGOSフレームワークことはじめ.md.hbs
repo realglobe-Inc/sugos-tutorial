@@ -21,7 +21,7 @@ SUGOSを使うと、あるクライアント上で定義した関数が、他の
 />
 
 
-例えば、宣言側クライアント（Actor) において、
+例えば、関数を提供する側のクライアント（Actor) において、
 
 + メソッドを持つModuleを宣言 ( `tableTennis#ping` )
 + クライアント名(key)を宣言し、仲介となるhubサーバに接続 ( `my-actor-01@example.sugo-hub.com` )
@@ -32,7 +32,7 @@ SUGOSを使うと、あるクライアント上で定義した関数が、他の
 
 すると、
 
-同じhubサーバに接続した呼び出し側クライアント (Caller)から、Actorが提供するModuleにアクセスできるようになります。
+関数を提供する側の呼び出す側クライアント (Caller)から、Actorが提供するModuleにアクセスできるようになります。
 
 
 ```javascript
@@ -49,13 +49,18 @@ SUGOSを使うと、あるクライアント上で定義した関数が、他の
 ### 主なコンポネーント
 
 | コンポーネント | 役割 |
-| ------------ | :---: |
+| ------------ | --- |
 | [SUGO-Hub]({{{links.sugo-hub}}}) | ActorとCallerの通信をとり持つサーバ。内部的には[Socket.IO]({{{links.socket-io}}})と[Koa]({{{links.koa}}})を利用している |
 | [SUGO-Actor]({{{links.sugo-actor}}}) | 関数実行を担うクライアント。`key`によって一意に識別される。 |
 | [SUGO-Caller]({{{links.sugo-caller}}}) | 関数呼び出しを担うクライアント。接続先のActorに合わせて動的にJavascriptの関数を生成する |
 
 
 ActorとCallerはそれぞれWebSocketでHubと接続します。
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;**Caller** **<----->** **Hub** **<----->** **Actor**
+
+
 Callerは接続時にActorからModuleの定義情報を受け取り、それを元にJavascript関数を動的に生成します。
 
 Caller側で関数を実行すると、関数名や引数などの情報が裏でJSONに変換され、Hubを介して接続先のActorに届きます。
@@ -72,8 +77,8 @@ Actor側では受けとった情報を元に対象の関数を呼び出し、そ
 
 ## これに関するリンク
 
-+ [SUGOS]({{{links.sugos}}}
-+ [SUGO-Hub]({{{links.sugo-hub}}}
-+ [SUGO-Actor]({{{links.sugo-actor}}}
-+ [SUGO-Caller]({{{links.sugo-caller}}}
-+ [Realglobe,Inc]({{{links.realglobe}}}
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Hub]({{{links.sugo-hub}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Caller]({{{links.sugo-caller}}})
++ [Realglobe,Inc]({{{links.realglobe}}})
