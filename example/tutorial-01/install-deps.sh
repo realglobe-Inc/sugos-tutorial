@@ -1,0 +1,1 @@
+npm install sugo-actor sugo-caller sugo-hub -S

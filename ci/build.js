@@ -36,6 +36,7 @@ runTasks('build', [
           mode: '444',
           cwd: `${__dirname}/..`,
           data: {
+            pkg: require('../package.json'),
             imgDir: '../../images',
             links: require('../src/links')
           }

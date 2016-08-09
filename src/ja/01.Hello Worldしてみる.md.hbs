@@ -1,0 +1,50 @@
+# 【SUGOS】チュートリアル001: Hello Worldしてみる
+
+
+このチュートリアルでは、SUGOSを使ったもっとも簡単な例を実装します。
+Actor側で定義し、関数をCallerから呼び出すところまでをやります
+
+## 事前準備
+
+SUGOSは基本的にNode.js上で稼働します。 [nvm]({{{nvm}}})などを利用して、以下の環境を事前に用意してください。
+
++ [Node.js {{{pkg.engines.node}}}]({{{links.node}}})
++ [npm {{{pkg.engines.npm}}}]({{{links.npm}}})
+
+## 実装してみる
+
+### プロジェクトの用意
+
+まずはプロジェクトディレクトリを用意します。
+
+```bash
+{{{read 'example/tutorial-01/init-project.sh'}}}
+```
+
+次に、必要なパッケージをインストールします
+
+
+```bash
+{{{read 'example/tutorial-01/install-deps.sh'}}}
+```
+
+### サーバを立てる
+
+命令を中継するための[SUGO-Hub]({{{links.sugo-hub}}})サーバを立てます。
+
+以下のようなスクリプトを用意した後、
+
+**hub.js**
+```javascript
+{{{read 'example/tutorial-01/hub.js'}}}
+```
+
+Nodeで実行します。
+
+```bash
+{{{read 'example/tutorial-01/run-hub.sh'}}}
+```
+
+パフォーマンス的な理由からRedisを使うべきだという警告がでますが、ここでは無視で構いません。
+
+

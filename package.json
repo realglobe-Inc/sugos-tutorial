@@ -2,7 +2,7 @@
   "name": "sugos-tutorial",
   "version": "1.0.0",
   "description": "Tutorial for SUGOS",
-  "main": "lib",
+  "main": "index.js",
   "scripts": {
     "test": "./ci/test.js",
     "prepublish": "./ci/build.js && ./ci/assets.js"
@@ -23,7 +23,10 @@
   },
   "homepage": "https://github.com/realglobe-Inc/sugos-tutorial#readme",
   "dependencies": {
-    "co": "^4.6.0"
+    "co": "^4.6.0",
+    "sugo-actor": "^4.1.9",
+    "sugo-caller": "^2.1.12",
+    "sugo-hub": "^3.0.10"
   },
   "devDependencies": {
     "aglob": "^1.0.2",
@@ -43,8 +46,8 @@
     "unorm": "^1.4.1"
   },
   "engines": {
-    "node": ">=6",
-    "npm": ">=3"
+    "node": ">=6.x",
+    "npm": ">=3.x"
   },
   "publishConfig": {
     "registry": "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-local"

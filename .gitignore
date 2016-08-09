@@ -30,4 +30,8 @@ node_modules
 .idea
 tmp
 
-secrets.json
+
+.npmrc
+.DS_Store
+
+var

@@ -1,6 +1,6 @@
 'use strict'
 
-const index = require('../lib')
+const index = require('../index')
 const assert = require('assert')
 
 describe('index', () => {

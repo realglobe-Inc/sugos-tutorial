@@ -10,5 +10,6 @@
   "socket-io": "http://socket.io/",
   "koa": "https://github.com/koajs/koa",
   "event-emitter": "https://nodejs.org/api/events.html#events_events",
-  "async-await": "https://github.com/yortus/asyncawait#guide-to-asyncawait-v10"
+  "async-await": "https://github.com/yortus/asyncawait#guide-to-asyncawait-v10",
+  "nvm": "https://github.com/creationix/nvm#node-version-manager-"
 }
