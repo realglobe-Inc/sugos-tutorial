@@ -26,7 +26,7 @@
     "co": "^4.6.0"
   },
   "devDependencies": {
-    "aglob": "^1.0.1",
+    "aglob": "^1.0.2",
     "ape-covering": "^3.0.3",
     "ape-formatting": "^1.0.2",
     "ape-releasing": "^4.0.1",
