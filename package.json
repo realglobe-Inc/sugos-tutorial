@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/realglobe-Inc/sugos-tutorial#readme",
   "dependencies": {
+    "asleep": "^1.0.3",
     "co": "^4.6.0",
     "sugo-actor": "^4.1.9",
     "sugo-caller": "^2.1.12",

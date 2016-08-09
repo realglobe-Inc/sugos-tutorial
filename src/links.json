@@ -9,7 +9,9 @@
   "promise": "https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise",
   "socket-io": "http://socket.io/",
   "koa": "https://github.com/koajs/koa",
+  "co": "https://github.com/tj/co#readme",
   "event-emitter": "https://nodejs.org/api/events.html#events_events",
   "async-await": "https://github.com/yortus/asyncawait#guide-to-asyncawait-v10",
-  "nvm": "https://github.com/creationix/nvm#node-version-manager-"
+  "nvm": "https://github.com/creationix/nvm#node-version-manager-",
+  "standard-js": "https://github.com/feross/standard#------javascript-standard-style--"
 }

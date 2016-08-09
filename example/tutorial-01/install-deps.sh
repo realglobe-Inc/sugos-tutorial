@@ -1,1 +1,1 @@
-npm install sugo-actor sugo-caller sugo-hub -S
+npm install sugo-actor sugo-caller sugo-hub co asleep -S

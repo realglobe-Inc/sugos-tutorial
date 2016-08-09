@@ -28,7 +28,7 @@ SUGOSは基本的にNode.js上で稼働します。 [nvm]({{{nvm}}})などを利
 {{{read 'example/tutorial-01/install-deps.sh'}}}
 ```
 
-### サーバを立てる
+### Hubサーバを立てる
 
 命令を中継するための[SUGO-Hub]({{{links.sugo-hub}}})サーバを立てます。
 
@@ -48,3 +48,71 @@ Nodeで実行します。
 パフォーマンス的な理由からRedisを使うべきだという警告がでますが、ここでは無視で構いません。
 
 
+### Moduleを宣言する
+
+次にActorにつなぐためのModuleを宣言します。
+ここではPingを打つとPongを返すだけの簡単間のを用意します。
+
+**modules/table-tennis.js**
+```javascript
+{{{read 'example/tutorial-01/modules/tabel-tennis.js'}}}
+```
+
+モジュールで宣言したメソッドは後でActorを通じてCaller側に公開されます。
+
+なお、メソッドの戻り値に[Promise]({{{links.promise}}}オブジェクトを渡すことで非同期に処理を扱えるようになります。
+ここではより直感的な記述的にするために、[co]({{{links.co}}})パッケージを利用しています。
+
+
+### ActorにModuleを載せてHubにつなぐ
+
+Moduleが用意できたら、それを[SUGO-Actor]({{{links.sugo-actor}}}に載せます。
+
+接続先となるhubのhost名と、自身の識別子となる`key`項目、使うモジュールを渡してactorインスタンスを生成します。
+
+**actor.js**
+```javascript
+{{{read 'example/tutorial-01/actor.js'}}}
+```
+
+Actorのスクリプトが用意できたらそれを実行してhubにつなぎます。
+
+```bash
+{{{read 'example/tutorial-01/run-actor.sh'}}}
+```
+
+
+### Callerから呼び出す
+
+Callerからは`.connect()`メッソドに、keyを指定することで特定のActorに接続することができます。
+先ほど宣言した"my-actor-01"をkeyとて渡し、そこから'tableTennis'にアクセスします。
+
+**caller.js**
+```javascript
+{{{read 'example/tutorial-01/caller.js'}}}
+```
+
+このスクリプトを実行し、無事pongが帰ってきたら成功です。
+
+
+## おまけ
+
+今回でてきたスクリプトを含め、SUGOSチームではコーディング規約として[standard JS]({{{links.standard-js}}})を採用しています。
+これはソースコードの中でインテンドをいくつにするか、セミコロンをどうすると行ったルールを規程し、チェックするものです。
+
+以前はチーム内のメンバが異なるエディタを使っているため、フォーマッタによって毎度Gitの差分が出てしまうという問題が生じていました。
+standard JSでは
+
++ ルールが徹底している
++ 個別の設定がいらない
++ 様々なエディタに対応している
+
+という利点があり、現在ではチーム標準となりました。同じような差分に悩んでいる方がいたら導入してみると良いかもしれません。
+
+
+## リンク
+
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Hub]({{{links.sugo-hub}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Caller]({{{links.sugo-caller}}})
