@@ -1,0 +1,37 @@
+# 【SUGOS】チュートリアル02: Event Emitしてみる
+
+前回のチュートリアルでは、簡単な関数のCall/Returnを実装しました。
+
+今回はEmit/Listen形式でのイベント駆動を実装してみます。
+Actor側からEventを発火し、Caller側でそれを受け取ります。
+
+
+## 実装してみる
+
+### プロジェクトの用意
+
+前回と同様に、まずはプロジェクトディレクトリを用意します。
+
+```bash
+{{{read 'example/tutorial-02/init-project.sh'}}}
+```
+
+次に、必要なパッケージをインストールします。
+
+```bash
+{{{read 'example/tutorial-02/install-deps.sh'}}}
+```
+
+(編集中)
+
+
+## リンク
+
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Hub]({{{links.sugo-hub}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Caller]({{{links.sugo-caller}}})
++ Tutorials
+{{#each markdowns}}
+  + [{{{name}}}]({{{../markdownBase}}}/{{{filename}}})
+{{/each}}

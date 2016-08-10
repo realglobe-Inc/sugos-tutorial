@@ -1,4 +1,4 @@
-# 【SUGOS】チュートリアル001: SUGOSことはじめ
+# 【SUGOS】チュートリアル00: SUGOSことはじめ
 
 
 ## これはなにか
@@ -9,12 +9,18 @@
 + 関数定義を動的に共有することで、ネットワーク越しであることを意識しなくて良くなる
 + 主に[Node.js]({{{links.node}}})で実装されている
 + [EventEmitter]({{{links.event-emitter}}})形式でのイベント駆動な記述も可能
-+ [株式会社リアルグローブ]({{{links.realglobe}}})が開発
++ [株式会社リアルグローブ]({{{links.realglobe}}})が開発している
+
+<img src="{{{imgDir}}}/sugos-banner.png"
+     alt="Banner"
+     height="{{bannerHeight}}"
+/>
 
 
 ## これでできること
 
 SUGOSを使うと、あるクライアント上で定義した関数が、他のクライアントからいきなり使えるようになります。
+HTTPやWebSocketといった中間のプロトコルを意識することなく、遠隔呼び出しが可能になるのです。
 
 <img src="{{{imgDir}}}/sugos-overview.png"
      alt="Overview"
@@ -41,7 +47,8 @@ SUGOSを使うと、あるクライアント上で定義した関数が、他の
 
 `.ping()`自体はCaller側のJavascriptではどこにも宣言されていませんが、Actorから受け取った定義を基にして動的に生成されます。
 
-また、一方的な関数呼び出しだけではなく、 Node.jsの[EventEmitter]({{{links.event-emitter}}})を用いたイベント通知もサポートしています。
+また、一方的な関数呼び出しだけではなく、 Node.jsの[EventEmitter]({{{links.event-emitter}}})を用いたイベント駆動もサポートしています。
+`.on()`や`.emit()`となどの書き方で、Actor側からCaller側に通知が出せます。
 
 
 ## これはどういう仕組みか
@@ -81,4 +88,8 @@ Actor側では受けとった情報を元に対象の関数を呼び出し、そ
 + [SUGO-Hub]({{{links.sugo-hub}}})
 + [SUGO-Actor]({{{links.sugo-actor}}})
 + [SUGO-Caller]({{{links.sugo-caller}}})
-+ [Realglobe,Inc]({{{links.realglobe}}})
++ [Realglobe Inc]({{{links.realglobe}}})
++ Tutorials
+{{#each markdowns}}
+  + [{{{name}}}]({{{../markdownBase}}}/{{{filename}}})
+{{/each}}

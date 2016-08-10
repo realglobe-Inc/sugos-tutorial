@@ -6,6 +6,7 @@
   "sugo": "https://github.com/realglobe-Inc/sugos",
   "realglobe": "http://realglobe.jp/",
   "node": "https://nodejs.org/en/",
+  "npm": "https://www.npmjs.com/",
   "promise": "https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise",
   "socket-io": "http://socket.io/",
   "koa": "https://github.com/koajs/koa",
@@ -13,5 +14,6 @@
   "event-emitter": "https://nodejs.org/api/events.html#events_events",
   "async-await": "https://github.com/yortus/asyncawait#guide-to-asyncawait-v10",
   "nvm": "https://github.com/creationix/nvm#node-version-manager-",
-  "standard-js": "https://github.com/feross/standard#------javascript-standard-style--"
+  "standard-js": "https://github.com/feross/standard#------javascript-standard-style--",
+  "tutorial-01-example": "https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-01"
 }

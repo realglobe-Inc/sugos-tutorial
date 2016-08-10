@@ -1,10 +1,23 @@
-# 【SUGOS】チュートリアル001: Hello Worldしてみる
+# 【SUGOS】チュートリアル01: Hello Worldしてみる
 
 
 このチュートリアルでは、SUGOSを使ったもっとも簡単な例を実装します。
 Actor側で定義し、関数をCallerから呼び出すところまでをやります。
 
 ## 事前準備
+
+<a href="https://nodejs.org">
+  <img src="{{{imgDir}}}/nodejs-banner.png"
+       alt="banner"
+       height="{{bannerHeight}}"
+       style="height:{{bannerHeight}}px"
+  /></a>
+<a href="https://docs.npmjs.com/">
+  <img src="{{{imgDir}}}/npm-banner.png"
+       alt="banner"
+       height="{{bannerHeight}}"
+       style="height:{{bannerHeight}}px"
+  /></a>
 
 SUGOSは基本的にNode.js上で稼働します。 [nvm]({{{nvm}}})などを利用して、以下の環境を事前に用意してください。
 
@@ -51,7 +64,7 @@ Nodeで実行します。
 ### Moduleを宣言する
 
 次にActorにつなぐためのModuleを宣言します。
-ここではPingを打つとPongを返すだけの簡単なものを用意します。
+ここではpingを打つとpongを返すだけの簡単なものを用意します。
 
 **modules/table-tennis.js**
 ```javascript
@@ -68,14 +81,14 @@ Nodeで実行します。
 
 Moduleが用意できたら、それを[SUGO-Actor]({{{links.sugo-actor}}})に載せます。
 
-接続先となるhubのhost名と、自身の識別子となる`key`項目、使うモジュールを渡してactorインスタンスを生成します。
+接続先となるHubのhost名と、自身の識別子となる`key`項目、使うモジュールを渡してActorインスタンスを生成します。
 
 **actor.js**
 ```javascript
 {{{read 'example/tutorial-01/actor.js'}}}
 ```
 
-Actorのスクリプトが用意できたらそれを実行してhubにつなぎます。
+Actorのスクリプトが用意できたらそれを実行してHubにつなぎます。
 
 ```bash
 {{{read 'example/tutorial-01/run-actor.sh'}}}
@@ -101,10 +114,19 @@ Callerからは`.connect()`メッソドに、keyを指定することで特定�
 + actor側で宣言された関数はcaller側で使えるようになる
 + actorの実行結果はPromiseで返ってくる
 
+なお、今回出てきたSnippetは、[こちら]({{{links.tutorial-01-example}}})からも入手できます
+
 
 ## おまけ
 
 ### 余談: standard JSを使ってコーディング標準化する
+
+<a href="https://github.com/feross/standard">
+  <img src="{{{imgDir}}}/standard-js-banner.png"
+       alt="banner"
+       height="{{bannerHeight}}"
+       style="height:{{bannerHeight}}px"
+  /></a>
 
 今回でてきたスクリプトを含め、SUGOSチームではコーディング規約として[standard JS]({{{links.standard-js}}})を採用しています。
 これはソースコードの中でインテンドをいくつにするか、セミコロンをどうすると行ったルールを規程し、チェックするものです。
@@ -125,3 +147,7 @@ standard JSでは
 + [SUGO-Hub]({{{links.sugo-hub}}})
 + [SUGO-Actor]({{{links.sugo-actor}}})
 + [SUGO-Caller]({{{links.sugo-caller}}})
++ Tutorials
+{{#each markdowns}}
+  + [{{{name}}}]({{{../markdownBase}}}/{{{filename}}})
+{{/each}}
