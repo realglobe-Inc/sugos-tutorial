@@ -1,7 +1,4 @@
-/**
- * Use sugo caller
- * @see https://github.com/realglobe-Inc/sugo-caller#readme
- */
+#!/usr/bin/env node
 'use strict'
 
 const sugoCaller = require('sugo-caller')

@@ -1,8 +1,5 @@
 #!/usr/bin/env node
 
-/**
- * Connect actor
- */
 'use strict'
 
 const sugoActor = require('sugo-actor')

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  * Use sugo caller
  * @see https://github.com/realglobe-Inc/sugo-caller#readme
