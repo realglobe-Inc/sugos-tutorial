@@ -87,7 +87,7 @@ Caller側で`.get()`したModuleもやはり同様にEventEmitterです
 
 ### まとめ
 
-+ Moduleのメソッドないの`this`はEventEmitter
++ Moduleのメソッド内の`this`はEventEmitter
 + `.on()`, `.off()`, `.emit()`メソッドでイベントをやり取りする
 + Actor側のPromiseがpendingの間はCaller側もそれを待つ
 

@@ -7,6 +7,10 @@
 
 exports.ja = [
   {
+    title: '00.SUGOSことはじめ',
+    filename: 'dist/markdown/ja/00.SUGOS%E3%81%93%E3%81%A8%E3%81%AF%E3%81%98%E3%82%81.md'
+  },
+  {
     title: '01.Hello Worldしてみる',
     filename: 'dist/markdown/ja/01.Hello%20World%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md'
   },
