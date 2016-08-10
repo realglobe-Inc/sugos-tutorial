@@ -20,6 +20,29 @@ Tutorial for SUGOS
 
 
 
+Contributing
+-----------
+
+This project it self is a npm package.
+
+
+To contributing, checkout this project to your local and install dependencies.
+
+```bash
+git clone git@github.com:realglobe-Inc/sugos-tutorial.git
+cd sugos-tutorial
+npm install
+```
+
+Then, edit articles under `src` directory and run
+
+```bash
+./ci/build.js
+```
+
+This will render articles into `dist` directory.
+
+
 Links
 -----------
 
