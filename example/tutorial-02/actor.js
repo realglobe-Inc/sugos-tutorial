@@ -7,15 +7,15 @@
 
 const sugoActor = require('sugo-actor')
 const co = require('co')
-const tableTennis = require('./modules/table-tennis')
+const timeBomb = require('./modules/time-bomb')
 
 co(function * () {
   let actor = sugoActor({
     host: 'localhost:3000',
-    key: 'my-actor-01',
+    key: 'my-actor-02',
     /** Modules to load */
     modules: {
-      tableTennis
+      timeBomb
     }
   })
 

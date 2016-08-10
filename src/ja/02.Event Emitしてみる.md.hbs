@@ -22,8 +22,78 @@ Actor側からEventを発火し、Caller側でそれを受け取ります。
 {{{read 'example/tutorial-02/install-deps.sh'}}}
 ```
 
-(編集中)
+### Hubサーバを立てる
 
+ここは前回と同様で、
+
+**hub.js**
+```javascript
+{{{read 'example/tutorial-02/hub.js'}}}
+```
+
+を用意してNodeから実行
+
+```bash
+{{{read 'example/tutorial-02/run-hub.sh'}}}
+```
+
+### Eventを発火するModuleを宣言する
+
+次にModuleを用意します。ここでは一秒ごとにtickを発火し、最後にboomするものを用意します
+
+**modules/time-bomb.js**
+```javascript
+{{{read 'example/tutorial-01/modules/time-bomb.js'}}}
+```
+
+Moduleのメソッドにおける`this`はEventEmitterを継承しており、
+`.on`, `.off`でListerの登録・解除、`.emit()`で発火を行なえます。
+
+
+### Actorに載せてHubにつなぐ
+
+前回と同様にActorに登録し、
+
+**actor.js**
+```javascript
+{{{read 'example/tutorial-02/actor.js'}}}
+```
+
+実行します。
+
+```bash
+{{{read 'example/tutorial-02/run-actor.sh'}}}
+```
+
+### Callerから呼び出す
+
+先に定義したtimeBomb ModuleをCaller側から呼びます。
+
+Caller側で`.get()`したModuleもやはり同様にEventEmitterです
+
+**caller.js**
+```javascript
+{{{read 'example/tutorial-02/caller.js'}}}
+```
+
+`yield timeBomb.countDown(10)`の部分はcountが全て終わるまで(Actor側でreturnが走るまで）その次の処理に進まない、という点に留意してください。
+内部的にはPromiseがpending状態になっており、Actor側のreturnを受けて処理が再開します。
+
+このスクリプトを実行し、カウントダウンが確認できたら成功です。
+
+```bash
+{{{read 'example/tutorial-02/run-caller.sh'}}}
+```
+
+
+
+### まとめ
+
++ Moduleのメソッドないの`this`はEventEmitter
++ `.on()`, `.off()`, `.emit()`メソッドでイベントをやり取りする
++ Actor側のPromiseがpendingの間はCaller側もそれを待つ
+
+なお、今回出てきたSnippetは、[こちら]({{{links.tutorial-02-example}}})からも入手できます
 
 ## リンク
 

@@ -4,8 +4,8 @@
  */
 'use strict'
 
-const co = require('co')
 const sugoCaller = require('sugo-caller')
+const co = require('co')
 
 co(function * () {
   let caller = sugoCaller({
@@ -13,10 +13,11 @@ co(function * () {
   })
 
   // Connect to actor
-  let myActor01 = yield caller.connect('my-actor-01')
-  let tableTennis = myActor01.get('tableTennis')
-
-  let pong = yield tableTennis.ping('hello world!')
-  console.log(`Pong from myActor01/tableTennis: "${pong}"`)
+  let myActor02 = yield caller.connect('my-actor-02')
+  let timeBomb = myActor02.get('timeBomb')
+  let tick = (data) => console.log(`tick: ${data.count}`)
+  timeBomb.on('tick', tick) // Add listener
+  let booom = yield timeBomb.countDown(10)
+  console.log(booom)
+  timeBomb.off('tick', tick) // Remove listener
 }).catch((err) => console.error(err))
-

@@ -7,7 +7,6 @@
 'use strict'
 
 const sugoHub = require('sugo-hub')
-
 const co = require('co')
 
 co(function * () {

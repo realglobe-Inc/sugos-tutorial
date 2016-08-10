@@ -4,8 +4,8 @@
  */
 'use strict'
 
-const co = require('co')
 const sugoCaller = require('sugo-caller')
+const co = require('co')
 
 co(function * () {
   let caller = sugoCaller({

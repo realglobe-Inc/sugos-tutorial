@@ -1,5 +1,6 @@
 /**
- * Define a table tennis module
+ * Sample of module with simple call-return function
+ * @module tableTennis
  * @see https://github.com/realglobe-Inc/sugo-module-base#usage
  */
 'use strict'
@@ -11,7 +12,7 @@ const asleep = require('asleep')
 // Create a new module
 const tableTennis = new Module({
   ping (message = '') {
-    // Just wait 500 milliseconds and return pong.
+    // Just wait 500ms and return pong.
     return co(function * () {
       yield asleep(500)
       return `pong! ${message}`
