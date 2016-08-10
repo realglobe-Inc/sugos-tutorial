@@ -2,12 +2,25 @@
 
 const pkg = require('./package.json')
 const aglob = require('aglob')
+const path = require('path')
+const unorm = require('unorm')
+
+const markdown = (lang) => ({
+  base: 'https://github.com/realglobe-Inc/sugos-tutorial/blob/master',
+  contents: aglob.sync(`dist/markdown/${lang}/*.md`).map((filename) => ({
+    title: unorm.nfc(path.basename(filename, '.md')),
+    filename: path.join(path.dirname(filename), encodeURIComponent(unorm.nfc(path.basename(filename, '.md'))) + '.md')
+  }))
+})
 
 module.exports = {
   force: true,
   mode: '444',
   data: {
-    pkg
+    pkg,
+    markdowns: {
+      ja: markdown('ja')
+    }
   }
 }
 

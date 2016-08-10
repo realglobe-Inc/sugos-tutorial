@@ -6,7 +6,7 @@
   "sugo": "https://github.com/realglobe-Inc/sugos",
   "realglobe": "http://realglobe.jp/",
   "node": "https://nodejs.org/en/",
-  "npm": "https://www.npmjs.com/",
+  "npm": "https://docs.npmjs.com/",
   "promise": "https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise",
   "socket-io": "http://socket.io/",
   "koa": "https://github.com/koajs/koa",

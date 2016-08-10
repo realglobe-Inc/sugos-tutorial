@@ -3,4 +3,14 @@
  * @module {{pkg.name}}
  * @version {{pkg.version}}
  */
-'use script'
+'use strict'
+
+{{#each markdowns}}
+exports.{{@key}} = [
+{{#each contents}}  {
+    title: '{{title}}',
+    filename: '{{{filename}}}'
+  }{{#if @last}}{{else}},
+{{/if}}{{/each}}
+]
+{{/each}}
