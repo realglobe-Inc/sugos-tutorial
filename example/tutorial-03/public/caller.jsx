@@ -28,10 +28,13 @@ const CallerWorkspace = React.createClass({
       <div className='caller-workspace'>
         <textarea name="html"
                   placeholder="HTML to Write"
-                  value={ state.value }
+                  value={ state.html }
                   onChange={ (e) => s.updateHTML(e.target.value) }
         ></textarea>
-        <div dangerouslySetInnerHTML={ { __html: state.html } }></div>
+        <fieldset>
+          <legend>Preview</legend>
+          <div dangerouslySetInnerHTML={ { __html: state.html } }></div>
+        </fieldset>
       </div>
     )
   },
@@ -42,13 +45,18 @@ const CallerWorkspace = React.createClass({
 
     co(function * () {
       let caller = sugoCaller({})
-      let actor = yield caller.connect(actorKey)
-      let htmlWriter = actor.get('htmlWriter')
+      // Access to actor
+      let actor = yield caller.connect(actorKey).catch((err) => {
+        alert(`Failed to connect actor: ${actorKey}`)
+      })
+      // Get dynamic html module
+      let dynamicHTML = actor.get('dynamicHTML')
       s.caller = caller
-      s.htmlWriter = htmlWriter
+      s.dynamicHTML = dynamicHTML
 
-      let html = yield htmlWriter.read()
+      let html = yield dynamicHTML.read()
       s.setState({ html })
+      s.forceUpdate()
     }).catch((err) => console.error(err))
   },
 
@@ -62,7 +70,7 @@ const CallerWorkspace = React.createClass({
     const s = this
     s.setState({ html })
     // Apply HTML to remote
-    s.htmlWriter.write(html)
+    s.dynamicHTML.write(html)
     console.log('html', html)
   }
 

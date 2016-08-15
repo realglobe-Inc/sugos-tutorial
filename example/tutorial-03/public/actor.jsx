@@ -19,7 +19,6 @@ const ActorWorkspace = React.createClass({
       html: `
 <h3>This is <b>sample</b> dynamic html</h3>
 <p>You can edit the contents from <a href="./caller.html">Caller page</a></p>
-
 `
     }
   },
@@ -41,7 +40,7 @@ const ActorWorkspace = React.createClass({
       key: actorKey,
       modules: {
         // Define a module to handle HTML
-        htmlWriter: new Module({
+        dynamicHTML: new Module({
           // Read HTML string
           read () {
             return s.state.html

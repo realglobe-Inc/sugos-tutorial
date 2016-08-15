@@ -36,22 +36,94 @@ Hubサーバは前回とほぼ同様ですが、新たに`static`オプション
 
 **hub.js**
 ```javascript
-{{{read 'example/tutorial-02/hub.js'}}}
+{{{read 'example/tutorial-03/hub.js'}}}
 ```
 ```bash
-{{{read 'example/tutorial-02/run-hub.sh'}}}
+{{{read 'example/tutorial-03/run-hub.sh'}}}
 ```
 
 ### Actorを用意する
 
-まずはブラウザに読ませるためのHTMLを用意します。
+Actor側のブラウザ用スクリプトを用意します。
+`componentDidMount`のタイミングでactorのインスタンスを作成し、その中で`dynamicHTML`という名前をモジュールを宣言しています。
+このモジュールはComponentのstateにアクセスすることで、動的にHTMLを書き換える機能を持ちます。
 
-**public/actor.html**
+**public/actor.jsx**
+```jsx
+{{{read 'example/tutorial-03/public/actor.jsx'}}}
+```
 
-```html
-{{{read 'example/tutorial-03/public/actor.html'}}}
+次に、このスクリプトを走らせるためのHTMLを用意します。
+
+**public/actor.jsx**
+```jsx
+{{{read 'example/tutorial-03/public/actor.jsx'}}}
 ```
 
 
+### Callerを用意する
+
+Caller側のブラウザ用スクリプトを用意します。
+
+テキストボックスに入力が変更されたらその内容を、先程Actorで宣言した`dynamicHTML`の`.write()`メソッドに渡します。
+これにより、編集内容をリアルタイムに反映するということが実現します。
 
 
+**public/caller.jsx**
+```jsx
+{{{read 'example/tutorial-03/public/caller.jsx'}}}
+```
+
+こちらもHTMLを用意します。
+
+**public/caller.jsx**
+```jsx
+{{{read 'example/tutorial-03/public/caller.jsx'}}}
+```
+
+
+### Buildする
+
+用意したJSXファイルはそのままではブラウザで実行できません。BabelとBrowserifyを使ってコンパイル・バンドルします。
+
+
+**build.js**
+```js
+{{{read 'example/tutorial-03/build.js'}}}
+```
+
+
+```bash
+{{{read 'example/tutorial-03/run-hub.sh'}}}
+```
+
+### ブラウザから確認する
+
+Hubが起動している状態で、Actor側HTMLをブラウザから開きます。
+
+[http://localhost:3000/actor.html](http://localhost:3000/actor.html)
+
+
+続いて、Caller側HTMLをブラウザの別タブで開きます。
+
+[http://localhost:3000/caller.html](http://localhost:3000/caller.html)
+
+Caller側のテキストエリアを編集すると、Actorブラウザにリアルタイムで反映されていることが確認できたら成功です。
+
+
+<img src="{{{imgDir}}}/03-tutorial-browser.png"/>
+
+
+## リンク
+
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Hub]({{{links.sugo-hub}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Caller]({{{links.sugo-caller}}})
++ [React]({{{links.react}}})
++ [Babel]({{{links.babel}}})
++ [Browserify]({{{links.browserify}}})
++ Tutorials
+{{#each markdowns}}
+  + [{{{name}}}]({{{../markdownBase}}}/{{{filename}}})
+{{/each}}
