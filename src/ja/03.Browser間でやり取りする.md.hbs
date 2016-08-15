@@ -1,0 +1,22 @@
+# 【SUGOS】チュートリアル03: Browser間でやり取りする.md.hbs
+
+前回までのチュートリアルでは、Caller/Actorの基本的なやり取りをNode.js上で行ないました。
+
+今回はブラウザからの呼び出しを実装してみます。
+ブラウザ上のCallerから、別ウィンドウに読み込まれたActorを呼び出します。
+
+## 実装してみる
+
+### プロジェクトの用意
+
+前回と同様に、まずはプロジェクトディレクトリを用意します。
+
+```bash
+{{{read 'example/tutorial-03/init-project.sh'}}}
+```
+
+次に、必要なパッケージをインストールします。
+
+```bash
+{{{read 'example/tutorial-03/install-deps.sh'}}}
+```
