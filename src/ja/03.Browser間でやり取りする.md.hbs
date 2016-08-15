@@ -1,6 +1,6 @@
-# 【SUGOS】チュートリアル03: Browser間でやり取りする.md.hbs
+# 【SUGOS】チュートリアル03: Browser間でやり取りする
 
-前回までのチュートリアルでは、Caller/Actorの基本的なやり取りをNode.js上で行ないました。
+[前回のチュートリアル]({{{links.tutorial-02-example}}})では、Caller/Actorのやり取りをNode.js上で行ないました。
 
 今回はブラウザ間での呼び出しを実装してみます。
 一方のウィンドウでテキストボックスにHTML文字列を打ち込むと、別のウィンドウにリアルタイムでレンダリングされて表示される、というものを作ります。
@@ -20,7 +20,7 @@
 今回はUIを作成するので、SUGOSに加え、
 
 + [React.js]({{{links.react}}})
-+ [Babel]({{{links.babel}}}
++ [Babel]({{{links.babel}}})
 + [Browserify]({{{links.browserify}}})
 
 と等を利用します。
@@ -55,9 +55,9 @@ Actor側のブラウザ用スクリプトを用意します。
 
 次に、このスクリプトを走らせるためのHTMLを用意します。
 
-**public/actor.jsx**
-```jsx
-{{{read 'example/tutorial-03/public/actor.jsx'}}}
+**public/actor.html**
+```html
+{{{read 'example/tutorial-03/public/actor.html'}}}
 ```
 
 
@@ -76,9 +76,9 @@ Caller側のブラウザ用スクリプトを用意します。
 
 こちらもHTMLを用意します。
 
-**public/caller.jsx**
-```jsx
-{{{read 'example/tutorial-03/public/caller.jsx'}}}
+**public/caller.html**
+```html
+{{{read 'example/tutorial-03/public/caller.html'}}}
 ```
 
 
