@@ -1,9 +1,10 @@
 # 【SUGOS】チュートリアル03: Browser間でやり取りする
 
-[前回のチュートリアル]({{{links.tutorial-02-example}}})では、Caller/Actorのやり取りをNode.js上で行ないました。
+[前回のチュートリアル]({{{markdownBase}}}/{{{markdowns.2.filename}}})では、Caller/Actorのやり取りをNode.js上で行ないました。
 
-今回はブラウザ間での呼び出しを実装してみます。
+今回はブラウザ間での呼び出しを実装してみます。Actorが動いているブラウザをCallerが動いているブラウザから操るサンプルです。
 一方のウィンドウでテキストボックスにHTML文字列を打ち込むと、別のウィンドウにリアルタイムでレンダリングされて表示される、というものを作ります。
+
 
 ## 実装してみる
 
@@ -23,7 +24,7 @@
 + [Babel]({{{links.babel}}})
 + [Browserify]({{{links.browserify}}})
 
-と等を利用します。
+等を利用します。
 
 ```bash
 {{{read 'example/tutorial-03/install-deps.sh'}}}
@@ -45,7 +46,7 @@ Hubサーバは前回とほぼ同様ですが、新たに`static`オプション
 ### Actorを用意する
 
 Actor側のブラウザ用スクリプトを用意します。
-`componentDidMount`のタイミングでactorのインスタンスを作成し、その中で`dynamicHTML`という名前をモジュールを宣言しています。
+`componentDidMount`のタイミングでActorのインスタンスを作成し、その中で`dynamicHTML`という名前でモジュールを宣言しています。
 このモジュールはComponentのstateにアクセスすることで、動的にHTMLを書き換える機能を持ちます。
 
 **public/actor.jsx**
@@ -94,7 +95,7 @@ Caller側のブラウザ用スクリプトを用意します。
 
 
 ```bash
-{{{read 'example/tutorial-03/run-hub.sh'}}}
+{{{read 'example/tutorial-03/run-build.sh'}}}
 ```
 
 ### ブラウザから確認する
