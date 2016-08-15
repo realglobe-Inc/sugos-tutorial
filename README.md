@@ -17,13 +17,14 @@ Tutorial for SUGOS
 + [00.SUGOSことはじめ](dist/markdown/ja/00.SUGOS%E3%81%93%E3%81%A8%E3%81%AF%E3%81%98%E3%82%81.md)
 + [01.Hello Worldしてみる](dist/markdown/ja/01.Hello%20World%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
 + [02.Event Emitしてみる](dist/markdown/ja/02.Event%20Emit%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
++ [03.Browser間でやり取りする](dist/markdown/ja/03.Browser%E9%96%93%E3%81%A7%E3%82%84%E3%82%8A%E5%8F%96%E3%82%8A%E3%81%99%E3%82%8B.md)
 
 
 
 Contributing
 -----------
 
-This project it self is a npm package.
+This project itself is a npm package.
 
 
 To contributing, checkout this project to your local and install dependencies.

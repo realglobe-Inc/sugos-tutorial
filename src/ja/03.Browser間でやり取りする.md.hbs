@@ -2,8 +2,8 @@
 
 前回までのチュートリアルでは、Caller/Actorの基本的なやり取りをNode.js上で行ないました。
 
-今回はブラウザからの呼び出しを実装してみます。
-ブラウザ上のCallerから、別ウィンドウに読み込まれたActorを呼び出します。
+今回はブラウザ間での呼び出しを実装してみます。
+一方のウィンドウでテキストボックスにHTML文字列を打ち込むと、別のウィンドウにリアルタイムでレンダリングされて表示される、というものを作ります。
 
 ## 実装してみる
 
@@ -17,6 +17,41 @@
 
 次に、必要なパッケージをインストールします。
 
+今回はUIを作成するので、SUGOSに加え、
+
++ [React.js]({{{links.react}}})
++ [Babel]({{{links.babel}}}
++ [Browserify]({{{links.browserify}}})
+
+と等を利用します。
+
 ```bash
 {{{read 'example/tutorial-03/install-deps.sh'}}}
 ```
+
+### Hubサーバを立てる
+
+Hubサーバは前回とほぼ同様ですが、新たに`static`オプションを追加します。
+ここにディレクトリ名を指定することで、静的ファイルの配布が可能になります。
+
+**hub.js**
+```javascript
+{{{read 'example/tutorial-02/hub.js'}}}
+```
+```bash
+{{{read 'example/tutorial-02/run-hub.sh'}}}
+```
+
+### Actorを用意する
+
+まずはブラウザに読ませるためのHTMLを用意します。
+
+**public/actor.html**
+
+```html
+{{{read 'example/tutorial-03/public/actor.html'}}}
+```
+
+
+
+
