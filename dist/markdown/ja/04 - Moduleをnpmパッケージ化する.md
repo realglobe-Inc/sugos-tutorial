@@ -24,6 +24,15 @@
 
 ## 事前準備
 
+まずは[sugo-scaffold](https://github.com/realglobe-Inc/sugo-scaffold)コマンドラインツールをインストールします。
+これを使うと、SUGOS関連のプロジェクトの雛形が簡単に作成できます。
+
+
+```bash
+
+```
+
+
 ( 編集中... )
 
 
@@ -38,6 +47,7 @@
 
 + [SUGOS](https://github.com/realglobe-Inc/sugos)
 + [SUGO-Actor](https://github.com/realglobe-Inc/sugo-actor)
++ [SUGO-Scaffold](https://github.com/realglobe-Inc/sugo-scaffold)
 + Tutorials
   + [00 - SUGOSことはじめ](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/00%20-%20SUGOS%E3%81%93%E3%81%A8%E3%81%AF%E3%81%98%E3%82%81.md)
   + [01 - Hello Worldしてみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/01%20-%20Hello%20World%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
