@@ -18,7 +18,9 @@
   "babel": "https://babeljs.io/docs/setup/",
   "react": "https://facebook.github.io/react/",
   "browserify": "https://github.com/substack/node-browserify",
+  "tutorial-example": "https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example",
   "tutorial-01-example": "https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-01",
   "tutorial-02-example": "https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-02",
-  "tutorial-03-example": "https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-03"
+  "tutorial-03-example": "https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-03",
+  "tutorial-04-example": "https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-04"
 }

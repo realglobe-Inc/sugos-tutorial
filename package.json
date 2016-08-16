@@ -41,6 +41,7 @@
     "coz": "^6.0.5",
     "filecopy": "^2.0.2",
     "injectmock": "^2.0.0",
+    "markdown-toc": "^0.12.16",
     "sugos-assets": "^2.0.3",
     "sugos-index": "^1.0.3",
     "unorm": "^1.4.1"

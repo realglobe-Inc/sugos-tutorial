@@ -9,7 +9,9 @@
 process.chdir(`${__dirname}/..`)
 
 const { runTasks } = require('ape-tasking')
+const fs = require('fs')
 const co = require('co')
+const toc = require('markdown-toc')
 const coz = require('coz')
 const path = require('path')
 const aglob = require('aglob')
@@ -29,7 +31,11 @@ runTasks('build', [
   () => co(function * () {
     let prefixes = {
       'ja': '【SUGOSチュートリアル】',
-      'en': '[SUGOS TUtorial]'
+      'en': '[SUGOS Tutorial]'
+    }
+    let tocTitles = {
+      'ja': '内容',
+      'en': 'Table of Contents'
     }
     for (let lang of langs) {
       let markdownBase = 'https://github.com/realglobe-Inc/sugos-tutorial/blob/master'
@@ -42,6 +48,8 @@ runTasks('build', [
           url: `${markdownBase}/${encodedFilename}`
         }
       })
+      let tocTitle = tocTitles[ lang ]
+      let prefix = prefixes[ lang ]
       let filenames = yield aglob(`${lang}/*.md.hbs`, { cwd: 'src' })
       for (let filename of filenames) {
         let index = filenames.indexOf(filename)
@@ -49,7 +57,7 @@ runTasks('build', [
         let dest = path.resolve('dist/markdown', filename).replace(/\.hbs$/, '')
         let data = {
           pkg: pkg,
-          prefix: prefixes[ lang ],
+          prefix,
           imgDir: '../../images',
           links: links,
           bannerHeight: '40',
@@ -57,7 +65,23 @@ runTasks('build', [
           markdowns,
           prev: markdowns[ index - 1 ],
           cur: markdowns[ index ],
-          next: markdowns[ index + 1 ]
+          next: markdowns[ index + 1 ],
+          tocTitle,
+          get toc () {
+            let content
+            try {
+              content = fs.readFileSync(dest).toString()
+            } catch (e) {
+              return null
+            }
+            return toc(content, {
+              maxdepth: 3,
+              firsth1: false,
+              filter: (line) => {
+                return !line.match(prefix) && !line.match(tocTitle)
+              }
+            }).content.toString()
+          }
         }
         yield coz.render({
           tmpl: src,
