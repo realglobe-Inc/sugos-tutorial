@@ -27,9 +27,12 @@
 まずは[sugo-scaffold](https://github.com/realglobe-Inc/sugo-scaffold)コマンドラインツールをインストールします。
 これを使うと、SUGOS関連のプロジェクトの雛形が簡単に作成できます。
 
-
 ```bash
+# Install as global module
+npm install -g sugo-scaffold
 
+# Show version to check if the installation succeeded
+sugo-scaffold --version
 ```
 
 

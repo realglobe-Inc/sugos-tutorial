@@ -24,10 +24,13 @@
   "homepage": "https://github.com/realglobe-Inc/sugos-tutorial#readme",
   "dependencies": {
     "asleep": "^1.0.3",
+    "babel-polyfill": "^6.13.0",
     "co": "^4.6.0",
-    "sugo-actor": "^4.1.9",
-    "sugo-caller": "^2.1.12",
-    "sugo-hub": "^3.0.10"
+    "react": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "sugo-actor": "^4.1.15",
+    "sugo-caller": "^2.1.13",
+    "sugo-hub": "^3.0.13"
   },
   "devDependencies": {
     "aglob": "^1.0.2",

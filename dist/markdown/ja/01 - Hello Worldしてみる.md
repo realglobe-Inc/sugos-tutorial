@@ -230,10 +230,10 @@ node ./caller.js
 
 ## まとめ
 
-+ hub / actor / callerの三つで最小構成となる
-+ actorはkeyによって判別される
-+ actor側で宣言された関数はcaller側で使えるようになる
-+ actorの実行結果はPromiseで返ってくる
++ Hub / Actor / Callerの三つで最小構成となる
++ Actorはkeyによって判別される
++ Actor側で宣言された関数はCaller側で使えるようになる
++ Callerから呼び出した実行結果はPromiseで返ってくる
 
 なお、今回出てきたSnippetは、[こちら](https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-01)からも入手できます
 
@@ -243,7 +243,7 @@ node ./caller.js
 ### 雑談: standard JSを使ってコーディング標準化する
 
 今回でてきたスクリプトを含め、SUGOSチームではコーディング規約として[standard JS](https://github.com/feross/standard#------javascript-standard-style--)を採用しています。
-これはソースコードの中でインテンドをいくつにするか、セミコロンをどうすると行ったルールを規程し、チェックするものです。
+これはソースコードの中で「インテンドをいくつにするか」、「セミコロンをどうするか」などのルールを規程し、チェックするものです。
 
 以前はチーム内のメンバが異なるエディタを使っているため、フォーマッタによって毎度Gitの差分が出てしまうという問題が生じていました。
 standard JSでは
@@ -252,7 +252,7 @@ standard JSでは
 + 個別の設定がいらない
 + 様々なエディタに対応している
 
-という利点があり、現在ではチーム標準となりました。同じような差分に悩んでいる方がいたら導入してみると良いかもしれません。
+という利点があり、現在ではチーム標準となりました。オススメです。
 
 <a href="https://github.com/feross/standard">
   <img src="../../images/standard-js-banner.png"
