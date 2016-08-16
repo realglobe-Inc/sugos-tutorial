@@ -17,6 +17,8 @@ describe('tutorial-01', function () {
     process.chdir(here)
   }))
   it('Run example', () => co(function * () {
+    yield asleep(100)
+
     let hub = spawn('node', [ './hub.js' ], { stdio: 'inherit' })
 
     yield asleep(500)

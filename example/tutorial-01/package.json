@@ -1,0 +1,17 @@
+{
+  "name": "sugos-tutorial-01",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Example for tutorial-01",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "asleep": "^1.0.3",
+    "co": "^4.6.0",
+    "sugo-actor": "^4.2.3",
+    "sugo-caller": "^2.1.14",
+    "sugo-hub": "^3.0.13"
+  }
+}
