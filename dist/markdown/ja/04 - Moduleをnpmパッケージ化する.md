@@ -17,6 +17,7 @@
 
 ## 内容
 - [事前準備](#事前準備)
+- [実装してみる](#実装してみる)
 - [まとめ](#まとめ)
 - [おまけ](#おまけ)
   * [雑談: Javascriptの関数でキーワード引数みたいなことをしてみる](#雑談-javascriptの関数でキーワード引数みたいなことをしてみる)
@@ -37,11 +38,26 @@ npm install -g sugo-scaffold
 sugo-scaffold --version
 ```
 
+## 実装してみる
+
+コマンドラインで`sugo-scaffold <type> <dircotry>`を実行すると対話シェルが始まり、それに答えると雛形が生成できます。
+
+まずは以下のようにModuleプロジェクトを用意します。
+
+```bash
+sugo-scaffold module sugos-tutorial-04
+cd sugos-tutorial-04
+npm install
+npm test
+```
+
 
 ( 編集中... )
 
 
 ## まとめ
+
++ [sugo-scaffold](https://github.com/realglobe-Inc/sugo-scaffold)で雛形が生成できる
 
 
 ## おまけ

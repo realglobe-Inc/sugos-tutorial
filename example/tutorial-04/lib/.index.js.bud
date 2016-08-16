@@ -1,0 +1,23 @@
+/**
+ * Bud file for index.js
+ */
+
+'use strict'
+
+const pkg = require('../package.json')
+const { moduleIndex } = require('sg-templates')
+
+module.exports = {
+  force: true,
+  mode: '444',
+  tmpl: moduleIndex,
+  data: {
+    name: 'MyModule',
+    sub: {},
+    pkg
+  }
+}
+
+if (!module.parent) {
+  require('coz').render(__filename)
+}

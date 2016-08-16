@@ -1,0 +1,13 @@
+{{#if vars.spec.events}}Events
+---------
+
+The following events my be emitted from the module.
+
+<a name="events"></a>
+
+| Param | Description |
+| ----- | ----------- |
+{{#each vars.spec.events}}
+| "{{@key}}"  | {{{desc}}} |
+{{/each}}
+{{/if}}

@@ -1,0 +1,25 @@
+{{#if vars.spec.methods}}Methods
+---------
+
+The following methods are available from remote callers for the module.
+
+{{#each vars.spec.methods}}
++ [.{{{@key}}}({{#each params}}{{name}}{{#if @last}}{{else}}, {{/if}}{{/each}}){{#if return}} -> {{{return.type}}}{{/if}}](#method-{{spinalcase @key}})
+{{/each}}
+
+{{#each vars.spec.methods}}
+<a name="method-{{spinalcase @key}}"></a>
+### .{{{@key}}}({{#each params}}{{name}}{{#if @last}}{{else}}, {{/if}}{{/each}}){{#if return}} -> <code>{{{return.type}}}</code>{{/if}}
+
+{{{desc}}}
+{{#if params}}
+
+| Param | Type | Description |
+| ----- | ---- | ----------- |
+{{#each params}}
+| {{name}}  | <code>{{{type}}}</code> | {{{desc}}} |
+{{/each}}
+{{/if}}
+
+{{/each}}
+{{/if}}
