@@ -15,6 +15,9 @@ const path = require('path')
 const aglob = require('aglob')
 const unorm = require('unorm')
 
+const pkg = require('../package.json')
+const links = require('../src/links')
+
 let langs = [ 'ja' ]
 
 runTasks('build', [
@@ -24,21 +27,37 @@ runTasks('build', [
     'test/.*.bud'
   ]),
   () => co(function * () {
+    let prefixes = {
+      'ja': '【SUGOSチュートリアル】',
+      'en': '[SUGOS TUtorial]'
+    }
     for (let lang of langs) {
+      let markdownBase = 'https://github.com/realglobe-Inc/sugos-tutorial/blob/master'
+      let markdowns = aglob.sync(`dist/markdown/${lang}/*.md`).map((filename) => {
+        let name = path.basename(filename, '.md')
+        let encodedFilename = path.join(path.dirname(filename), encodeURIComponent(unorm.nfc(name)) + '.md')
+        return {
+          name,
+          filename: encodedFilename,
+          url: `${markdownBase}/${encodedFilename}`
+        }
+      })
       let filenames = yield aglob(`${lang}/*.md.hbs`, { cwd: 'src' })
       for (let filename of filenames) {
+        let index = filenames.indexOf(filename)
         let src = path.resolve('src', filename)
         let dest = path.resolve('dist/markdown', filename).replace(/\.hbs$/, '')
         let data = {
-          pkg: require('../package.json'),
+          pkg: pkg,
+          prefix: prefixes[ lang ],
           imgDir: '../../images',
-          links: require('../src/links'),
+          links: links,
           bannerHeight: '40',
-          markdownBase: 'https://github.com/realglobe-Inc/sugos-tutorial/blob/master',
-          markdowns: aglob.sync(`dist/markdown/${lang}/*.md`).map((filename) => ({
-            name: path.basename(filename, '.md'),
-            filename: path.join(path.dirname(filename), encodeURIComponent(unorm.nfc(path.basename(filename, '.md'))) + '.md')
-          }))
+          markdownBase,
+          markdowns,
+          prev: markdowns[ index - 1 ],
+          cur: markdowns[ index ],
+          next: markdowns[ index + 1 ]
         }
         yield coz.render({
           tmpl: src,

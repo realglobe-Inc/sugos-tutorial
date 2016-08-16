@@ -1,6 +1,6 @@
-# 【SUGOS】チュートリアル03: Browser間でやり取りする
+# 【SUGOSチュートリアル】 03 - Browser間でやり取りする
 
-[前回のチュートリアル](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/02.Event%20Emit%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)では、Caller/Actorのやり取りをNode.js上で行ないました。
+[前回のチュートリアル](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/02%20-%20Event%20Emit%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)では、Caller/Actorのやり取りをNode.js上で行ないました。
 
 今回はブラウザ間での呼び出しを実装してみます。Actorが動いているブラウザをCallerが動いているブラウザから操るサンプルです。
 一方のウィンドウでテキストボックスにHTML文字列を打ち込むと、別のウィンドウにリアルタイムでレンダリングされて表示される、というものを作ります。
@@ -149,6 +149,9 @@ window.addEventListener('DOMContentLoaded', () => {
 })
 
 ```
+
+今回はHub自身がHTMLの配布するので、Actorの宣言時に`host`などの設定は不要です 。
+`location`オブジェクトの情報から自動的に接続先を見つけます。
 
 次に、このスクリプトを走らせるためのHTMLを用意します。
 
@@ -420,7 +423,32 @@ Caller側のテキストエリアを編集すると、Actorブラウザにリア
 <img src="../../images/03-tutorial-browser.png"/>
 
 
+## まとめ
+
++ CallerとActorはBrowser上で動かせる
++ Hubの`static`オプションで静的ファイルの配布ができる
++ ブラウザ上の場合、CallerやActorの宣言時にHostを省略すると、`location`オブジェクトから自動的に解釈する
+
+## おまけ
+
+### 雑談: SUGOSにおけるCallbackサポートを諦めた理由
+
+SUGOSを使うと他のクライアント(Actor)で宣言した関数がいきなり使える！のですが現状は制限があります。
+
+Callbackが渡せないのです。`doSomething(() => console.log('done'!))`のような書き方ができません。
+
+理由は、それを実現する術が見つけられなかったため。
+引数として関数を渡すこと自体は擬似的に実現可能なのですが、その後、参照を解放する方法が発見できませんでした。
+呼び出し側（Caller)でのメモリリークを防ぐために、用済みなったCallbackは適切に処分する必要があります。
+しかしES2015時点のJavaScriptでは、Weak参照やポインタ数の取得といった機能が提供されておらず、
+Actor側で用済みになったかどうかをCallerから判定する術がありません。
+
+そのため、2016年現在、SUGOSではPromiseベースでのやり取りを必須としています。無念。。。
+
+
 ## リンク
+
+次回: [04 - Moduleをnpmパッケージ化する](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/04%20-%20Module%E3%82%92npm%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%8C%96%E3%81%99%E3%82%8B.md)
 
 + [SUGOS](https://github.com/realglobe-Inc/sugos)
 + [SUGO-Hub](https://github.com/realglobe-Inc/sugo-hub)
@@ -430,7 +458,8 @@ Caller側のテキストエリアを編集すると、Actorブラウザにリア
 + [Babel](https://babeljs.io/docs/setup/)
 + [Browserify](https://github.com/substack/node-browserify)
 + Tutorials
-  + [00.SUGOSことはじめ](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/00.SUGOS%E3%81%93%E3%81%A8%E3%81%AF%E3%81%98%E3%82%81.md)
-  + [01.Hello Worldしてみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/01.Hello%20World%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
-  + [02.Event Emitしてみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/02.Event%20Emit%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
-  + [03.Browser間でやり取りする](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/03.Browser%E9%96%93%E3%81%A7%E3%82%84%E3%82%8A%E5%8F%96%E3%82%8A%E3%81%99%E3%82%8B.md)
+  + [00 - SUGOSことはじめ](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/00%20-%20SUGOS%E3%81%93%E3%81%A8%E3%81%AF%E3%81%98%E3%82%81.md)
+  + [01 - Hello Worldしてみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/01%20-%20Hello%20World%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
+  + [02 - Event Emitしてみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/02%20-%20Event%20Emit%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
+  + [03 - Browser間でやり取りする](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/03%20-%20Browser%E9%96%93%E3%81%A7%E3%82%84%E3%82%8A%E5%8F%96%E3%82%8A%E3%81%99%E3%82%8B.md)
+  + [04 - Moduleをnpmパッケージ化する](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/04%20-%20Module%E3%82%92npm%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%8C%96%E3%81%99%E3%82%8B.md)

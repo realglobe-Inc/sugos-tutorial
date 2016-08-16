@@ -1,6 +1,6 @@
-# 【SUGOS】チュートリアル03: Browser間でやり取りする
+# {{prefix}} {{{cur.name}}}
 
-[前回のチュートリアル]({{{markdownBase}}}/{{{markdowns.2.filename}}})では、Caller/Actorのやり取りをNode.js上で行ないました。
+[前回のチュートリアル]({{{prev.url}}})では、Caller/Actorのやり取りをNode.js上で行ないました。
 
 今回はブラウザ間での呼び出しを実装してみます。Actorが動いているブラウザをCallerが動いているブラウザから操るサンプルです。
 一方のウィンドウでテキストボックスにHTML文字列を打ち込むと、別のウィンドウにリアルタイムでレンダリングされて表示される、というものを作ります。
@@ -53,6 +53,9 @@ Actor側のブラウザ用スクリプトを用意します。
 ```jsx
 {{{read 'example/tutorial-03/public/actor.jsx'}}}
 ```
+
+今回はHub自身がHTMLの配布するので、Actorの宣言時に`host`などの設定は不要です 。
+`location`オブジェクトの情報から自動的に接続先を見つけます。
 
 次に、このスクリプトを走らせるためのHTMLを用意します。
 
@@ -115,7 +118,32 @@ Caller側のテキストエリアを編集すると、Actorブラウザにリア
 <img src="{{{imgDir}}}/03-tutorial-browser.png"/>
 
 
+## まとめ
+
++ CallerとActorはBrowser上で動かせる
++ Hubの`static`オプションで静的ファイルの配布ができる
++ ブラウザ上の場合、CallerやActorの宣言時にHostを省略すると、`location`オブジェクトから自動的に解釈する
+
+## おまけ
+
+### 雑談: SUGOSにおけるCallbackサポートを諦めた理由
+
+SUGOSを使うと他のクライアント(Actor)で宣言した関数がいきなり使える！のですが現状は制限があります。
+
+Callbackが渡せないのです。`doSomething(() => console.log('done'!))`のような書き方ができません。
+
+理由は、それを実現する術が見つけられなかったため。
+引数として関数を渡すこと自体は擬似的に実現可能なのですが、その後、参照を解放する方法が発見できませんでした。
+呼び出し側（Caller)でのメモリリークを防ぐために、用済みなったCallbackは適切に処分する必要があります。
+しかしES2015時点のJavaScriptでは、Weak参照やポインタ数の取得といった機能が提供されておらず、
+Actor側で用済みになったかどうかをCallerから判定する術がありません。
+
+そのため、2016年現在、SUGOSではPromiseベースでのやり取りを必須としています。無念。。。
+
+
 ## リンク
+
+次回: [{{{next.name}}}]({{{next.url}}})
 
 + [SUGOS]({{{links.sugos}}})
 + [SUGO-Hub]({{{links.sugo-hub}}})
@@ -126,5 +154,5 @@ Caller側のテキストエリアを編集すると、Actorブラウザにリア
 + [Browserify]({{{links.browserify}}})
 + Tutorials
 {{#each markdowns}}
-  + [{{{name}}}]({{{../markdownBase}}}/{{{filename}}})
+  + [{{{name}}}]({{{url}}})
 {{/each}}

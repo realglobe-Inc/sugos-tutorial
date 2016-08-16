@@ -1,7 +1,7 @@
-# 【SUGOS】チュートリアル01: Hello Worldしてみる
+# {{prefix}} {{{cur.name}}}
 
 このチュートリアルでは、SUGOSを使ったもっとも簡単な例を実装します。Actor側で定義した関数をCallerから呼び出すところまでをやります。
-(ActorやCallerの役割については[前回のチュートリアル]({{{markdownBase}}}/{{{markdowns.0.filename}}})に記述されています)
+(ActorやCallerの役割については[前回のチュートリアル]({{{prev.url}}})に記述されています)
 
 ## 事前準備
 
@@ -122,7 +122,7 @@ Callerからは`.connect()`メッソドに、keyを指定することで特定�
 
 ## おまけ
 
-### 余談: standard JSを使ってコーディング標準化する
+### 雑談: standard JSを使ってコーディング標準化する
 
 今回でてきたスクリプトを含め、SUGOSチームではコーディング規約として[standard JS]({{{links.standard-js}}})を採用しています。
 これはソースコードの中でインテンドをいくつにするか、セミコロンをどうすると行ったルールを規程し、チェックするものです。
@@ -145,11 +145,13 @@ standard JSでは
 
 ## リンク
 
+次回: [{{{next.name}}}]({{{next.url}}})
+
 + [SUGOS]({{{links.sugos}}})
 + [SUGO-Hub]({{{links.sugo-hub}}})
 + [SUGO-Actor]({{{links.sugo-actor}}})
 + [SUGO-Caller]({{{links.sugo-caller}}})
 + Tutorials
 {{#each markdowns}}
-  + [{{{name}}}]({{{../markdownBase}}}/{{{filename}}})
+  + [{{{name}}}]({{{url}}})
 {{/each}}

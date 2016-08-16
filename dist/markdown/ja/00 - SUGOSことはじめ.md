@@ -1,7 +1,6 @@
-# 【SUGOS】チュートリアル00: SUGOSことはじめ
+# 【SUGOSチュートリアル】 00 - SUGOSことはじめ
 
-
-## これはなにか
+## 何なのか
 
 [SUGOS](https://github.com/realglobe-Inc/sugos)とは
 
@@ -37,7 +36,7 @@
   /></a>
 
 
-## これでできること
+## できること
 
 SUGOSを使うと、あるクライアント上で定義した関数が、他のクライアントからいきなり使えるようになります。
 HTTPやWebSocketといった中間のプロトコルを意識することなく、遠隔呼び出しが可能になるのです。
@@ -114,7 +113,7 @@ co(function * () {
 `.on()`や`.emit()`となどの書き方で、Actor側からCaller側に通知が出せます。
 
 
-## これはどういう仕組みか
+## どういう仕組みか
 
 ### 主なコンポネーント
 
@@ -139,13 +138,16 @@ Actor側では受けとった情報を元に対象の関数を呼び出し、そ
 それぞれの関数はJavascriptの[async/await](https://github.com/yortus/asyncawait#guide-to-asyncawait-v10)に沿って実装されており、
 ネットワークの時差をあまり意識せずにプログラムがかけるようになっています。
 
-## これの利点
+## まとめ
 
-+ 機能単位でWebアプリケーション設計ができる
-+ ネットワークをあまり意識しなくていい
-+ Javascriptだけで直感的にかける
++ SUGOSは遠隔呼び出しを実現するフレームワーク
++ あるクライアント側で宣言した関数を別のクライアントから呼べる
++ 呼び出し側のJavascript上では関数が動的に作られる
++ HTTPやWebSocketをほとんど意識なくて良い
 
-## これに関するリンク
+## リンク
+
+次回: [01 - Hello Worldしてみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/01%20-%20Hello%20World%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
 
 + [SUGOS](https://github.com/realglobe-Inc/sugos)
 + [SUGO-Hub](https://github.com/realglobe-Inc/sugo-hub)
@@ -153,7 +155,8 @@ Actor側では受けとった情報を元に対象の関数を呼び出し、そ
 + [SUGO-Caller](https://github.com/realglobe-Inc/sugo-caller)
 + [Realglobe Inc](http://realglobe.jp/)
 + Tutorials
-  + [00.SUGOSことはじめ](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/00.SUGOS%E3%81%93%E3%81%A8%E3%81%AF%E3%81%98%E3%82%81.md)
-  + [01.Hello Worldしてみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/01.Hello%20World%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
-  + [02.Event Emitしてみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/02.Event%20Emit%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
-  + [03.Browser間でやり取りする](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/03.Browser%E9%96%93%E3%81%A7%E3%82%84%E3%82%8A%E5%8F%96%E3%82%8A%E3%81%99%E3%82%8B.md)
+  + [00 - SUGOSことはじめ](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/00%20-%20SUGOS%E3%81%93%E3%81%A8%E3%81%AF%E3%81%98%E3%82%81.md)
+  + [01 - Hello Worldしてみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/01%20-%20Hello%20World%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
+  + [02 - Event Emitしてみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/02%20-%20Event%20Emit%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
+  + [03 - Browser間でやり取りする](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/03%20-%20Browser%E9%96%93%E3%81%A7%E3%82%84%E3%82%8A%E5%8F%96%E3%82%8A%E3%81%99%E3%82%8B.md)
+  + [04 - Moduleをnpmパッケージ化する](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/04%20-%20Module%E3%82%92npm%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%8C%96%E3%81%99%E3%82%8B.md)

@@ -1,6 +1,6 @@
-# 【SUGOS】チュートリアル02: Event Emitしてみる
+# {{prefix}} {{{cur.name}}}
 
-[前回のチュートリアル]({{{markdownBase}}}/{{{markdowns.1.filename}}})では、簡単な関数のCall/Returnを実装しました。
+[前回のチュートリアル]({{{prev.url}}})では、簡単な関数のCall/Returnを実装しました。
 
 今回はEmit/Listen形式でのイベント駆動を実装してみます。
 Actor側からEventを発火し、Caller側でそれを受け取ります。
@@ -96,7 +96,7 @@ Caller側で`.get()`したModuleもやはり同様にEventEmitterです
 
 ## おまけ
 
-### 余談: SUGOSの正式名称とそれが目指す世界
+### 雑談: SUGOSの正式名称とそれが目指す世界
 
 SUGOSというのは略称です。それでは正式名称は？Super Ultra Gorgeous Outstanding Specialです。
 そうです。スーパー・ウルトラ・ゴージャース・アウトスタンディング・スペシャルです。略してスゴす。
@@ -117,11 +117,13 @@ SUGOSというのは略称です。それでは正式名称は？Super Ultra Gor
 
 ## リンク
 
+次回: [{{{next.name}}}]({{{next.url}}})
+
 + [SUGOS]({{{links.sugos}}})
 + [SUGO-Hub]({{{links.sugo-hub}}})
 + [SUGO-Actor]({{{links.sugo-actor}}})
 + [SUGO-Caller]({{{links.sugo-caller}}})
 + Tutorials
 {{#each markdowns}}
-  + [{{{name}}}]({{{../markdownBase}}}/{{{filename}}})
+  + [{{{name}}}]({{{url}}})
 {{/each}}

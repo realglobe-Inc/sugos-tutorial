@@ -1,7 +1,6 @@
-# 【SUGOS】チュートリアル00: SUGOSことはじめ
+# {{prefix}} {{{cur.name}}}
 
-
-## これはなにか
+## 何なのか
 
 [SUGOS]({{{links.sugos}}})とは
 
@@ -37,7 +36,7 @@
   /></a>
 
 
-## これでできること
+## できること
 
 SUGOSを使うと、あるクライアント上で定義した関数が、他のクライアントからいきなり使えるようになります。
 HTTPやWebSocketといった中間のプロトコルを意識することなく、遠隔呼び出しが可能になるのです。
@@ -71,7 +70,7 @@ HTTPやWebSocketといった中間のプロトコルを意識することなく�
 `.on()`や`.emit()`となどの書き方で、Actor側からCaller側に通知が出せます。
 
 
-## これはどういう仕組みか
+## どういう仕組みか
 
 ### 主なコンポネーント
 
@@ -96,13 +95,16 @@ Actor側では受けとった情報を元に対象の関数を呼び出し、そ
 それぞれの関数はJavascriptの[async/await](https://github.com/yortus/asyncawait#guide-to-asyncawait-v10)に沿って実装されており、
 ネットワークの時差をあまり意識せずにプログラムがかけるようになっています。
 
-## これの利点
+## まとめ
 
-+ 機能単位でWebアプリケーション設計ができる
-+ ネットワークをあまり意識しなくていい
-+ Javascriptだけで直感的にかける
++ SUGOSは遠隔呼び出しを実現するフレームワーク
++ あるクライアント側で宣言した関数を別のクライアントから呼べる
++ 呼び出し側のJavascript上では関数が動的に作られる
++ HTTPやWebSocketをほとんど意識なくて良い
 
-## これに関するリンク
+## リンク
+
+次回: [{{{next.name}}}]({{{next.url}}})
 
 + [SUGOS]({{{links.sugos}}})
 + [SUGO-Hub]({{{links.sugo-hub}}})
@@ -111,5 +113,5 @@ Actor側では受けとった情報を元に対象の関数を呼び出し、そ
 + [Realglobe Inc]({{{links.realglobe}}})
 + Tutorials
 {{#each markdowns}}
-  + [{{{name}}}]({{{../markdownBase}}}/{{{filename}}})
+  + [{{{name}}}]({{{url}}})
 {{/each}}
