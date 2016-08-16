@@ -6,6 +6,13 @@
 一方のウィンドウでテキストボックスにHTML文字列を打ち込むと、別のウィンドウにリアルタイムでレンダリングされて表示される、というものを作ります。
 
 
+<a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/03%20-%20Browser%E9%96%93%E3%81%A7%E3%82%84%E3%82%8A%E5%8F%96%E3%82%8A%E3%81%99%E3%82%8B.md">
+  <img src="../../images/eyecatch-browser.png"
+       alt="eyecatch"
+       height="128"
+       style="height:128px"
+/></a>
+
 ## 内容
 - [実装してみる](#実装してみる)
   * [プロジェクトの用意](#プロジェクトの用意)
@@ -17,6 +24,7 @@
 - [まとめ](#まとめ)
 - [おまけ](#おまけ)
   * [雑談: SUGOSにおけるCallbackサポートを諦めた理由](#雑談-sugosにおけるcallbackサポートを諦めた理由)
+- [これも読みたい](#これも読みたい)
 - [リンク](#リンク)
 
 
@@ -434,7 +442,7 @@ Hubが起動している状態で、Actor側HTMLをブラウザから開きま�
 Caller側のテキストエリアを編集すると、Actorブラウザにリアルタイムで反映されていることが確認できたら成功です。
 
 
-<img src="../../images/03-tutorial-browser.png"/>
+<img src="../../images/tutorial-browser.png"/>
 
 
 ## まとめ

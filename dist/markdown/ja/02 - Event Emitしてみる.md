@@ -6,6 +6,13 @@
 Actor側からEventを発火し、Caller側でそれを受け取ります。
 
 
+<a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/02%20-%20Event%20Emit%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md">
+  <img src="../../images/eyecatch-event-emit.jpg"
+       alt="eyecatch"
+       height="128"
+       style="height:128px"
+  /></a>
+
 ## 内容
 - [実装してみる](#実装してみる)
   * [プロジェクトの用意](#プロジェクトの用意)
@@ -16,6 +23,7 @@ Actor側からEventを発火し、Caller側でそれを受け取ります。
   * [まとめ](#まとめ)
 - [おまけ](#おまけ)
   * [雑談: SUGOSの正式名称とそれが目指す世界](#雑談-sugosの正式名称とそれが目指す世界)
+- [これも読みたい](#これも読みたい)
 - [リンク](#リンク)
 
 

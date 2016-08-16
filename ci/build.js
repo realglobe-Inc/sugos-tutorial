@@ -61,6 +61,7 @@ runTasks('build', [
           imgDir: '../../images',
           links: links,
           bannerHeight: '40',
+          eyecatchHeight: '128',
           markdownBase,
           markdowns,
           prev: markdowns[ index - 1 ],

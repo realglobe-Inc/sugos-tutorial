@@ -8,9 +8,17 @@
 そこで今回は、Moduleを単体のプロジェクトとして生成し、npmパッケージとして配布します。
 
 
+<a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/04%20-%20Module%E3%82%92npm%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%8C%96%E3%81%99%E3%82%8B.md">
+<img src="../../images/eyecatch-package.jpg"
+     alt="eyecatch"
+     height="128"
+     style="height:128px"
+/></a>
+
 ## 内容
 - [事前準備](#事前準備)
 - [まとめ](#まとめ)
+- [これも読みたい](#これも読みたい)
 - [リンク](#リンク)
 
 

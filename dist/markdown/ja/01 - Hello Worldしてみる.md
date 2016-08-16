@@ -3,6 +3,13 @@
 このチュートリアルでは、SUGOSを使ったもっとも簡単な例を実装します。Actor側で定義した関数をCallerから呼び出すところまでをやります。
 (ActorやCallerの役割については[前回のチュートリアル](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/00%20-%20SUGOS%E3%81%93%E3%81%A8%E3%81%AF%E3%81%98%E3%82%81.md)に記述されています)
 
+<a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/01%20-%20Hello%20World%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md">
+  <img src="../../images/eyecatch-hello-world.jpg"
+       alt="eyecatch"
+       height="128"
+       style="height:128px"
+/></a>
+
 ## 内容
 - [事前準備](#事前準備)
 - [実装してみる](#実装してみる)
@@ -14,6 +21,7 @@
 - [まとめ](#まとめ)
 - [おまけ](#おまけ)
   * [雑談: standard JSを使ってコーディング標準化する](#雑談-standard-jsを使ってコーディング標準化する)
+- [これも読みたい](#これも読みたい)
 - [リンク](#リンク)
 
 
