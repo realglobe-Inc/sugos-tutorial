@@ -221,9 +221,12 @@ SUGOSというのは略称です。それでは正式名称は？Super Ultra Gor
 そう、スーパーで、ウルトラで、ゴージャースで、アウトスタンディングな、スペシャルを。（言いたいだけ）
 
 
-## リンク
+## これも読みたい
 
-次回: [03 - Browser間でやり取りする](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/03%20-%20Browser%E9%96%93%E3%81%A7%E3%82%84%E3%82%8A%E5%8F%96%E3%82%8A%E3%81%99%E3%82%8B.md)
++ 前回: [01 - Hello Worldしてみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/01%20-%20Hello%20World%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
++ 次回: [03 - Browser間でやり取りする](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/03%20-%20Browser%E9%96%93%E3%81%A7%E3%82%84%E3%82%8A%E5%8F%96%E3%82%8A%E3%81%99%E3%82%8B.md)
+
+## リンク
 
 + [SUGOS](https://github.com/realglobe-Inc/sugos)
 + [SUGO-Hub](https://github.com/realglobe-Inc/sugo-hub)

@@ -253,9 +253,13 @@ standard JSでは
        style="height:40px"
   /></a>
 
-## リンク
 
-次回: [02 - Event Emitしてみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/02%20-%20Event%20Emit%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
+## これも読みたい
+
++ 前回: [00 - SUGOSことはじめ](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/00%20-%20SUGOS%E3%81%93%E3%81%A8%E3%81%AF%E3%81%98%E3%82%81.md)
++ 次回: [02 - Event Emitしてみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/02%20-%20Event%20Emit%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
+
+## リンク
 
 + [SUGOS](https://github.com/realglobe-Inc/sugos)
 + [SUGO-Hub](https://github.com/realglobe-Inc/sugo-hub)

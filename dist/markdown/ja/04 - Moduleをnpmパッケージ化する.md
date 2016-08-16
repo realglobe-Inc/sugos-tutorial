@@ -21,6 +21,11 @@
 
 ## まとめ
 
+## これも読みたい
+
++ 前回: [03 - Browser間でやり取りする](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/03%20-%20Browser%E9%96%93%E3%81%A7%E3%82%84%E3%82%8A%E5%8F%96%E3%82%8A%E3%81%99%E3%82%8B.md)
++ 次回: []()
+
 ## リンク
 
 + [SUGOS](https://github.com/realglobe-Inc/sugos)

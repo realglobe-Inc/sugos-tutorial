@@ -1,7 +1,7 @@
 # 【SUGOSチュートリアル】 00 - SUGOSことはじめ
 
 
-これはフレームワーク[SUGOS](https://github.com/realglobe-Inc/sugos)のチュートリアルです。
+フレームワーク[SUGOS](https://github.com/realglobe-Inc/sugos)のチュートリアル。
 
 そんなのいいから取りあえずソースコードを！と言う方は[こちらの実装例](https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example)を参照。
 
@@ -158,9 +158,13 @@ Actor側では受けとった情報を元に対象の関数を呼び出し、そ
 + 呼び出し側のJavascript上では関数が動的に作られる
 + HTTPやWebSocketをほとんど意識なくて良い
 
-## リンク
 
-次回: [01 - Hello Worldしてみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/01%20-%20Hello%20World%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
+## これも読みたい
+
++ 次回: [01 - Hello Worldしてみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/01%20-%20Hello%20World%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
+
+
+## リンク
 
 + [SUGOS](https://github.com/realglobe-Inc/sugos)
 + [SUGO-Hub](https://github.com/realglobe-Inc/sugo-hub)

@@ -460,9 +460,12 @@ Actor側で用済みになったかどうかをCallerから判定する術があ
 そのため、2016年現在、SUGOSではPromiseベースでのやり取りを必須としています。無念。。。
 
 
-## リンク
+## これも読みたい
 
-次回: [04 - Moduleをnpmパッケージ化する](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/04%20-%20Module%E3%82%92npm%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%8C%96%E3%81%99%E3%82%8B.md)
++ 前回: [02 - Event Emitしてみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/02%20-%20Event%20Emit%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
++ 次回: [04 - Moduleをnpmパッケージ化する](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/04%20-%20Module%E3%82%92npm%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%8C%96%E3%81%99%E3%82%8B.md)
+
+## リンク
 
 + [SUGOS](https://github.com/realglobe-Inc/sugos)
 + [SUGO-Hub](https://github.com/realglobe-Inc/sugo-hub)
