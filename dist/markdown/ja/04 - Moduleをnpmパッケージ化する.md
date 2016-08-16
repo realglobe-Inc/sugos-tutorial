@@ -18,6 +18,8 @@
 ## 内容
 - [事前準備](#事前準備)
 - [まとめ](#まとめ)
+- [おまけ](#おまけ)
+  * [雑談: Javascriptの関数でキーワード引数みたいなことをしてみる](#雑談-javascriptの関数でキーワード引数みたいなことをしてみる)
 - [これも読みたい](#これも読みたい)
 - [リンク](#リンク)
 
@@ -47,9 +49,10 @@ sugo-scaffold --version
 ### 雑談: Javascriptの関数でキーワード引数みたいなことをしてみる
 
 例えばPythonだと[Keyword Arguments](https://docs.python.org/3/tutorial/controlflow.html#keyword-arguments)なる仕様があって、
-関数の引数がいっぱいあるやつをうまく処理できるようになってたりする。
+引数がいっぱい関数をうまく記述できるようになっているのです。
 
 ```python
+# Keyword-arguments example of Python
 def do_something(src, dest, **keywords):
   force = keywords.pop('force', false)
   mkdirp = keywords.pop('mkdirp', true)
@@ -58,12 +61,12 @@ def do_something(src, dest, **keywords):
 do_something('foo.txt', 'bar.txt', force=false, mkdirp=false)
 ```
 
-これと同じようなことをJavaScriptでやろうとするとそれはもう大変だった。ES2015が使えるようになるまではね。
+これと同じようなことをJavaScriptでやろうとするとそれはもう大変でした。ES2015が使えるようになるまではね。
 
-Node.js6以降で使えるようになった、[ES2015のDestructuring assignment](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)機能を使うと、
+Node.js6から導入された[ES2015のDestructuring assignment](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)機能を使うと、
 
 ```javascript
-// After ES2015
+// Example JavasScript, after ES2015
 function doSomething (src, dest, options = {}) {
   let {
     force = false,
@@ -74,24 +77,25 @@ function doSomething (src, dest, options = {}) {
 doSomething('foo.txt', 'bar.txt', { force: false, mkdirp: false })
 ````
 
-といった感じで、pythonと大差ない形でかけるようになった。もちろん[preset-es2015でバベれ](https://babeljs.io/docs/plugins/preset-es2015/)ばブラウザでも使える
+といった感じで、pythonと大差ない形でかけます。
+もちろん[preset-es2015でバベれ](https://babeljs.io/docs/plugins/preset-es2015/)ばブラウザでも動きます。
 
 昔だったら
 
 ```javascript
-// Before ES2015
+// Example JavasScript, before ES2015
 function doSomething (src, dest, options) {
   if(typeof options === 'undefined') {
     options = {}
   }
-  var force = typeof(options.force === 'undefined') ? false: options.force
-  var mkdirp = typeof(options.mkdirp === 'undefined') ? false: options.mkdirp
-console.log('Do something with args: ', src, dest, force)
+  var force = typeof options.force === 'undefined' ? false : options.force
+  var mkdirp = typeof options.mkdirp === 'undefined' ? false : options.mkdirp
+  console.log('Do something with args: ', src, dest, force)
 }
 doSomething('foo.txt', 'bar.txt', { force: false, mkdirp: false })
 ```
 
-とか書いていたのに。もう携帯電話がなかった時代と同じくらい遠く感じる。
+とか書いていたのに。もう携帯電話がなかった時代と同じくらい遠く感じますね。
 
 
 
