@@ -258,7 +258,7 @@ module.exports = KeyValueStore
 
 まずはconstructorの引数に`filename`を追加しました。keyValueのデータを保存する先です。
 
-次にファイルアクセス用の'._read()`と`._write(data)`メソッドを用意します。
+次にファイルアクセス用の`._read()`と`._write(data)`メソッドを用意します。
 アンダースコアで始まる名前はプライベートとして扱われ、 Actorに渡してもCallerには共有されません。
 ここではconstructorで渡されたファイルにJSONとしての読み書きをし、Promiseインターフェイスを提供するようなものにします。
 
@@ -292,6 +292,7 @@ class KeyValueStore extends Module {
   set (key, value) { /* ... */ }
 
   get (key) { /* ... */ }
+
   del (key) { /* ... */ }
 
   // Private function to read data file
@@ -323,6 +324,7 @@ class KeyValueStore extends Module {
             { name: 'value', type: 'string', desc: 'value to set' }
           ]
         },
+
         get: {
           desc: 'Get by key ',
           params: [
@@ -330,6 +332,7 @@ class KeyValueStore extends Module {
           ],
           return: { type: 'string', desc: 'Found value' }
         },
+
         del: {
           desc: 'Delete by key ',
           params: [

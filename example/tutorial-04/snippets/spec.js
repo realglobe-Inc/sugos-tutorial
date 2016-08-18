@@ -22,6 +22,7 @@ class KeyValueStore extends Module {
   set (key, value) { /* ... */ }
 
   get (key) { /* ... */ }
+
   del (key) { /* ... */ }
 
   // Private function to read data file
@@ -53,6 +54,7 @@ class KeyValueStore extends Module {
             { name: 'value', type: 'string', desc: 'value to set' }
           ]
         },
+
         get: {
           desc: 'Get by key ',
           params: [
@@ -60,6 +62,7 @@ class KeyValueStore extends Module {
           ],
           return: { type: 'string', desc: 'Found value' }
         },
+
         del: {
           desc: 'Delete by key ',
           params: [
