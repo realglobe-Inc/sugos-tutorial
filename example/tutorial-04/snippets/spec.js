@@ -11,7 +11,7 @@ const debug = require('debug')('sugo:module:demo-module')
 
 /** @lends KeyValueStore */
 class KeyValueStore extends Module {
-  constructor (filename = 'kv.json', config = {}) { /* ... */ }
+  constructor (config = {}) { /* ... */ }
 
   /** ... */
   ping (pong = 'pong') { /* ... */ }

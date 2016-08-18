@@ -14,7 +14,8 @@ class KeyValueStore extends Module {
 
   // Add "filename" parameter on constructor
 
-  constructor (filename = 'kv.json', config = {}) {
+  constructor (config = {}) {
+    let { filename = 'kv.json' } = config
     debug('Config: ', config)
     super(config)
     const s = this
@@ -32,9 +33,9 @@ class KeyValueStore extends Module {
   set (key, value) {
     const s = this
     return co(function * () {
-      let data = yield s._read()
+      let data = yield s._read().catch(() => ({}))
       data[ key ] = value
-      return yield s.write(data)
+      return yield s._write(data)
     })
   }
 
@@ -51,7 +52,7 @@ class KeyValueStore extends Module {
     return co(function * () {
       let data = yield s._read()
       delete data[ key ]
-      return yield s.write(data)
+      return yield s._write(data)
     })
   }
 

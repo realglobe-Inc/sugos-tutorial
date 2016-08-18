@@ -92,7 +92,24 @@
 
 ### Moduleのテスト
 
+次にテストを追加します。自動生成された"test/key_value_store_test.js"にはすでに幾つかのテストが書かれています。
 
+```javascript
+{{{read 'example/tutorial-04/snippets/generated_test.js'}}}
+```
+
+ここに作成した機能に関するテストを追加します。
+
+```javascript
+{{{read 'example/tutorial-04/snippets/imple_test.js'}}}
+  ```
+
+
+```bash
+npm test
+```
+
+で無事テストが通れば成功です。
 
 
 ## まとめ

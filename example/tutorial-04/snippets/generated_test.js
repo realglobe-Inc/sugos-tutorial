@@ -62,23 +62,6 @@ describe('demo-module', function () {
       assert.ok(!!~implemented.indexOf(name), `${name} method should be implemented`)
     }
   }))
-
-  it('Do get/set/del', () => co(function * () {
-    let module = new KeyValueStore({
-      filename: `${__dirname}/../testing-store.json`,
-      $emitter: new EventEmitter()
-    })
-    yield module.set('foo', 'This is foo')
-    {
-      let foo = yield module.get('foo')
-      assert.equal(foo, 'This is foo')
-    }
-    yield module.del('foo')
-    {
-      let foo = yield module.get('foo')
-      assert.equal(foo, undefined)
-    }
-  }))
 })
 
 /* global describe, before, after, it */
