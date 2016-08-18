@@ -77,10 +77,10 @@
 まずはconstructorの引数に`filename`を追加しました。keyValueのデータを保存する先です。
 
 次にファイルアクセス用の'._read()`と`._write(data)`メソッドを用意します。
-"_"で始まる名前はプライベートとして扱われ、 Actorについ内でもCallerには共有されません。
-
+アンダースコアで始まる名前はプライベートとして扱われ、 Actorに渡してもCallerには共有されません。
 ここではconstructorで渡されたファイルにJSONとしての読み書きをし、Promiseインターフェイスを提供するようなものにします。
-そしたらそれらを利用する`.set(key, value)`、`.get(key)`、`.del(key)`を実装すれば、単純なKeyValueStoreの完成です。
+
+そして、それらを利用する`.set(key, value)`、`.get(key)`、`.del(key)`を実装すれば、単純なKeyValueStoreの完成です。
 
 
 実装したら忘れずに`$spec`も記述しましょう
@@ -98,6 +98,9 @@
 ## まとめ
 
 + [sugo-scaffold]({{{links.sugo-scaffold}}})で雛形が生成できる
++ `$spec`でModule自身を描写できる
++ アンダースコアで始まるメソッドはプライベート扱いになる
++ ActorやHubがなくてもテストできる
 
 
 ## おまけ

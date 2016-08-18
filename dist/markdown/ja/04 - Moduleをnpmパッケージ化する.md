@@ -21,6 +21,7 @@
 - [実装してみる](#実装してみる)
   * [雛形の作成](#雛形の作成)
   * [Moduleの実装](#moduleの実装)
+  * [Moduleのテスト](#moduleのテスト)
 - [まとめ](#まとめ)
 - [おまけ](#おまけ)
   * [雑談: Javascriptの関数でキーワード引数みたいなことをしてみる](#雑談-javascriptの関数でキーワード引数みたいなことをしてみる)
@@ -185,6 +186,9 @@ const debug = require('debug')('sugo:module:demo-module')
 
 /** @lends KeyValueStore */
 class KeyValueStore extends Module {
+
+  // Add "filename" parameter on constructor
+
   constructor (filename = 'kv.json', config = {}) {
     debug('Config: ', config)
     super(config)
@@ -197,6 +201,8 @@ class KeyValueStore extends Module {
 
   /** ... */
   assert () { /* ... */ }
+
+  // Define methods for Key-vale store
 
   set (key, value) {
     const s = this
@@ -242,10 +248,7 @@ class KeyValueStore extends Module {
     )
   }
 
-  /**
-   * Module specification
-   * @see https://github.com/realglobe-Inc/sg-schemas/blob/master/lib/module_spec.json
-   */
+  /** ... */
   get $spec () { /* ... */ }
 }
 
@@ -256,10 +259,10 @@ module.exports = KeyValueStore
 まずはconstructorの引数に`filename`を追加しました。keyValueのデータを保存する先です。
 
 次にファイルアクセス用の'._read()`と`._write(data)`メソッドを用意します。
-"_"で始まる名前はプライベートとして扱われ、 Actorについ内でもCallerには共有されません。
-
+アンダースコアで始まる名前はプライベートとして扱われ、 Actorに渡してもCallerには共有されません。
 ここではconstructorで渡されたファイルにJSONとしての読み書きをし、Promiseインターフェイスを提供するようなものにします。
-そしたらそれらを利用する`.set(key, value)`、`.get(key)`、`.del(key)`を実装すれば、単純なKeyValueStoreの完成です。
+
+そして、それらを利用する`.set(key, value)`、`.get(key)`、`.del(key)`を実装すれば、単純なKeyValueStoreの完成です。
 
 
 実装したら忘れずに`$spec`も記述しましょう
@@ -352,6 +355,9 @@ module.exports = KeyValueStore
 ## まとめ
 
 + [sugo-scaffold](https://github.com/realglobe-Inc/sugo-scaffold)で雛形が生成できる
++ `$spec`でModule自身を描写できる
++ アンダースコアで始まるメソッドはプライベート扱いになる
++ ActorやHubがなくてもテストできる
 
 
 ## おまけ

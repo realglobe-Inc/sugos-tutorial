@@ -11,6 +11,9 @@ const debug = require('debug')('sugo:module:demo-module')
 
 /** @lends KeyValueStore */
 class KeyValueStore extends Module {
+
+  // Add "filename" parameter on constructor
+
   constructor (filename = 'kv.json', config = {}) {
     debug('Config: ', config)
     super(config)
@@ -23,6 +26,8 @@ class KeyValueStore extends Module {
 
   /** ... */
   assert () { /* ... */ }
+
+  // Define methods for Key-vale store
 
   set (key, value) {
     const s = this
@@ -68,10 +73,7 @@ class KeyValueStore extends Module {
     )
   }
 
-  /**
-   * Module specification
-   * @see https://github.com/realglobe-Inc/sg-schemas/blob/master/lib/module_spec.json
-   */
+  /** ... */
   get $spec () { /* ... */ }
 }
 
