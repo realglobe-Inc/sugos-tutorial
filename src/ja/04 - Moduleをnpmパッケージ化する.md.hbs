@@ -51,11 +51,48 @@
 ### Moduleの実装
 
 作成したプロジェクトに移動の中に"lib/key_value_store.js"と名前でModuleクラスのファイルが生成されています。
-ここに機能を追加していきましょう。
 
 ```javascript
-{{{read 'example/tutorial-04/lib/_key_value_store_generated.js'}}}
+{{{read 'example/tutorial-04/snippets/generated.js'}}}
 ```
+
+すでに二つのメソッドが実装されていますね。
+
+生存確認用の`.ping()`メソッドと、稼働環境の確認用の`.assert()`メソッドです。
+
+`npm test`を実行すると、実際にこれらのメソッドを動かすことができます。
+
+また、最後の部分には
+`get $spec () { /* ... */ }`
+というgetterが定義されており、そこにこのモジュールの情報が描写されています。
+これは任意の付加情報であり、実は書かなくても動くのですが、単体パッケージにするようなModuleの場合はきちんと書くことが推奨されます。
+
+
+さて、ここにKeyValueStoreっぽいメソッドを追加していきましょう。
+
+```javascript
+{{{read 'example/tutorial-04/snippets/imple.js'}}}
+```
+
+まずはconstructorの引数に`filename`を追加しました。keyValueのデータを保存する先です。
+
+次にファイルアクセス用の'._read()`と`._write(data)`メソッドを用意します。
+"_"で始まる名前はプライベートとして扱われ、 Actorについ内でもCallerには共有されません。
+
+ここではconstructorで渡されたファイルにJSONとしての読み書きをし、Promiseインターフェイスを提供するようなものにします。
+そしたらそれらを利用する`.set(key, value)`、`.get(key)`、`.del(key)`を実装すれば、単純なKeyValueStoreの完成です。
+
+
+実装したら忘れずに`$spec`も記述しましょう
+
+```javascript
+{{{read 'example/tutorial-04/snippets/spec.js'}}}
+```
+
+
+### Moduleのテスト
+
+
 
 
 ## まとめ

@@ -19,6 +19,8 @@
 ## 内容
 - [事前準備](#事前準備)
 - [実装してみる](#実装してみる)
+  * [雛形の作成](#雛形の作成)
+  * [Moduleの実装](#moduleの実装)
 - [まとめ](#まとめ)
 - [おまけ](#おまけ)
   * [雑談: Javascriptの関数でキーワード引数みたいなことをしてみる](#雑談-javascriptの関数でキーワード引数みたいなことをしてみる)
@@ -63,7 +65,6 @@ npm test
 ### Moduleの実装
 
 作成したプロジェクトに移動の中に"lib/key_value_store.js"と名前でModuleクラスのファイルが生成されています。
-ここに機能を追加していきましょう。
 
 ```javascript
 /**
@@ -155,6 +156,197 @@ class KeyValueStore extends Module {
 module.exports = KeyValueStore
 
 ```
+
+すでに二つのメソッドが実装されていますね。
+
+生存確認用の`.ping()`メソッドと、稼働環境の確認用の`.assert()`メソッドです。
+
+`npm test`を実行すると、実際にこれらのメソッドを動かすことができます。
+
+また、最後の部分には
+`get $spec () { /* ... */ }`
+というgetterが定義されており、そこにこのモジュールの情報が描写されています。
+これは任意の付加情報であり、実は書かなくても動くのですが、単体パッケージにするようなModuleの場合はきちんと書くことが推奨されます。
+
+
+さて、ここにKeyValueStoreっぽいメソッドを追加していきましょう。
+
+```javascript
+/** ... */
+'use strict'
+
+const { Module } = require('sugo-module-base')
+const { name, version, description } = require('../package.json')
+
+const co = require('co')
+const fs = require('fs')
+const { hasBin } = require('sg-check')
+const debug = require('debug')('sugo:module:demo-module')
+
+/** @lends KeyValueStore */
+class KeyValueStore extends Module {
+  constructor (filename = 'kv.json', config = {}) {
+    debug('Config: ', config)
+    super(config)
+    const s = this
+    s.filename = filename
+  }
+
+  /** ... */
+  ping (pong = 'pong') { /* ... */ }
+
+  /** ... */
+  assert () { /* ... */ }
+
+  set (key, value) {
+    const s = this
+    return co(function * () {
+      let data = yield s._read()
+      data[ key ] = value
+      return yield s.write(data)
+    })
+  }
+
+  get (key) {
+    const s = this
+    return co(function * () {
+      let data = yield s._read()
+      return data[ key ]
+    })
+  }
+
+  del (key) {
+    const s = this
+    return co(function * () {
+      let data = yield s._read()
+      delete data[ key ]
+      return yield s.write(data)
+    })
+  }
+
+  // Private function to read data file
+  // Methods with "_" is not exposed to remote caller
+  _read () {
+    let { filename } = this
+    return new Promise((resolve, reject) =>
+      fs.readFile((filename), (err, content) => err ? reject(err) : resolve(content))
+    ).then(JSON.parse)
+  }
+
+  // Private function to write data file
+  // Methods with "_" is not exposed to remote caller
+  _write (data) {
+    let { filename } = this
+    return new Promise((resolve, reject) =>
+      fs.writeFile(filename, JSON.stringify(data), (err) => err ? reject(err) : resolve())
+    )
+  }
+
+  /**
+   * Module specification
+   * @see https://github.com/realglobe-Inc/sg-schemas/blob/master/lib/module_spec.json
+   */
+  get $spec () { /* ... */ }
+}
+
+module.exports = KeyValueStore
+
+```
+
+まずはconstructorの引数に`filename`を追加しました。keyValueのデータを保存する先です。
+
+次にファイルアクセス用の'._read()`と`._write(data)`メソッドを用意します。
+"_"で始まる名前はプライベートとして扱われ、 Actorについ内でもCallerには共有されません。
+
+ここではconstructorで渡されたファイルにJSONとしての読み書きをし、Promiseインターフェイスを提供するようなものにします。
+そしたらそれらを利用する`.set(key, value)`、`.get(key)`、`.del(key)`を実装すれば、単純なKeyValueStoreの完成です。
+
+
+実装したら忘れずに`$spec`も記述しましょう
+
+```javascript
+/** ... */
+'use strict'
+
+const { Module } = require('sugo-module-base')
+const { name, version, description } = require('../package.json')
+
+const co = require('co')
+const fs = require('fs')
+const { hasBin } = require('sg-check')
+const debug = require('debug')('sugo:module:demo-module')
+
+/** @lends KeyValueStore */
+class KeyValueStore extends Module {
+  constructor (filename = 'kv.json', config = {}) { /* ... */ }
+
+  /** ... */
+  ping (pong = 'pong') { /* ... */ }
+
+  /** ... */
+  assert () { /* ... */ }
+
+  set (key, value) { /* ... */ }
+
+  get (key) { /* ... */ }
+  del (key) { /* ... */ }
+
+  // Private function to read data file
+  // Methods with "_" is not exposed to remote caller
+  _read () { /* ... */ }
+
+  // Private function to write data file
+  // Methods with "_" is not exposed to remote caller
+  _write (data) { /* ... */ }
+
+  /**
+   * Module specification
+   * @see https://github.com/realglobe-Inc/sg-schemas/blob/master/lib/module_spec.json
+   */
+  get $spec () {
+    return {
+      name,
+      version,
+      desc: description,
+      methods: {
+        ping: { /* ... */ },
+
+        assert: { /* ... */ },
+
+        set: {
+          desc: 'Set key value',
+          params: [
+            { name: 'key', type: 'string', desc: 'Key to set' },
+            { name: 'value', type: 'string', desc: 'value to set' }
+          ]
+        },
+        get: {
+          desc: 'Get by key ',
+          params: [
+            { name: 'key', type: 'string', desc: 'Key to set' }
+          ],
+          return: { type: 'string', desc: 'Found value' }
+        },
+        del: {
+          desc: 'Delete by key ',
+          params: [
+            { name: 'key', type: 'string', desc: 'Key to set' }
+          ]
+        }
+      },
+      events: null
+    }
+  }
+}
+
+module.exports = KeyValueStore
+
+```
+
+
+### Moduleのテスト
+
+
 
 
 ## まとめ
