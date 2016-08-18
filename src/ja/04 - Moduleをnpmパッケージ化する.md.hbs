@@ -6,6 +6,7 @@
 しかし実際にアプリケーションを作るとなると、Moduleを使い回したくなる場合が多々あります。
 
 そこで今回は、Moduleを単体のプロジェクトとして生成し、npmパッケージとして配布します。
+機能としては簡単なKeyValueStoreにします。キーと値を渡すと、それをローカルのJSONファイルに保存するようなものです。
 
 
 <a href="{{{cur.url}}}">
@@ -32,16 +33,29 @@
 
 ## 実装してみる
 
-コマンドラインで`sugo-scaffold <type> <dircotry>`を実行すると対話シェルが始まり、それに答えると雛形が生成できます。
+### 雛形の作成
 
-まずは以下のようにModuleプロジェクトを用意します。
+コマンドラインで`sugo-scaffold <type> <dircotry>`を実行すると対話シェルが始まり、値を入力すると雛形が生成されます。
 
 ```bash
 {{{read 'example/tutorial-04/init-project.sh'}}}
 ```
 
+`module_name`の部分は今回作成する"KeyValueStore"という名称にします。
 
-( 編集中... )
+<img src="{{{imgDir}}}/tutorial-module-scaffold.png"/>
+
+最後まで答えるとプロジェクトの雛形が生成されます。
+
+
+### Moduleの実装
+
+作成したプロジェクトに移動の中に"lib/key_value_store.js"と名前でModuleクラスのファイルが生成されています。
+ここに機能を追加していきましょう。
+
+```javascript
+{{{read 'example/tutorial-04/lib/_key_value_store_generated.js'}}}
+```
 
 
 ## まとめ
@@ -94,7 +108,7 @@ function doSomething (src, dest, options) {
     options = {}
   }
   var force = typeof options.force === 'undefined' ? false : options.force
-  var mkdirp = typeof options.mkdirp === 'undefined' ? false : options.mkdirp
+  var mkdirp = typeof options.mkdirp === 'undefined' ? true : options.mkdirp
   console.log('Do something with args: ', src, dest, force)
 }
 doSomething('foo.txt', 'bar.txt', { force: false, mkdirp: false })

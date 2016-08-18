@@ -1,6 +1,6 @@
 /**
- * MyModule class
- * @class MyModule
+ * KeyValueStore class
+ * @class KeyValueStore
  * @augments Module
  * @param {Object} config - Configuration
  */
@@ -13,8 +13,8 @@ const co = require('co')
 const { hasBin } = require('sg-check')
 const debug = require('debug')('sugo:module:demo-module')
 
-/** @lends MyModule */
-class MyModule extends Module {
+/** @lends KeyValueStore */
+class KeyValueStore extends Module {
   constructor (config = {}) {
     debug('Config: ', config)
     super(config)
@@ -84,4 +84,4 @@ class MyModule extends Module {
   }
 }
 
-module.exports = MyModule
+module.exports = KeyValueStore

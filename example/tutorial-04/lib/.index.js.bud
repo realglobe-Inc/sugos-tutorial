@@ -12,7 +12,7 @@ module.exports = {
   mode: '444',
   tmpl: moduleIndex,
   data: {
-    name: 'MyModule',
+    name: 'KeyValueStore',
     sub: {},
     pkg
   }

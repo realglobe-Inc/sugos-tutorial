@@ -6,6 +6,7 @@
 しかし実際にアプリケーションを作るとなると、Moduleを使い回したくなる場合が多々あります。
 
 そこで今回は、Moduleを単体のプロジェクトとして生成し、npmパッケージとして配布します。
+機能としては簡単なKeyValueStoreにします。キーと値を渡すと、それをローカルのJSONファイルに保存するようなものです。
 
 
 <a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/04%20-%20Module%E3%82%92npm%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%8C%96%E3%81%99%E3%82%8B.md">
@@ -40,19 +41,120 @@ sugo-scaffold --version
 
 ## 実装してみる
 
-コマンドラインで`sugo-scaffold <type> <dircotry>`を実行すると対話シェルが始まり、それに答えると雛形が生成できます。
+### 雛形の作成
 
-まずは以下のようにModuleプロジェクトを用意します。
+コマンドラインで`sugo-scaffold <type> <dircotry>`を実行すると対話シェルが始まり、値を入力すると雛形が生成されます。
 
 ```bash
-sugo-scaffold module sugos-tutorial-04
+# Create a module project
+sugo-scaffold module "sugos-tutorial-04"
 cd sugos-tutorial-04
 npm install
 npm test
 ```
 
+`module_name`の部分は今回作成する"KeyValueStore"という名称にします。
 
-( 編集中... )
+<img src="../../images/tutorial-module-scaffold.png"/>
+
+最後まで答えるとプロジェクトの雛形が生成されます。
+
+
+### Moduleの実装
+
+作成したプロジェクトに移動の中に"lib/key_value_store.js"と名前でModuleクラスのファイルが生成されています。
+ここに機能を追加していきましょう。
+
+```javascript
+/**
+ * KeyValueStore class
+ * @class KeyValueStore
+ * @augments Module
+ * @param {Object} config - Configuration
+ */
+'use strict'
+
+const { Module } = require('sugo-module-base')
+const { name, version, description } = require('../package.json')
+
+const co = require('co')
+const { hasBin } = require('sg-check')
+const debug = require('debug')('sugo:module:demo-module')
+
+/** @lends KeyValueStore */
+class KeyValueStore extends Module {
+  constructor (config = {}) {
+    debug('Config: ', config)
+    super(config)
+  }
+
+  /**
+   * Ping a message.
+   * @param {string} pong
+   * @returns {Promise.<string>} - Pong message
+   */
+  ping (pong = 'pong') {
+    return co(function * pingAck () {
+      return pong // Return result to a remote caller.
+    })
+  }
+
+  /**
+   * Assert actor system requirements.
+   * @throws {Error} - System requirements failed error
+   * @returns {Promise.<boolean>} - Asserted state
+   */
+  assert () {
+    const bins = [ 'node' ] // Required commands
+    return co(function * assertAck () {
+      yield hasBin.assertAll(bins)
+      return true
+    })
+  }
+
+  /**
+   * Module specification
+   * @see https://github.com/realglobe-Inc/sg-schemas/blob/master/lib/module_spec.json
+   */
+  get $spec () {
+    return {
+      name,
+      version,
+      desc: description,
+      methods: {
+        ping: {
+          desc: 'Test the reachability of a module.',
+          params: [
+            { name: 'pong', type: 'string', desc: 'Pong message to return' }
+          ],
+          return: {
+            type: 'string',
+            desc: 'Pong message'
+          }
+        },
+
+        assert: {
+          desc: 'Test if the actor fulfills system requirements',
+          params: [],
+          throws: [ {
+            type: 'Error',
+            desc: 'System requirements failed'
+          } ],
+          return: {
+            type: 'boolean',
+            desc: 'System is OK'
+          }
+        }
+      },
+
+      events: null
+    }
+  }
+}
+
+module.exports = KeyValueStore
+
+```
 
 
 ## まとめ
@@ -105,7 +207,7 @@ function doSomething (src, dest, options) {
     options = {}
   }
   var force = typeof options.force === 'undefined' ? false : options.force
-  var mkdirp = typeof options.mkdirp === 'undefined' ? false : options.mkdirp
+  var mkdirp = typeof options.mkdirp === 'undefined' ? true : options.mkdirp
   console.log('Do something with args: ', src, dest, force)
 }
 doSomething('foo.txt', 'bar.txt', { force: false, mkdirp: false })

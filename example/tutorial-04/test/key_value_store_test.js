@@ -4,7 +4,7 @@
  */
 'use strict'
 
-const MyModule = require('../lib/my_module.js')
+const KeyValueStore = require('../lib/key_value_store.js')
 const assert = require('assert')
 const co = require('co')
 const { EventEmitter } = require('events')
@@ -23,7 +23,7 @@ describe('demo-module', function () {
   }))
 
   it('Get module spec', () => co(function * () {
-    let module = new MyModule({ $emitter: new EventEmitter() })
+    let module = new KeyValueStore({ $emitter: new EventEmitter() })
     assert.ok(module)
 
     let { $spec } = module
@@ -32,13 +32,13 @@ describe('demo-module', function () {
   }))
 
   it('Try ping-pong', () => co(function * () {
-    let module = new MyModule({ $emitter: new EventEmitter() })
+    let module = new KeyValueStore({ $emitter: new EventEmitter() })
     let pong = yield module.ping('pong')
     assert.equal(pong, 'pong')
   }))
 
   it('Do assert', () => co(function * () {
-    let module = new MyModule({ $emitter: new EventEmitter() })
+    let module = new KeyValueStore({ $emitter: new EventEmitter() })
     let caught
     try {
       yield module.assert({})
@@ -49,9 +49,9 @@ describe('demo-module', function () {
   }))
 
   it('Compare methods with spec', () => co(function * () {
-    let module = new MyModule({ $emitter: new EventEmitter() })
+    let module = new KeyValueStore({ $emitter: new EventEmitter() })
     let { $spec } = module
-    let implemented = Object.getOwnPropertyNames(MyModule.prototype)
+    let implemented = Object.getOwnPropertyNames(KeyValueStore.prototype)
       .filter((name) => !/^[\$_]/.test(name))
       .filter((name) => !~[ 'constructor' ].indexOf(name))
     let described = Object.keys($spec.methods).filter((name) => !/^[\$_]/.test(name))

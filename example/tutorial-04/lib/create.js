@@ -1,15 +1,15 @@
 /**
  * Create a module instance
  * @function create
- * @returns {MyModule}
+ * @returns {KeyValueStore}
  */
 'use strict'
 
-const MyModule = require('./my_module')
+const KeyValueStore = require('./key_value_store')
 
 /** @lends create */
 function create (...args) {
-  return new MyModule(...args)
+  return new KeyValueStore(...args)
 }
 
 module.exports = create
