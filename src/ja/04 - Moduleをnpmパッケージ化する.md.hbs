@@ -111,14 +111,23 @@ npm test
 
 で無事テストが通れば成功です。
 
+あとは`npm publish`すればnpmレジストリに登録されます。
+
+そしたら他のプロジェクトから以下のように使えるようになります
+
+```javascript
+{{{read 'example/tutorial-04/example/example-usage.js'}}}
+```
+
 
 ## まとめ
 
 + [sugo-scaffold]({{{links.sugo-scaffold}}})で雛形が生成できる
 + `$spec`でModule自身を描写できる
-+ アンダースコアで始まるメソッドはプライベート扱いになる
++ アンダースコアで始まるメソッドはプライベート扱いになり、Callerには共有されない
 + ActorやHubがなくてもテストできる
 
+なお、今回出てきたSnippetは、[こちら]({{{links.tutorial-04-example}}})からも入手できます
 
 ## おまけ
 

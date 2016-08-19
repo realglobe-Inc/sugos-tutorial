@@ -191,7 +191,7 @@ node ./actor.js
 
 ### Callerから呼び出す
 
-Callerからは`.connect()`メッソドに、keyを指定することで特定のActorに接続することができます。
+Callerからは`.connect()`メソッドに、keyを指定することで特定のActorに接続することができます。
 先ほど宣言した"my-actor-01"をkeyとて渡し、そこから'tableTennis'にアクセスします。
 
 **caller.js**

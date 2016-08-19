@@ -490,6 +490,38 @@ npm test
 
 で無事テストが通れば成功です。
 
+あとは`npm publish`すればnpmレジストリに登録されます。
+
+そしたら他のプロジェクトから以下のように使えるようになります
+
+```javascript
+#!/usr/bin/env node
+
+/**
+ * Example usage to register module on actor
+ * @see https://github.com/realglobe-Inc/sugo-actor
+ */
+'use strict'
+
+const { KeyValueStore } = require('sugos-tutorial-04')
+const sugoActor = require('sugo-actor')
+const co = require('co')
+
+co(function * () {
+  let actor = sugoActor('http://my-sugo-cloud.example.com/actors', {
+    key: 'my-actor-01',
+    modules: {
+      // Register the module
+      kvs: new KeyValueStore({
+        filename: 'kv.json'
+      })
+    }
+  })
+  yield actor.connect()
+}).catch((err) => console.error(err))
+
+```
+
 
 ## まとめ
 
@@ -498,6 +530,7 @@ npm test
 + アンダースコアで始まるメソッドはプライベート扱いになる
 + ActorやHubがなくてもテストできる
 
+なお、今回出てきたSnippetは、[こちら](https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-04)からも入手できます
 
 ## おまけ
 

@@ -15,9 +15,9 @@ co(function * () {
   let actor = caller.connect('my-actor-01')
 
   // Access to the module
-  let module01 = actor.get('module01')
+  let kvs = actor.get('kvs')
 
   // Send ping
-  let pong = yield module01.ping()
+  let pong = yield kvs.ping()
   assert.ok(pong)
 }).catch((err) => console.error(err))

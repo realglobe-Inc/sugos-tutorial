@@ -469,6 +469,8 @@ Caller側のテキストエリアを編集すると、Actorブラウザにリア
 + Hubの`static`オプションで静的ファイルの配布ができる
 + ブラウザ上の場合、CallerやActorの宣言時にHostを省略すると、`location`オブジェクトから自動的に解釈する
 
+なお、今回出てきたSnippetは、[こちら](https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-03)からも入手できます
+
 ## おまけ
 
 ### 雑談: SUGOSにおけるCallbackサポートを諦めた理由
