@@ -527,7 +527,7 @@ co(function * () {
 
 + [sugo-scaffold](https://github.com/realglobe-Inc/sugo-scaffold)で雛形が生成できる
 + `$spec`でModule自身を描写できる
-+ アンダースコアで始まるメソッドはプライベート扱いになる
++ アンダースコアで始まるメソッドはプライベート扱いになり、Callerには共有されない
 + ActorやHubがなくてもテストできる
 
 なお、今回出てきたSnippetは、[こちら](https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-04)からも入手できます
@@ -537,7 +537,7 @@ co(function * () {
 ### 雑談: Javascriptの関数でキーワード引数みたいなことをしてみる
 
 例えばPythonだと[Keyword Arguments](https://docs.python.org/3/tutorial/controlflow.html#keyword-arguments)なる仕様があって、
-引数がいっぱい関数をうまく記述できるようになっているのです。
+引数が沢山ある関数をうまく記述できるようになっているのです。
 
 ```python
 # Keyword-arguments example of Python
