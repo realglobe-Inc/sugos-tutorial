@@ -21,6 +21,16 @@ Tutorial for SUGOS
 + [04 - Moduleをnpmパッケージ化する](dist/markdown/ja/04%20-%20Module%E3%82%92npm%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%8C%96%E3%81%99%E3%82%8B.md)
 
 
+English Contents
+---------
+
++ [00 - Let us begin with SUGOS](dist/markdown/en/00%20-%20Let%20us%20begin%20with%20SUGOS.md)
++ [01 - Hello World, as always](dist/markdown/en/01%20-%20Hello%20World%2C%20as%20always.md)
++ [02 - Using Event Emit](dist/markdown/en/02%20-%20Using%20Event%20Emit.md)
++ [03 - Communication betweein Browsers](dist/markdown/en/03%20-%20Communication%20betweein%20Browsers.md)
++ [04 - Module as npm package](dist/markdown/en/04%20-%20Module%20as%20npm%20package.md)
+
+
 
 Contributing
 -----------
