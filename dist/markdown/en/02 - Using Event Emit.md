@@ -1,6 +1,6 @@
 # [SUGOS Tutorial] 02 - Using Event Emit
 
-In the [Previous Tutorial](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/01%20-%20Hello%20World%2C%20as%20always.md), we learned simple call/return function.
+In [the Previous Tutorial](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/01%20-%20Hello%20World%2C%20as%20always.md), we learned simple call/return function.
 
 Now, we will try using event emitter interface.
 Fire events from actors and receive them on callers.
@@ -13,11 +13,6 @@ Fire events from actors and receive them on callers.
        style="height:128px"
   /></a>
 
-## Table of Contents
-- [実装してみる](#%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B)
-  * [プロジェクトの用意](#%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E7%94%A8%E6%84%8F)
-  * [まとめ](#%E3%81%BE%E3%81%A8%E3%82%81)
-- [おまけ](#%E3%81%8A%E3%81%BE%E3%81%91)
 
 
 ## Try It Out

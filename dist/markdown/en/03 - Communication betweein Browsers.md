@@ -1,6 +1,6 @@
 # [SUGOS Tutorial] 03 - Communication betweein Browsers
 
-In the [Previous Tutorial](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/02%20-%20Using%20Event%20Emit.md), both of callers and actors run on Node.js.
+In [the Previous Tutorial](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/02%20-%20Using%20Event%20Emit.md), both of callers and actors run on Node.js.
 
 This time, try it on browsers.
 
@@ -14,12 +14,6 @@ Typing HTML string in a textbox in one browser, and render the HTML in another b
        style="height:128px"
 /></a>
 
-## Table of Contents
-- [実装してみる](#%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B)
-  * [プロジェクトの用意](#%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E7%94%A8%E6%84%8F)
-  * [ブラウザから確認する](#%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E3%81%8B%E3%82%89%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B)
-- [まとめ](#%E3%81%BE%E3%81%A8%E3%82%81)
-- [おまけ](#%E3%81%8A%E3%81%BE%E3%81%91)
 
 
 ## Try It Out

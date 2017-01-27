@@ -1,12 +1,11 @@
 # [SUGOS Tutorial] 04 - Module as npm package
 
-In the [Previous Tutorial](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/03%20-%20Communication%20betweein%20Browsers.md), we learned how to run callers and actors on browser.
+In [the Previous Tutorial](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/03%20-%20Communication%20betweein%20Browsers.md), we learned how to run callers and actors on browser.
 
-さて、これまでのチュートリアルはActorの宣言時に、提供するModuleを毎回その場で定義していました。
-しかし実際にアプリケーションを作るとなると、Moduleを使い回したくなる場合が多々あります。
+Until now, we declare most modules on actor creation.
+But most cases in the real world you need to reuse module on another project.
 
-そこで今回は、Moduleを単体のプロジェクトとして生成し、npmパッケージとして配布します。
-機能としては簡単なKeyValueStoreにします。キーと値を渡すと、それをローカルのJSONファイルに保存するようなものです。
+So, this tutorial shows how to create publish a module as npm package. What we are making is a simple Key-Value-Store which save data in to local file system.
 
 
 <a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/04%20-%20Module%20as%20npm%20package.md">
@@ -20,14 +19,11 @@ In the [Previous Tutorial](https://github.com/realglobe-Inc/sugos-tutorial/blob/
 - [事前準備](#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99)
 - [実装してみる](#%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B)
   * [雛形の作成](#%E9%9B%9B%E5%BD%A2%E3%81%AE%E4%BD%9C%E6%88%90)
-- [まとめ](#%E3%81%BE%E3%81%A8%E3%82%81)
-- [おまけ](#%E3%81%8A%E3%81%BE%E3%81%91)
 
 
-## 事前準備
+## Before Starting
 
-まずは[sugo-scaffold](https://github.com/realglobe-Inc/sugo-scaffold)コマンドラインツールをインストールします。
-これを使うと、SUGOS関連のプロジェクトの雛形が簡単に作成できます。
+Install [sugo-scaffold](https://github.com/realglobe-Inc/sugo-scaffold) CLI tool to generate project structure.
 
 ```bash
 # Install as global module
@@ -37,11 +33,11 @@ npm install -g sugo-scaffold
 sugo-scaffold --version
 ```
 
-## 実装してみる
+## Try It Out
 
-### 雛形の作成
+### Generating Scaffold
 
-コマンドラインで`sugo-scaffold <type> <dircotry>`を実行すると対話シェルが始まり、値を入力すると雛形が生成されます。
+Run command `sugo-scaffold <type> <dircotry>` on you terminal and it starts interactive shell.
 
 ```bash
 # Create a module project
@@ -51,16 +47,17 @@ npm install
 npm test
 ```
 
-`module_name`の部分は今回作成する"KeyValueStore"という名称にします。
+Set `module_name` as "KeyValueStore".
 
 <img src="../../images/tutorial-module-scaffold.png"/>
 
-最後まで答えるとプロジェクトの雛形が生成されます。
+When you answer all questions, project scaffold will be generated.
 
 
-### Moduleの実装
+### Implement the Module
 
-作成したプロジェクトに移動の中に"lib/key_value_store.js"と名前でModuleクラスのファイルが生成されています。
+
+See a file named "lib/key_value_store.js" in the generated directory.
 
 ```javascript
 /**
@@ -153,19 +150,19 @@ module.exports = KeyValueStore
 
 ```
 
-すでに二つのメソッドが実装されていますね。
+There are two methods defined by default.
 
-生存確認用の`.ping()`メソッドと、稼働環境の確認用の`.assert()`メソッドです。
+`.ping()` to test the reachability、`.assert()` to test the environment.
 
-`npm test`を実行すると、実際にこれらのメソッドを動かすことができます。
+Run `npm test` to test the module.
 
-また、最後の部分には
+And you may notice the getter defined in the module class.
 `get $spec () { /* ... */ }`
-というgetterが定義されており、そこにこのモジュールの情報が描写されています。
-これは任意の付加情報であり、実は書かなくても動くのですが、単体パッケージにするようなModuleの場合はきちんと書くことが推奨されます。
+
+This is an optional settings to tell how this module works.
 
 
-さて、ここにKeyValueStoreっぽいメソッドを追加していきましょう。
+Well, let's begin to define methods for the KeyValueStore.
 
 ```javascript
 /** ... */
@@ -252,16 +249,17 @@ module.exports = KeyValueStore
 
 ```
 
-まずはconstructorの引数に`filename`を追加しました。keyValueのデータを保存する先です。
 
-次にファイルアクセス用の`._read()`と`._write(data)`メソッドを用意します。
-アンダースコアで始まる名前はプライベートとして扱われ、 Actorに渡してもCallerには共有されません。
-ここではconstructorで渡されたファイルにJSONとしての読み書きをし、Promiseインターフェイスを提供するようなものにします。
+Define constructor to take `filename`, the path of json file to store data.
+Then define,
 
-そして、それらを利用する`.set(key, value)`、`.get(key)`、`.del(key)`を実装すれば、単純なKeyValueStoreの完成です。
++ `._read()` and `._write(data)` to access data internally.
++ `.set(key, value)`、`.get(key)`、`.del(key)` method for public
+
+Not that methods start with underscore are marked as private, and you cannot call it from callers.
 
 
-実装したら忘れずに`$spec`も記述しましょう
+And don't forget to implement `$spec` for docs.
 
 ```javascript
 /** ... */
@@ -346,9 +344,9 @@ module.exports = KeyValueStore
 ```
 
 
-### Moduleのテスト
+### Testing the Module
 
-次にテストを追加します。自動生成された"test/key_value_store_test.js"にはすでに幾つかのテストが書かれています。
+See the "test/key_value_store_test.js" in the generated directory.
 
 ```javascript
 /**
@@ -421,7 +419,7 @@ describe('demo-module', function () {
 
 ```
 
-ここに作成した機能に関するテストを追加します。
+Add some tests here
 
 ```javascript
 /**
@@ -479,15 +477,16 @@ describe('demo-module', function () {
   ```
 
 
+Then, run it.
+
 ```bash
 npm test
 ```
 
-で無事テストが通れば成功です。
 
-あとは`npm publish`すればnpmレジストリに登録されます。
+If you succeed `npm publish` to register the package.
 
-そしたら他のプロジェクトから以下のように使えるようになります
+Then, use it from another packages
 
 ```javascript
 #!/usr/bin/env node
@@ -520,12 +519,12 @@ co(function * () {
 
 ## Conclusion
 
-+ [sugo-scaffold](https://github.com/realglobe-Inc/sugo-scaffold)で雛形が生成できる
-+ `$spec`でModule自身を描写できる
-+ アンダースコアで始まるメソッドはプライベート扱いになり、Callerには共有されない
-+ ActorやHubがなくてもテストできる
++ Use [sugo-scaffold](https://github.com/realglobe-Inc/sugo-scaffold) to generate project structure
++ Write `$spec` to describe the module (optional)
++ Method starts with underscore works as private (Cannot call from callers)
++ You can test the module without hub nor callers
 
-    Code snippets of this tutorial are also [available here](https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-04)
+Code snippets of this tutorial are also [available here](https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-04)
 
 
 ## You may Want to Read

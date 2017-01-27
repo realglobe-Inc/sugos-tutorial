@@ -4,8 +4,8 @@
   "description": "Tutorial for SUGOS",
   "main": "index.js",
   "scripts": {
-    "test": "./ci/test.js",
-    "prepublish": "./ci/build.js && ./ci/assets.js"
+    "test": "node ./ci/test.js",
+    "prepare": "node ./ci/build.js && node ./ci/assets.js"
   },
   "repository": "realglobe-Inc/sugos-tutorial",
   "keywords": [
@@ -56,8 +56,8 @@
     "unorm": "^1.4.1"
   },
   "engines": {
-    "node": ">=6.x",
-    "npm": ">=3.x"
+    "node": ">=6",
+    "npm": ">=4"
   },
   "publishConfig": {
     "registry": "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-local"
