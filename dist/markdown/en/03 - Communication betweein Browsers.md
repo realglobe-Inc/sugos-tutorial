@@ -1,9 +1,10 @@
 # [SUGOS Tutorial] 03 - Communication betweein Browsers
 
-[前回のチュートリアル](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/02%20-%20Using%20Event%20Emit.md)では、Caller/Actorのやり取りをNode.js上で行ないました。
+In the [Previous Tutorial](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/02%20-%20Using%20Event%20Emit.md), both of callers and actors run on Node.js.
 
-今回はブラウザ間での呼び出しを実装してみます。Actorが動いているブラウザをCallerが動いているブラウザから操るサンプルです。
-一方のウィンドウでテキストボックスにHTML文字列を打ち込むと、別のウィンドウにリアルタイムでレンダリングされて表示される、というものを作ります。
+This time, try it on browsers.
+
+Typing HTML string in a textbox in one browser, and render the HTML in another browser on real time.
 
 
 <a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/03%20-%20Communication%20betweein%20Browsers.md">
@@ -21,11 +22,11 @@
 - [おまけ](#%E3%81%8A%E3%81%BE%E3%81%91)
 
 
-## 実装してみる
+## Try It Out
 
-### プロジェクトの用意
+### Prepare project
 
-前回と同様に、まずはプロジェクトディレクトリを用意します。
+For the beginning, prepare project directory as usual.
 
 ```bash
 mkdir sugos-tutorial-03
@@ -34,15 +35,14 @@ npm init -y
 
 ```
 
-次に、必要なパッケージをインストールします。
+Then, install dependencies.
 
-今回はUIを作成するので、SUGOSに加え、
+This time we needs some extra libraries to build user interface.
 
 + [React.js](https://facebook.github.io/react/)
 + [Babel](https://babeljs.io/docs/setup/)
 + [Browserify](https://github.com/substack/node-browserify)
 
-等を利用します。
 
 ```bash
 # Install dependencies
@@ -51,10 +51,9 @@ npm install -S sugo-actor sugo-caller sugo-hub co asleep react react-dom babel-p
 npm install -D browserify browserify-incremental xtend babelify babel-preset-es2015 babel-preset-react
 ```
 
-### Hubサーバを立てる
+### Running Hub Server
 
-Hubサーバは前回とほぼ同様ですが、新たに`static`オプションを追加します。
-ここにディレクトリ名を指定することで、静的ファイルの配布が可能になります。
+Almost same with the previous tutorial, but now we add `static` option to serve static files.
 
 **hub.js**
 ```javascript
@@ -82,11 +81,10 @@ co(function * () {
 node ./hub.js
 ```
 
-### Actorを用意する
+### Creating Actor
 
-Actor側のブラウザ用スクリプトを用意します。
-`componentDidMount`のタイミングでActorのインスタンスを作成し、その中で`dynamicHTML`という名前でモジュールを宣言しています。
-このモジュールはComponentのstateにアクセスすることで、動的にHTMLを書き換える機能を持ちます。
+Create an actor instance at `componentDidMount`, React.js lifecycle method, and declare a module with name `dynamicHTML`.
+This module enables to rewrite HTML by accessing the component state.
 
 **public/actor.jsx**
 ```jsx
@@ -165,10 +163,10 @@ window.addEventListener('DOMContentLoaded', () => {
 
 ```
 
-今回はHub自身がHTMLの配布するので、Actorの宣言時に`host`などの設定は不要です 。
-`location`オブジェクトの情報から自動的に接続先を見つけます。
+Note that there is not `host` option with actor creating.
+This is because the actor script it self is served by the hub. Actor find connection info by `localtion` object.
 
-次に、このスクリプトを走らせるためのHTMLを用意します。
+Then, create an HTML file to run this script.
 
 **public/actor.html**
 ```html
@@ -218,12 +216,9 @@ window.addEventListener('DOMContentLoaded', () => {
 ```
 
 
-### Callerを用意する
+### Creating Caller
 
-Caller側のブラウザ用スクリプトを用意します。
-
-テキストボックスに入力が変更されたらその内容を、先程Actorで宣言した`dynamicHTML`の`.write()`メソッドに渡します。
-これにより、編集内容をリアルタイムに反映するということが実現します。
+On caller side, call `.write()` method of the `dynamicHTML` defined in actor side when never text box changed.
 
 
 **public/caller.jsx**
@@ -315,7 +310,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 ```
 
-こちらもHTMLを用意します。
 
 **public/caller.html**
 ```html
@@ -380,9 +374,9 @@ window.addEventListener('DOMContentLoaded', () => {
 ```
 
 
-### Buildする
+### Build the script
 
-用意したJSXファイルはそのままではブラウザで実行できません。BabelとBrowserifyを使ってコンパイル・バンドルします。
+The jsx script needs to be compiled. Babel and Browserify would do this.
 
 
 **build.js**
@@ -439,46 +433,30 @@ co(function * () {
 node ./build.js
 ```
 
-### ブラウザから確認する
+### Play with Browser
 
-Hubが起動している状態で、Actor側HTMLをブラウザから開きます。
+With the hub server running, open actor html from browser:
 
 [http://localhost:3000/actor.html](http://localhost:3000/actor.html)
 
 
-続いて、Caller側HTMLをブラウザの別タブで開きます。
+Then、open caller html as well
 
 [http://localhost:3000/caller.html](http://localhost:3000/caller.html)
 
-Caller側のテキストエリアを編集すると、Actorブラウザにリアルタイムで反映されていることが確認できたら成功です。
+Type something on caller html textarea and actor html will show the result.
 
 
 <img src="../../images/tutorial-browser.png"/>
 
 
-## まとめ
+## Conclusion
 
-+ CallerとActorはBrowser上で動かせる
-+ Hubの`static`オプションで静的ファイルの配布ができる
-+ ブラウザ上の場合、CallerやActorの宣言時にHostを省略すると、`location`オブジェクトから自動的に解釈する
++ Callers and actors supports browser
++ Hub has `static` option to serve static files
++ Callers and actors find host from `location` object by default.
 
-なお、今回出てきたSnippetは、[こちら](https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-03)からも入手できます
-
-## おまけ
-
-### 雑談: SUGOSにおけるCallbackサポートを諦めた理由
-
-SUGOSを使うと他のクライアント(Actor)で宣言した関数がいきなり使える！のですが現状は制限があります。
-
-Callbackが渡せないのです。`doSomething(() => console.log('done'!))`のような書き方ができません。
-
-理由は、それを実現する術が見つけられなかったため。
-引数として関数を渡すこと自体は擬似的に実現可能なのですが、その後、参照を解放する方法が発見できませんでした。
-呼び出し側（Caller)でのメモリリークを防ぐために、用済みなったCallbackは適切に処分する必要があります。
-しかしES2015時点のJavaScriptでは、Weak参照やポインタ数の取得といった機能が提供されておらず、
-Actor側で用済みになったかどうかをCallerから判定する術がありません。
-
-そのため、2016年現在、SUGOSではPromiseベースでのやり取りを必須としています。無念。。。
+Code snippets of this tutorial are also [available here](https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-03)
 
 
 ## You may Want to Read

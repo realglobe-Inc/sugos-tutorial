@@ -1,9 +1,9 @@
 # [SUGOS Tutorial] 02 - Using Event Emit
 
-[前回のチュートリアル](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/01%20-%20Hello%20World%2C%20as%20always.md)では、簡単な関数のCall/Returnを実装しました。
+In the [Previous Tutorial](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/01%20-%20Hello%20World%2C%20as%20always.md), we learned simple call/return function.
 
-今回はEmit/Listen形式でのイベント駆動を実装してみます。
-Actor側からEventを発火し、Caller側でそれを受け取ります。
+Now, we will try using event emitter interface.
+Fire events from actors and receive them on callers.
 
 
 <a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/02%20-%20Using%20Event%20Emit.md">
@@ -20,11 +20,11 @@ Actor側からEventを発火し、Caller側でそれを受け取ります。
 - [おまけ](#%E3%81%8A%E3%81%BE%E3%81%91)
 
 
-## 実装してみる
+## Try It Out
 
-### プロジェクトの用意
+### Prepare project
 
-前回と同様に、まずはプロジェクトディレクトリを用意します。
+For the beginning, prepare project directory.
 
 ```bash
 mkdir sugos-tutorial-02
@@ -33,15 +33,15 @@ npm init -y
 
 ```
 
-次に、必要なパッケージをインストールします。
+Then, install dependencies.
 
 ```bash
 npm install sugo-actor sugo-caller sugo-hub co asleep -S
 ```
 
-### Hubサーバを立てる
+### Running Hub Server
 
-ここは前回と同様で、
+Hub server script is same as the previous tutorial.
 
 **hub.js**
 ```javascript
@@ -63,15 +63,15 @@ co(function * () {
 
 ```
 
-を用意してNodeから実行
+Then, execute with node.
 
 ```bash
 node ./hub.js
 ```
 
-### Eventを発火するModuleを宣言する
+### Declaring a Module to Fire Events
 
-次にModuleを用意します。ここでは一秒ごとにtickを発火し、最後にboomするものを用意します
+Define a module which fires tick each second and say "boom!"
 
 **modules/time-bomb.js**
 ```javascript
@@ -109,13 +109,12 @@ module.exports = timeBomb
 
 ```
 
-Moduleのメソッドにおける`this`はEventEmitterを継承しており、
-`.on`, `.off`でListerの登録・解除、`.emit()`で発火を行なえます。
+The `this` inside module method inherits EventEmitter and has `.on`, `.off` and `.emit()`methods
 
 
-### Actorに載せてHubにつなぐ
+### Setting the Module to Actor and Connect to Hub Server
 
-前回と同様にActorに登録し、
+Create an actor instance
 
 **actor.js**
 ```javascript
@@ -145,17 +144,14 @@ co(function * () {
 
 ```
 
-実行します。
-
 ```bash
 node ./actor.js
 ```
 
-### Callerから呼び出す
+### Calling from Caller
 
-先に定義したtimeBomb ModuleをCaller側から呼びます。
-
-Caller側で`.get()`したModuleもやはり同様にEventEmitterです
+Call the timeBomb module from caller side.
+The module instance returns from `.get()` on caller side is also an instance of EventEmitter.
 
 **caller.js**
 ```javascript
@@ -182,43 +178,24 @@ co(function * () {
 
 ```
 
-`yield timeBomb.countDown(10)`の部分はcountが全て終わるまで(Actor側でreturnが走るまで）その次の処理に進まない、という点に留意してください。
-内部的にはPromiseがpending状態になっており、Actor側のreturnを受けて処理が再開します。
+Note that `yield timeBomb.countDown(10)` waits until the count down finished.
+Internally, promise state is pending until actor returns.
 
-このスクリプトを実行し、カウントダウンが確認できたら成功です。
+Now, execute the script and do count down.
 
 ```bash
 node ./caller.js
 ```
 
-### まとめ
-
-+ Moduleのメソッド内の`this`はEventEmitter
-+ `.on()`, `.off()`, `.emit()`メソッドでイベントをやり取りする
-+ Actor側のPromiseがpendingの間はCaller側もそれを待つ
-
-なお、今回出てきたSnippetは、[こちら](https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-02)からも入手できます
+## Conclusion
 
 
-## おまけ
++ `this` in module methods is an instance of EventEmitter
++ Fire and receive events via `.on()`, `.off()`, `.emit()` methods.
++ While an promise on actor side is pending, caller also waits
 
-### 雑談: SUGOSの正式名称とそれが目指す世界
+Code snippets of this tutorial are also [available here](https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-02)
 
-SUGOSというのは略称です。それでは正式名称は？Super Ultra Gorgeous Outstanding Specialです。
-そうです。スーパー・ウルトラ・ゴージャース・アウトスタンディング・スペシャルです。略してスゴす。
-
-びっくりするほど薄っぺらい名称ですね。しかしこれが開発チームの認めた公式名称です。
-
-背景を説明しますと、もともと「なんかスゲーの作ろうぜ」から始まったプロジェクトでした。「なんかスゲー」がなんなのかよく分からないまま走りはじめました。
-そのため、後で方向転換できるように名称は極力抽象的にしよう、でかい野望を表せる名前にしよう、ということになり、甚だしさを表す形容詞を並べただけの名称が採用されました。
-
-さて、その後そのでかい野望はどうなったのか？
-
-健在です。 現状、SUGOSはRPC(Remote Procedure Call)フレームワークとして説明されていますが、遠隔呼び出しはSUGOSが目指す世界の第一段階に過ぎません。
-目指す世界とは、万物のAPI化です。関数化という手段を持ってリソースを機能の集まりとして再定義し、用途に合わせて組み合わせることでそこに意味と役割を与えることを可能にするのです。
-そして、何かしらの実体を持つ「モノ」をそれが成す「コト」として捉えた時に、それが如何に目的に合致するかの度合いがすなわち価値です。
-最終的にはSUGOSと基盤の上ではその価値創造がこの上なく容易に成ることでしょう。それまでと比べて、甚だしく価値を生み出すことでしょう。
-そう、スーパーで、ウルトラで、ゴージャースで、アウトスタンディングな、スペシャルを。（言いたいだけ）
 
 
 ## You may Want to Read

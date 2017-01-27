@@ -1,6 +1,6 @@
 # [SUGOS Tutorial] 04 - Module as npm package
 
-[前回のチュートリアル](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/03%20-%20Communication%20betweein%20Browsers.md)では、Browser間の通信を実装しました。
+In the [Previous Tutorial](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/03%20-%20Communication%20betweein%20Browsers.md), we learned how to run callers and actors on browser.
 
 さて、これまでのチュートリアルはActorの宣言時に、提供するModuleを毎回その場で定義していました。
 しかし実際にアプリケーションを作るとなると、Moduleを使い回したくなる場合が多々あります。
@@ -518,68 +518,14 @@ co(function * () {
 ```
 
 
-## まとめ
+## Conclusion
 
 + [sugo-scaffold](https://github.com/realglobe-Inc/sugo-scaffold)で雛形が生成できる
 + `$spec`でModule自身を描写できる
 + アンダースコアで始まるメソッドはプライベート扱いになり、Callerには共有されない
 + ActorやHubがなくてもテストできる
 
-なお、今回出てきたSnippetは、[こちら](https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-04)からも入手できます
-
-## おまけ
-
-### 雑談: Javascriptの関数でキーワード引数みたいなことをしてみる
-
-例えばPythonだと[Keyword Arguments](https://docs.python.org/3/tutorial/controlflow.html#keyword-arguments)なる仕様があって、
-引数の多い関数をうまく記述できるようになっているのです。
-
-```python
-# Keyword-arguments example of Python
-def do_something(src, dest, **keywords):
-  force = keywords.pop('force', false)
-  mkdirp = keywords.pop('mkdirp', true)
-  print('Do something with args: ', src, dest, force)
-
-do_something('foo.txt', 'bar.txt', force=false, mkdirp=false)
-```
-
-これと同じようなことをJavaScriptでやろうとするとそれはもう大変でした。ES2015が使えるようになるまではね。
-
-Node.js6から導入された[ES2015のDestructuring assignment](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)機能を使うと、
-
-```javascript
-// Example JavasScript, after ES2015
-function doSomething (src, dest, options = {}) {
-  let {
-    force = false,
-    mkdirp = true
-  } = options
-  console.log('Do something with args: ', src, dest, force)
-}
-doSomething('foo.txt', 'bar.txt', { force: false, mkdirp: false })
-````
-
-といった感じで、pythonと大差ない形でかけます。
-もちろん[preset-es2015でバベれ](https://babeljs.io/docs/plugins/preset-es2015/)ばブラウザでも動きます。
-
-昔だったら
-
-```javascript
-// Example JavasScript, before ES2015
-function doSomething (src, dest, options) {
-  if(typeof options === 'undefined') {
-    options = {}
-  }
-  var force = typeof options.force === 'undefined' ? false : options.force
-  var mkdirp = typeof options.mkdirp === 'undefined' ? true : options.mkdirp
-  console.log('Do something with args: ', src, dest, force)
-}
-doSomething('foo.txt', 'bar.txt', { force: false, mkdirp: false })
-```
-
-とか書いていたのに。もう携帯電話がなかった時代と同じくらい遠く感じますね。
-
+    Code snippets of this tutorial are also [available here](https://github.com/realglobe-Inc/sugos-tutorial/tree/master/example/tutorial-04)
 
 
 ## You may Want to Read
