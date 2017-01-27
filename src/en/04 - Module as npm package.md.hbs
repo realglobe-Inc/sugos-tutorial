@@ -1,12 +1,11 @@
 # {{prefix}} {{{cur.name}}}
 
-In the [Previous Tutorial]({{{prev.url}}}), we learned how to run callers and actors on browser.
+In [the Previous Tutorial]({{{prev.url}}}), we learned how to run callers and actors on browser.
 
-さて、これまでのチュートリアルはActorの宣言時に、提供するModuleを毎回その場で定義していました。
-しかし実際にアプリケーションを作るとなると、Moduleを使い回したくなる場合が多々あります。
+Until now, we declare most modules on actor creation.
+But most cases in the real world you need to reuse module on another project.
 
-そこで今回は、Moduleを単体のプロジェクトとして生成し、npmパッケージとして配布します。
-機能としては簡単なKeyValueStoreにします。キーと値を渡すと、それをローカルのJSONファイルに保存するようなものです。
+So, this tutorial shows how to create publish a module as npm package. What we are making is a simple Key-Value-Store which save data in to local file system.
 
 
 <a href="{{{cur.url}}}">
@@ -22,98 +21,100 @@ In the [Previous Tutorial]({{{prev.url}}}), we learned how to run callers and ac
 {{/if}}
 
 
-## 事前準備
+## Before Starting
 
-まずは[sugo-scaffold]({{{links.sugo-scaffold}}})コマンドラインツールをインストールします。
-これを使うと、SUGOS関連のプロジェクトの雛形が簡単に作成できます。
+Install [sugo-scaffold]({{{links.sugo-scaffold}}}) CLI tool to generate project structure.
 
 ```bash
 {{{read 'example/tutorial-04/install-globals.sh'}}}
 ```
 
-## 実装してみる
+## Try It Out
 
-### 雛形の作成
+### Generating Scaffold
 
-コマンドラインで`sugo-scaffold <type> <dircotry>`を実行すると対話シェルが始まり、値を入力すると雛形が生成されます。
+Run command `sugo-scaffold <type> <dircotry>` on you terminal and it starts interactive shell.
 
 ```bash
 {{{read 'example/tutorial-04/init-project.sh'}}}
 ```
 
-`module_name`の部分は今回作成する"KeyValueStore"という名称にします。
+Set `module_name` as "KeyValueStore".
 
 <img src="{{{imgDir}}}/tutorial-module-scaffold.png"/>
 
-最後まで答えるとプロジェクトの雛形が生成されます。
+When you answer all questions, project scaffold will be generated.
 
 
-### Moduleの実装
+### Implement the Module
 
-作成したプロジェクトに移動の中に"lib/key_value_store.js"と名前でModuleクラスのファイルが生成されています。
+
+See a file named "lib/key_value_store.js" in the generated directory.
 
 ```javascript
 {{{read 'example/tutorial-04/snippets/generated.js'}}}
 ```
 
-すでに二つのメソッドが実装されていますね。
+There are two methods defined by default.
 
-生存確認用の`.ping()`メソッドと、稼働環境の確認用の`.assert()`メソッドです。
+`.ping()` to test the reachability、`.assert()` to test the environment.
 
-`npm test`を実行すると、実際にこれらのメソッドを動かすことができます。
+Run `npm test` to test the module.
 
-また、最後の部分には
+And you may notice the getter defined in the module class.
 `get $spec () { /* ... */ }`
-というgetterが定義されており、そこにこのモジュールの情報が描写されています。
-これは任意の付加情報であり、実は書かなくても動くのですが、単体パッケージにするようなModuleの場合はきちんと書くことが推奨されます。
+
+This is an optional settings to tell how this module works.
 
 
-さて、ここにKeyValueStoreっぽいメソッドを追加していきましょう。
+Well, let's begin to define methods for the KeyValueStore.
 
 ```javascript
 {{{read 'example/tutorial-04/snippets/imple.js'}}}
 ```
 
-まずはconstructorの引数に`filename`を追加しました。keyValueのデータを保存する先です。
 
-次にファイルアクセス用の`._read()`と`._write(data)`メソッドを用意します。
-アンダースコアで始まる名前はプライベートとして扱われ、 Actorに渡してもCallerには共有されません。
-ここではconstructorで渡されたファイルにJSONとしての読み書きをし、Promiseインターフェイスを提供するようなものにします。
+Define constructor to take `filename`, the path of json file to store data.
+Then define,
 
-そして、それらを利用する`.set(key, value)`、`.get(key)`、`.del(key)`を実装すれば、単純なKeyValueStoreの完成です。
++ `._read()` and `._write(data)` to access data internally.
++ `.set(key, value)`、`.get(key)`、`.del(key)` method for public
+
+Not that methods start with underscore are marked as private, and you cannot call it from callers.
 
 
-実装したら忘れずに`$spec`も記述しましょう
+And don't forget to implement `$spec` for docs.
 
 ```javascript
 {{{read 'example/tutorial-04/snippets/spec.js'}}}
 ```
 
 
-### Moduleのテスト
+### Testing the Module
 
-次にテストを追加します。自動生成された"test/key_value_store_test.js"にはすでに幾つかのテストが書かれています。
+See the "test/key_value_store_test.js" in the generated directory.
 
 ```javascript
 {{{read 'example/tutorial-04/snippets/generated_test.js'}}}
 ```
 
-ここに作成した機能に関するテストを追加します。
+Add some tests here
 
 ```javascript
 {{{read 'example/tutorial-04/snippets/imple_test.js'}}}
   ```
 
 
+Then, run it.
+
 ```bash
 npm test
 ```
 
-で無事テストが通れば成功です。
 
-あとは`npm publish`すればnpmレジストリに登録されます。
+If you succeed `npm publish` to register the package.
 
-そしたら他のプロジェクトから以下のように使えるようになります
+Then, use it from another packages
 
 ```javascript
 {{{read 'example/tutorial-04/example/example-usage.js'}}}
@@ -122,12 +123,12 @@ npm test
 
 ## Conclusion
 
-+ [sugo-scaffold]({{{links.sugo-scaffold}}})で雛形が生成できる
-+ `$spec`でModule自身を描写できる
-+ アンダースコアで始まるメソッドはプライベート扱いになり、Callerには共有されない
-+ ActorやHubがなくてもテストできる
++ Use [sugo-scaffold]({{{links.sugo-scaffold}}}) to generate project structure
++ Write `$spec` to describe the module (optional)
++ Method starts with underscore works as private (Cannot call from callers)
++ You can test the module without hub nor callers
 
-    Code snippets of this tutorial are also [available here]({{{links.tutorial-04-example}}})
+Code snippets of this tutorial are also [available here]({{{links.tutorial-04-example}}})
 
 
 ## You may Want to Read
