@@ -10,11 +10,6 @@ This tutorial shows most simple example with SUGOS. Define a function on actor, 
        style="height:128px"
 /></a>
 
-## Table of Contents
-- [まとめ](#%E3%81%BE%E3%81%A8%E3%82%81)
-- [おまけ](#%E3%81%8A%E3%81%BE%E3%81%91)
-- [これも読みたい](#%E3%81%93%E3%82%8C%E3%82%82%E8%AA%AD%E3%81%BF%E3%81%9F%E3%81%84)
-- [リンク](#%E3%83%AA%E3%83%B3%E3%82%AF)
 
 
 ## Before Starting
