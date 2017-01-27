@@ -1,0 +1,145 @@
+# {{prefix}} {{{cur.name}}}
+
+[前回のチュートリアル]({{{prev.url}}})では、簡単な関数のCall/Returnを実装しました。
+
+今回はEmit/Listen形式でのイベント駆動を実装してみます。
+Actor側からEventを発火し、Caller側でそれを受け取ります。
+
+
+<a href="{{{cur.url}}}">
+  <img src="{{{imgDir}}}/eyecatch-event-emit.jpg"
+       alt="eyecatch"
+       height="{{eyecatchHeight}}"
+       style="height:{{eyecatchHeight}}px"
+  /></a>
+
+{{#if toc}}
+## {{{tocTitle}}}
+{{{toc}}}
+{{/if}}
+
+
+## 実装してみる
+
+### プロジェクトの用意
+
+前回と同様に、まずはプロジェクトディレクトリを用意します。
+
+```bash
+{{{read 'example/tutorial-02/init-project.sh'}}}
+```
+
+次に、必要なパッケージをインストールします。
+
+```bash
+{{{read 'example/tutorial-02/install-deps.sh'}}}
+```
+
+### Hubサーバを立てる
+
+ここは前回と同様で、
+
+**hub.js**
+```javascript
+{{{read 'example/tutorial-02/hub.js'}}}
+```
+
+を用意してNodeから実行
+
+```bash
+{{{read 'example/tutorial-02/run-hub.sh'}}}
+```
+
+### Eventを発火するModuleを宣言する
+
+次にModuleを用意します。ここでは一秒ごとにtickを発火し、最後にboomするものを用意します
+
+**modules/time-bomb.js**
+```javascript
+{{{read 'example/tutorial-02/modules/time-bomb.js'}}}
+```
+
+Moduleのメソッドにおける`this`はEventEmitterを継承しており、
+`.on`, `.off`でListerの登録・解除、`.emit()`で発火を行なえます。
+
+
+### Actorに載せてHubにつなぐ
+
+前回と同様にActorに登録し、
+
+**actor.js**
+```javascript
+{{{read 'example/tutorial-02/actor.js'}}}
+```
+
+実行します。
+
+```bash
+{{{read 'example/tutorial-02/run-actor.sh'}}}
+```
+
+### Callerから呼び出す
+
+先に定義したtimeBomb ModuleをCaller側から呼びます。
+
+Caller側で`.get()`したModuleもやはり同様にEventEmitterです
+
+**caller.js**
+```javascript
+{{{read 'example/tutorial-02/caller.js'}}}
+```
+
+`yield timeBomb.countDown(10)`の部分はcountが全て終わるまで(Actor側でreturnが走るまで）その次の処理に進まない、という点に留意してください。
+内部的にはPromiseがpending状態になっており、Actor側のreturnを受けて処理が再開します。
+
+このスクリプトを実行し、カウントダウンが確認できたら成功です。
+
+```bash
+{{{read 'example/tutorial-02/run-caller.sh'}}}
+```
+
+### まとめ
+
++ Moduleのメソッド内の`this`はEventEmitter
++ `.on()`, `.off()`, `.emit()`メソッドでイベントをやり取りする
++ Actor側のPromiseがpendingの間はCaller側もそれを待つ
+
+なお、今回出てきたSnippetは、[こちら]({{{links.tutorial-02-example}}})からも入手できます
+
+
+## おまけ
+
+### 雑談: SUGOSの正式名称とそれが目指す世界
+
+SUGOSというのは略称です。それでは正式名称は？Super Ultra Gorgeous Outstanding Specialです。
+そうです。スーパー・ウルトラ・ゴージャース・アウトスタンディング・スペシャルです。略してスゴす。
+
+びっくりするほど薄っぺらい名称ですね。しかしこれが開発チームの認めた公式名称です。
+
+背景を説明しますと、もともと「なんかスゲーの作ろうぜ」から始まったプロジェクトでした。「なんかスゲー」がなんなのかよく分からないまま走りはじめました。
+そのため、後で方向転換できるように名称は極力抽象的にしよう、でかい野望を表せる名前にしよう、ということになり、甚だしさを表す形容詞を並べただけの名称が採用されました。
+
+さて、その後そのでかい野望はどうなったのか？
+
+健在です。 現状、SUGOSはRPC(Remote Procedure Call)フレームワークとして説明されていますが、遠隔呼び出しはSUGOSが目指す世界の第一段階に過ぎません。
+目指す世界とは、万物のAPI化です。関数化という手段を持ってリソースを機能の集まりとして再定義し、用途に合わせて組み合わせることでそこに意味と役割を与えることを可能にするのです。
+そして、何かしらの実体を持つ「モノ」をそれが成す「コト」として捉えた時に、それが如何に目的に合致するかの度合いがすなわち価値です。
+最終的にはSUGOSと基盤の上ではその価値創造がこの上なく容易に成ることでしょう。それまでと比べて、甚だしく価値を生み出すことでしょう。
+そう、スーパーで、ウルトラで、ゴージャースで、アウトスタンディングな、スペシャルを。（言いたいだけ）
+
+
+## これも読みたい
+
++ 前回: [{{{prev.name}}}]({{{prev.url}}})
++ 次回: [{{{next.name}}}]({{{next.url}}})
+
+## リンク
+
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Hub]({{{links.sugo-hub}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Caller]({{{links.sugo-caller}}})
++ Tutorials
+{{#each markdowns}}
+  + [{{{name}}}]({{{url}}})
+{{/each}}

@@ -1,7 +1,7 @@
 sugos-tutorial
 =============
 
-[![Build Status][bd_travis_com_shield_url]][bd_travis_com_url]
+[![Build Status][bd_travis_shield_url]][bd_travis_url]
 
 [bd_travis_url]: http://travis-ci.org/realglobe-Inc/sugos-tutorial
 [bd_travis_shield_url]: http://img.shields.io/travis/realglobe-Inc/sugos-tutorial.svg?style=flat

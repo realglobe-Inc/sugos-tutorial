@@ -1,0 +1,200 @@
+# {{prefix}} {{{cur.name}}}
+
+[前回のチュートリアル]({{{prev.url}}})では、Browser間の通信を実装しました。
+
+さて、これまでのチュートリアルはActorの宣言時に、提供するModuleを毎回その場で定義していました。
+しかし実際にアプリケーションを作るとなると、Moduleを使い回したくなる場合が多々あります。
+
+そこで今回は、Moduleを単体のプロジェクトとして生成し、npmパッケージとして配布します。
+機能としては簡単なKeyValueStoreにします。キーと値を渡すと、それをローカルのJSONファイルに保存するようなものです。
+
+
+<a href="{{{cur.url}}}">
+<img src="{{{imgDir}}}/eyecatch-package.jpg"
+     alt="eyecatch"
+     height="{{eyecatchHeight}}"
+     style="height:{{eyecatchHeight}}px"
+/></a>
+
+{{#if toc}}
+## {{{tocTitle}}}
+{{{toc}}}
+{{/if}}
+
+
+## 事前準備
+
+まずは[sugo-scaffold]({{{links.sugo-scaffold}}})コマンドラインツールをインストールします。
+これを使うと、SUGOS関連のプロジェクトの雛形が簡単に作成できます。
+
+```bash
+{{{read 'example/tutorial-04/install-globals.sh'}}}
+```
+
+## 実装してみる
+
+### 雛形の作成
+
+コマンドラインで`sugo-scaffold <type> <dircotry>`を実行すると対話シェルが始まり、値を入力すると雛形が生成されます。
+
+```bash
+{{{read 'example/tutorial-04/init-project.sh'}}}
+```
+
+`module_name`の部分は今回作成する"KeyValueStore"という名称にします。
+
+<img src="{{{imgDir}}}/tutorial-module-scaffold.png"/>
+
+最後まで答えるとプロジェクトの雛形が生成されます。
+
+
+### Moduleの実装
+
+作成したプロジェクトに移動の中に"lib/key_value_store.js"と名前でModuleクラスのファイルが生成されています。
+
+```javascript
+{{{read 'example/tutorial-04/snippets/generated.js'}}}
+```
+
+すでに二つのメソッドが実装されていますね。
+
+生存確認用の`.ping()`メソッドと、稼働環境の確認用の`.assert()`メソッドです。
+
+`npm test`を実行すると、実際にこれらのメソッドを動かすことができます。
+
+また、最後の部分には
+`get $spec () { /* ... */ }`
+というgetterが定義されており、そこにこのモジュールの情報が描写されています。
+これは任意の付加情報であり、実は書かなくても動くのですが、単体パッケージにするようなModuleの場合はきちんと書くことが推奨されます。
+
+
+さて、ここにKeyValueStoreっぽいメソッドを追加していきましょう。
+
+```javascript
+{{{read 'example/tutorial-04/snippets/imple.js'}}}
+```
+
+まずはconstructorの引数に`filename`を追加しました。keyValueのデータを保存する先です。
+
+次にファイルアクセス用の`._read()`と`._write(data)`メソッドを用意します。
+アンダースコアで始まる名前はプライベートとして扱われ、 Actorに渡してもCallerには共有されません。
+ここではconstructorで渡されたファイルにJSONとしての読み書きをし、Promiseインターフェイスを提供するようなものにします。
+
+そして、それらを利用する`.set(key, value)`、`.get(key)`、`.del(key)`を実装すれば、単純なKeyValueStoreの完成です。
+
+
+実装したら忘れずに`$spec`も記述しましょう
+
+```javascript
+{{{read 'example/tutorial-04/snippets/spec.js'}}}
+```
+
+
+### Moduleのテスト
+
+次にテストを追加します。自動生成された"test/key_value_store_test.js"にはすでに幾つかのテストが書かれています。
+
+```javascript
+{{{read 'example/tutorial-04/snippets/generated_test.js'}}}
+```
+
+ここに作成した機能に関するテストを追加します。
+
+```javascript
+{{{read 'example/tutorial-04/snippets/imple_test.js'}}}
+  ```
+
+
+```bash
+npm test
+```
+
+で無事テストが通れば成功です。
+
+あとは`npm publish`すればnpmレジストリに登録されます。
+
+そしたら他のプロジェクトから以下のように使えるようになります
+
+```javascript
+{{{read 'example/tutorial-04/example/example-usage.js'}}}
+```
+
+
+## まとめ
+
++ [sugo-scaffold]({{{links.sugo-scaffold}}})で雛形が生成できる
++ `$spec`でModule自身を描写できる
++ アンダースコアで始まるメソッドはプライベート扱いになり、Callerには共有されない
++ ActorやHubがなくてもテストできる
+
+なお、今回出てきたSnippetは、[こちら]({{{links.tutorial-04-example}}})からも入手できます
+
+## おまけ
+
+### 雑談: Javascriptの関数でキーワード引数みたいなことをしてみる
+
+例えばPythonだと[Keyword Arguments](https://docs.python.org/3/tutorial/controlflow.html#keyword-arguments)なる仕様があって、
+引数の多い関数をうまく記述できるようになっているのです。
+
+```python
+# Keyword-arguments example of Python
+def do_something(src, dest, **keywords):
+  force = keywords.pop('force', false)
+  mkdirp = keywords.pop('mkdirp', true)
+  print('Do something with args: ', src, dest, force)
+
+do_something('foo.txt', 'bar.txt', force=false, mkdirp=false)
+```
+
+これと同じようなことをJavaScriptでやろうとするとそれはもう大変でした。ES2015が使えるようになるまではね。
+
+Node.js6から導入された[ES2015のDestructuring assignment](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)機能を使うと、
+
+```javascript
+// Example JavasScript, after ES2015
+function doSomething (src, dest, options = {}) {
+  let {
+    force = false,
+    mkdirp = true
+  } = options
+  console.log('Do something with args: ', src, dest, force)
+}
+doSomething('foo.txt', 'bar.txt', { force: false, mkdirp: false })
+````
+
+といった感じで、pythonと大差ない形でかけます。
+もちろん[preset-es2015でバベれ](https://babeljs.io/docs/plugins/preset-es2015/)ばブラウザでも動きます。
+
+昔だったら
+
+```javascript
+// Example JavasScript, before ES2015
+function doSomething (src, dest, options) {
+  if(typeof options === 'undefined') {
+    options = {}
+  }
+  var force = typeof options.force === 'undefined' ? false : options.force
+  var mkdirp = typeof options.mkdirp === 'undefined' ? true : options.mkdirp
+  console.log('Do something with args: ', src, dest, force)
+}
+doSomething('foo.txt', 'bar.txt', { force: false, mkdirp: false })
+```
+
+とか書いていたのに。もう携帯電話がなかった時代と同じくらい遠く感じますね。
+
+
+
+## これも読みたい
+
++ 前回: [{{{prev.name}}}]({{{prev.url}}})
++ 次回: [{{{next.name}}}]({{{next.url}}})
+
+## リンク
+
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Scaffold]({{{links.sugo-scaffold}}})
++ Tutorials
+{{#each markdowns}}
+  + [{{{name}}}]({{{url}}})
+{{/each}}

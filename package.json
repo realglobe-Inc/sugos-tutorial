@@ -29,8 +29,8 @@
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
     "sugo-actor": "^4.1.15",
-    "sugo-caller": "^2.1.13",
-    "sugo-hub": "^3.0.13"
+    "sugo-caller": "^3.0.6",
+    "sugo-hub": "^5.1.5"
   },
   "devDependencies": {
     "aglob": "^1.0.2",
@@ -44,13 +44,14 @@
     "babel-preset-es2015": "^6.13.2",
     "babel-preset-react": "^6.11.1",
     "babelify": "^7.3.0",
-    "browserify": "^13.1.0",
+    "browserify": "^14.0.0",
     "coz": "^6.0.5",
     "filecopy": "^2.0.2",
     "injectmock": "^2.0.0",
-    "markdown-toc": "^0.12.16",
+    "markdown-toc": "^1.1.0",
+    "sg-travis": "^1.1.37",
     "sugos-assets": "^2.0.3",
-    "sugos-index": "^1.0.3",
+    "sugos-index": "^2.0.2",
     "unorm": "^1.4.1"
   },
   "engines": {

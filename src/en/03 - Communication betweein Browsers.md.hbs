@@ -1,0 +1,176 @@
+# {{prefix}} {{{cur.name}}}
+
+[前回のチュートリアル]({{{prev.url}}})では、Caller/Actorのやり取りをNode.js上で行ないました。
+
+今回はブラウザ間での呼び出しを実装してみます。Actorが動いているブラウザをCallerが動いているブラウザから操るサンプルです。
+一方のウィンドウでテキストボックスにHTML文字列を打ち込むと、別のウィンドウにリアルタイムでレンダリングされて表示される、というものを作ります。
+
+
+<a href="{{{cur.url}}}">
+  <img src="{{{imgDir}}}/eyecatch-browser.png"
+       alt="eyecatch"
+       height="{{eyecatchHeight}}"
+       style="height:{{eyecatchHeight}}px"
+/></a>
+
+{{#if toc}}
+## {{{tocTitle}}}
+{{{toc}}}
+{{/if}}
+
+
+## 実装してみる
+
+### プロジェクトの用意
+
+前回と同様に、まずはプロジェクトディレクトリを用意します。
+
+```bash
+{{{read 'example/tutorial-03/init-project.sh'}}}
+```
+
+次に、必要なパッケージをインストールします。
+
+今回はUIを作成するので、SUGOSに加え、
+
++ [React.js]({{{links.react}}})
++ [Babel]({{{links.babel}}})
++ [Browserify]({{{links.browserify}}})
+
+等を利用します。
+
+```bash
+{{{read 'example/tutorial-03/install-deps.sh'}}}
+```
+
+### Hubサーバを立てる
+
+Hubサーバは前回とほぼ同様ですが、新たに`static`オプションを追加します。
+ここにディレクトリ名を指定することで、静的ファイルの配布が可能になります。
+
+**hub.js**
+```javascript
+{{{read 'example/tutorial-03/hub.js'}}}
+```
+```bash
+{{{read 'example/tutorial-03/run-hub.sh'}}}
+```
+
+### Actorを用意する
+
+Actor側のブラウザ用スクリプトを用意します。
+`componentDidMount`のタイミングでActorのインスタンスを作成し、その中で`dynamicHTML`という名前でモジュールを宣言しています。
+このモジュールはComponentのstateにアクセスすることで、動的にHTMLを書き換える機能を持ちます。
+
+**public/actor.jsx**
+```jsx
+{{{read 'example/tutorial-03/public/actor.jsx'}}}
+```
+
+今回はHub自身がHTMLの配布するので、Actorの宣言時に`host`などの設定は不要です 。
+`location`オブジェクトの情報から自動的に接続先を見つけます。
+
+次に、このスクリプトを走らせるためのHTMLを用意します。
+
+**public/actor.html**
+```html
+{{{read 'example/tutorial-03/public/actor.html'}}}
+```
+
+
+### Callerを用意する
+
+Caller側のブラウザ用スクリプトを用意します。
+
+テキストボックスに入力が変更されたらその内容を、先程Actorで宣言した`dynamicHTML`の`.write()`メソッドに渡します。
+これにより、編集内容をリアルタイムに反映するということが実現します。
+
+
+**public/caller.jsx**
+```jsx
+{{{read 'example/tutorial-03/public/caller.jsx'}}}
+```
+
+こちらもHTMLを用意します。
+
+**public/caller.html**
+```html
+{{{read 'example/tutorial-03/public/caller.html'}}}
+```
+
+
+### Buildする
+
+用意したJSXファイルはそのままではブラウザで実行できません。BabelとBrowserifyを使ってコンパイル・バンドルします。
+
+
+**build.js**
+```js
+{{{read 'example/tutorial-03/build.js'}}}
+```
+
+
+```bash
+{{{read 'example/tutorial-03/run-build.sh'}}}
+```
+
+### ブラウザから確認する
+
+Hubが起動している状態で、Actor側HTMLをブラウザから開きます。
+
+[http://localhost:3000/actor.html](http://localhost:3000/actor.html)
+
+
+続いて、Caller側HTMLをブラウザの別タブで開きます。
+
+[http://localhost:3000/caller.html](http://localhost:3000/caller.html)
+
+Caller側のテキストエリアを編集すると、Actorブラウザにリアルタイムで反映されていることが確認できたら成功です。
+
+
+<img src="{{{imgDir}}}/tutorial-browser.png"/>
+
+
+## まとめ
+
++ CallerとActorはBrowser上で動かせる
++ Hubの`static`オプションで静的ファイルの配布ができる
++ ブラウザ上の場合、CallerやActorの宣言時にHostを省略すると、`location`オブジェクトから自動的に解釈する
+
+なお、今回出てきたSnippetは、[こちら]({{{links.tutorial-03-example}}})からも入手できます
+
+## おまけ
+
+### 雑談: SUGOSにおけるCallbackサポートを諦めた理由
+
+SUGOSを使うと他のクライアント(Actor)で宣言した関数がいきなり使える！のですが現状は制限があります。
+
+Callbackが渡せないのです。`doSomething(() => console.log('done'!))`のような書き方ができません。
+
+理由は、それを実現する術が見つけられなかったため。
+引数として関数を渡すこと自体は擬似的に実現可能なのですが、その後、参照を解放する方法が発見できませんでした。
+呼び出し側（Caller)でのメモリリークを防ぐために、用済みなったCallbackは適切に処分する必要があります。
+しかしES2015時点のJavaScriptでは、Weak参照やポインタ数の取得といった機能が提供されておらず、
+Actor側で用済みになったかどうかをCallerから判定する術がありません。
+
+そのため、2016年現在、SUGOSではPromiseベースでのやり取りを必須としています。無念。。。
+
+
+## これも読みたい
+
++ 前回: [{{{prev.name}}}]({{{prev.url}}})
++ 次回: [{{{next.name}}}]({{{next.url}}})
+
+## リンク
+
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Hub]({{{links.sugo-hub}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Caller]({{{links.sugo-caller}}})
++ [React]({{{links.react}}})
++ [Babel]({{{links.babel}}})
++ [Browserify]({{{links.browserify}}})
++ Tutorials
+{{#each markdowns}}
+  + [{{{name}}}]({{{url}}})
+{{/each}}
