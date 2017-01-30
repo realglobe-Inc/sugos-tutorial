@@ -4,6 +4,7 @@ node_js:
 before_install:
 - npm i npm-cli-login -g
 - npm-cli-login -u "${NPM_USER}" -p "${NPM_PASSWORD}" -e "${NPM_EMAIL}"
+- npm who
 install:
 - npm install
 script:
@@ -12,3 +13,5 @@ script:
 after_success:
 - ./ci/travis/publish.js
 - ./ci/travis/push_sugos_index.js
+env:
+  secure: "2rv9kE0u7KQoVonjXEw6O35RY3zsxwANNWnphxKQZzk+qNtB+6ujUD5X7A6UCBTC5SFW5YuZBg8yIi+Xj7hzqRViOTH4GnvxOnoikfLzw9kF0OX8yQqyoRYBlPH3RVb18OwzC2KjdmoISyg9do8RwTdcmTKKO8jWEBIM93uijAFQv2pGCZiAFDv6CUZQ4hkfEDcnfk6uEX75IroX0rtFxmZ9PiMc2GS8cSAvLYMMqtxn0I8VuziGdhWSzZGktpt24lM/oynXn+hQY5kGwAKnuW3m2A2G+Azf0hnLz/JZr7BoMaZyfBGq6n3vA/YuJOQdBADWPklX6oGEn7F9+VNfqB6xqgB+Jq4Oi36WWMfOJzFY6qsT20GLpbynOwBO8fX1HuiQBmJuC16eWOsyiSPUr2KM9M4nc3XMIx/pXmocs4QAFmUicq5T7BZ0cP/TBpl7Ksag4OIP3VaRdzEd2UV363ppGVRRn+NffvuPQgk0kQpGxdrpKEHXi9Dt3yZo2/T9U0RevUZoxYdnVI2QY4M5YQOyl94f+LuwB9BW0giXMxZStlbNVH/yTbiInwdy9s1jLqnjm7v2ZMYME7SKagLUFLNvHXq9BgwLjjD4vTLYQ+wmg5CGTb4At9pSUqhtKciUbsXwTaj/iSEKMZOhTV6h8nXaGWYFZZWFydAgVtQQQMw="
