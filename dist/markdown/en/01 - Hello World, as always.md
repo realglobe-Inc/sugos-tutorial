@@ -16,8 +16,8 @@ This tutorial shows most simple example with SUGOS. Define a function on actor, 
 
 SUGOS runs on Node.js. Prepare the environment with [nvm](https://github.com/creationix/nvm#node-version-manager-)
 
-+ [Node.js >=6.x](https://nodejs.org/en/)
-+ [npm >=3.x](https://docs.npmjs.com/)
++ [Node.js >=6](https://nodejs.org/en/)
++ [npm >=4](https://docs.npmjs.com/)
 
 <a href="https://nodejs.org/en/">
   <img src="../../images/nodejs-banner.png"

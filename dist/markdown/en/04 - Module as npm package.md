@@ -15,10 +15,6 @@ So, this tutorial shows how to create publish a module as npm package. What we a
      style="height:128px"
 /></a>
 
-## Table of Contents
-- [事前準備](#%E4%BA%8B%E5%89%8D%E6%BA%96%E5%82%99)
-- [実装してみる](#%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B)
-  * [雛形の作成](#%E9%9B%9B%E5%BD%A2%E3%81%AE%E4%BD%9C%E6%88%90)
 
 
 ## Before Starting

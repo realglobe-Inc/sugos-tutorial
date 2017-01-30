@@ -29,8 +29,8 @@
 
 SUGOSは基本的にNode.js上で稼働します。 [nvm](https://github.com/creationix/nvm#node-version-manager-)などを利用して、以下の環境を事前に用意してください。
 
-+ [Node.js >=6.x](https://nodejs.org/en/)
-+ [npm >=3.x](https://docs.npmjs.com/)
++ [Node.js >=6](https://nodejs.org/en/)
++ [npm >=4](https://docs.npmjs.com/)
 
 <a href="https://nodejs.org/en/">
   <img src="../../images/nodejs-banner.png"

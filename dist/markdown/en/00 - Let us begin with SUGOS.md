@@ -8,8 +8,8 @@ This is the tutorial [SUGOS](https://github.com/realglobe-Inc/sugos) framework.
 ## What is SUGOS?
 
 + RPC(Remote Procedure Call) framework
-+ It shares function definitions dynamically, so you don have to care about networks
-+ Most components is written with [Node.js](https://nodejs.org/en/)
++ It shares function definitions dynamically, so you don't have to care about networks
++ Most of components are written with [Node.js](https://nodejs.org/en/)
 + Supports [EventEmitter](https://nodejs.org/api/events.html#events_events) interface
 + Developed by [Realglobe, Inc](http://realglobe.jp/)
 
