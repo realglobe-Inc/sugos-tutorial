@@ -50,7 +50,7 @@ With SUGOS, you can use a function declared in another client. Forget about prot
 
 Let's see some examples.
 
-With actor, client who provides functions:
+We name a client to provide functions an "actor":
 
 + Declare a "module", bundle of functions, with methods (`tableTennis#ping`)
 + Give an actor a "key" as identifier and connect hub server ( `my-actor-01@example.sugo-hub.com` )
@@ -83,7 +83,7 @@ co(function * () {
 
 ```
 
-Then, you can access the module with caller, client who invoke functions:
+Then, you can access the module with a "caller", which we name a client to invoke functions:
 
 
 ```javascript
@@ -109,11 +109,11 @@ co(function * () {
 
 ```
 
-You never declared the `.ping()` function in the caller-side JavaScript, But SUGOS does in runtime with definitions passed from actor.
+You never declared the `.ping()` function in the caller-side JavaScript, but SUGOS executes it in runtime as definitions passed from actor.
 
 Also, SUGOS supports event driven interface like [EventEmitter](https://nodejs.org/api/events.html#events_events) of Node.js.
 
-Callers and actors can communicate through `.on()` or `.emit()` methods.
+Callers and actors can communicate with each others through `.on()` or `.emit()` methods.
 
 
 ## How it Works
@@ -133,7 +133,7 @@ Both actors and callers connect hub with WebSocket.
 &nbsp;&nbsp;&nbsp;&nbsp;**Caller** **<----->** **Hub** **<----->** **Actor**
 
 
-Caller receives module (bundle of functions) definition and dynamically define JavaScript functions
+Caller receives module (bundle of functions) definition and dynamically define JavaScript functions.
 
 When you execute a function on caller side, caller convert the invocation information into JSON object, and send it to actor via hub.
 On actor side, the function invoked with context given from caller and send the result back to the caller.

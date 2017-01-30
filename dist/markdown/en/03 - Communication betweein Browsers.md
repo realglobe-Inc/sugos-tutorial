@@ -47,7 +47,7 @@ npm install -D browserify browserify-incremental xtend babelify babel-preset-es2
 
 ### Running Hub Server
 
-Almost same with the previous tutorial, but now we add `static` option to serve static files.
+Almost the same with the previous tutorial, but now we add `static` option to serve static files.
 
 **hub.js**
 ```javascript
@@ -434,7 +434,7 @@ With the hub server running, open actor html from browser:
 [http://localhost:3000/actor.html](http://localhost:3000/actor.html)
 
 
-Then、open caller html as well
+Then, open caller html as well
 
 [http://localhost:3000/caller.html](http://localhost:3000/caller.html)
 

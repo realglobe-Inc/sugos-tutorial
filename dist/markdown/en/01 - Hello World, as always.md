@@ -1,6 +1,6 @@
 # [SUGOS Tutorial] 01 - Hello World, as always
 
-This tutorial shows most simple example with SUGOS. Define a function on actor, then call it from caller.
+This tutorial shows the simplest example with SUGOS. Define a function on actor, then call it from caller.
 (You can learn about actors/callas in [Previous Tutorial](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/00%20-%20Let%20us%20begin%20with%20SUGOS.md))
 
 <a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/01%20-%20Hello%20World%2C%20as%20always.md">
@@ -125,8 +125,8 @@ module.exports = tableTennis
 
 The declared functions are shared to callers via actor.
 
-Not that the functions returns [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise). This make it easy to handle async procedures.
-And this example use [co](https://github.com/tj/co#readme) packages for promise flow controlling.
+Note that the functions returns [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise). This make it easy to handle async procedures.
+And this example uses [co](https://github.com/tj/co#readme) packages for promise flow controlling.
 
 
 ### Set the Module onto Actor and Connect to Hub
@@ -175,8 +175,8 @@ node ./actor.js
 
 ### Calling from a Caller
 
-From caller side, connect to the remote actor via `.connect()` with key of the actor.
-Pass "my-actor-01" as key and access to 'tableTennis' module.
+From caller side, connect to the remote actor via `.connect()` with the key of the actor.
+Pass "my-actor-01" as a key and access to 'tableTennis' module.
 
 **caller.js**
 ```javascript
