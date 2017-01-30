@@ -5,7 +5,7 @@ In [the Previous Tutorial](https://github.com/realglobe-Inc/sugos-tutorial/blob/
 Until now, we declare most modules on actor creation.
 But most cases in the real world you need to reuse module on another project.
 
-So, this tutorial shows how to create publish a module as npm package. What we are making is a simple Key-Value-Store which save data in to local file system.
+So, this tutorial shows how to create a module as npm package. What we will make is a simple Key-Value-Store which save data in to local file system.
 
 
 <a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/04%20-%20Module%20as%20npm%20package.md">
@@ -252,7 +252,7 @@ Then define,
 + `._read()` and `._write(data)` to access data internally.
 + `.set(key, value)`、`.get(key)`、`.del(key)` method for public
 
-Not that methods start with underscore are marked as private, and you cannot call it from callers.
+Note that methods start with underscore are marked as private, and you cannot call it from callers.
 
 
 And don't forget to implement `$spec` for docs.

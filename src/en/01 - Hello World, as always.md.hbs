@@ -1,6 +1,6 @@
 # {{prefix}} {{{cur.name}}}
 
-This tutorial shows most simple example with SUGOS. Define a function on actor, then call it from caller.
+This tutorial shows the simplest example with SUGOS. Define a function on actor, then call it from caller.
 (You can learn about actors/callas in [Previous Tutorial]({{{prev.url}}}))
 
 <a href="{{{cur.url}}}">
@@ -84,8 +84,8 @@ For this example, define simple one which have ping function to return pong.
 
 The declared functions are shared to callers via actor.
 
-Not that the functions returns [Promise]({{{links.promise}}}). This make it easy to handle async procedures.
-And this example use [co]({{{links.co}}}) packages for promise flow controlling.
+Note that the functions returns [Promise]({{{links.promise}}}). This make it easy to handle async procedures.
+And this example uses [co]({{{links.co}}}) packages for promise flow controlling.
 
 
 ### Set the Module onto Actor and Connect to Hub
@@ -108,8 +108,8 @@ Run the actor script and connect to the server.
 
 ### Calling from a Caller
 
-From caller side, connect to the remote actor via `.connect()` with key of the actor.
-Pass "my-actor-01" as key and access to 'tableTennis' module.
+From caller side, connect to the remote actor via `.connect()` with the key of the actor.
+Pass "my-actor-01" as a key and access to 'tableTennis' module.
 
 **caller.js**
 ```javascript
