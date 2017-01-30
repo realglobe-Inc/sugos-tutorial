@@ -31,7 +31,7 @@ node_modules
 tmp
 
 
-.npmrc
+# .npmrc
 .DS_Store
 
 var
