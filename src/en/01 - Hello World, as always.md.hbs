@@ -1,0 +1,151 @@
+# {{prefix}} {{{cur.name}}}
+
+This tutorial shows most simple example with SUGOS. Define a function on actor, then call it from caller.
+(You can learn about actors/callas in [Previous Tutorial]({{{prev.url}}}))
+
+<a href="{{{cur.url}}}">
+  <img src="{{{imgDir}}}/eyecatch-hello-world.jpg"
+       alt="eyecatch"
+       height="{{eyecatchHeight}}"
+       style="height:{{eyecatchHeight}}px"
+/></a>
+
+{{#if toc}}
+## {{{tocTitle}}}
+{{{toc}}}
+{{/if}}
+
+
+## Before Starting
+
+SUGOS runs on Node.js. Prepare the environment with [nvm]({{{links.nvm}}})
+
++ [Node.js {{{pkg.engines.node}}}]({{{links.node}}})
++ [npm {{{pkg.engines.npm}}}]({{{links.npm}}})
+
+<a href="{{{links.node}}}">
+  <img src="{{{imgDir}}}/nodejs-banner.png"
+       alt="banner"
+       height="{{bannerHeight}}"
+       style="height:{{bannerHeight}}px"
+  /></a>
+<a href="{{{links.npm}}}">
+  <img src="{{{imgDir}}}/npm-banner.png"
+       alt="banner"
+       height="{{bannerHeight}}"
+       style="height:{{bannerHeight}}px"
+  /></a>
+
+## Play it
+
+### Prepare Project
+
+Make directory for the project
+
+```bash
+{{{read 'example/tutorial-01/init-project.sh'}}}
+```
+
+Then install dependencies.
+
+```bash
+{{{read 'example/tutorial-01/install-deps.sh'}}}
+```
+
+### Running Hub Server
+
+Run a [SUGO-Hub]({{{links.sugo-hub}}}) server to interchange commands.
+
+Write a script like:
+
+**hub.js**
+```javascript
+{{{read 'example/tutorial-01/hub.js'}}}
+```
+
+Then, execute it with node.
+
+```bash
+{{{read 'example/tutorial-01/run-hub.sh'}}}
+```
+
+You may get warning to use Redis server for performance, but just ignore it for now.
+
+
+### Declaring a Module
+
+Declare a module, bundle of functions, to connect actor.
+For this example, define simple one which have ping function to return pong.
+
+**modules/table-tennis.js**
+```javascript
+{{{read 'example/tutorial-01/modules/table-tennis.js'}}}
+```
+
+The declared functions are shared to callers via actor.
+
+Not that the functions returns [Promise]({{{links.promise}}}). This make it easy to handle async procedures.
+And this example use [co]({{{links.co}}}) packages for promise flow controlling.
+
+
+### Set the Module onto Actor and Connect to Hub
+
+Now we have a module. The next step is set it onto [SUGO-Actor]({{{links.sugo-actor}}}).
+
+Create an actor instance with connecting hub host and `key` as identifier, and modules.
+
+**actor.js**
+```javascript
+{{{read 'example/tutorial-01/actor.js'}}}
+```
+
+Run the actor script and connect to the server.
+
+```bash
+{{{read 'example/tutorial-01/run-actor.sh'}}}
+```
+
+
+### Calling from a Caller
+
+From caller side, connect to the remote actor via `.connect()` with key of the actor.
+Pass "my-actor-01" as key and access to 'tableTennis' module.
+
+**caller.js**
+```javascript
+{{{read 'example/tutorial-01/caller.js'}}}
+```
+
+Run the call script and you will receive a pon.
+
+```bash
+{{{read 'example/tutorial-01/run-caller.sh'}}}
+```
+
+## Conclusion
+
++ There are three components: Hub, Actor, Caller
++ Actors are identified by key
++ Functions declared in actor side is available in caller side
++ Function result is wrapped in promise.
+
+
+Code snippets of this tutorial are also [available here]({{{links.tutorial-01-example}}})
+
+
+
+## You may Want to Read
+
++ Previous Tutorial: [{{{prev.name}}}]({{{prev.url}}})
++ Next Tutorial: [{{{next.name}}}]({{{next.url}}})
+
+## Links
+
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Hub]({{{links.sugo-hub}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Caller]({{{links.sugo-caller}}})
++ Tutorials
+{{#each markdowns}}
+  + [{{{name}}}]({{{url}}})
+{{/each}}

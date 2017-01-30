@@ -1,0 +1,122 @@
+# {{prefix}} {{{cur.name}}}
+
+In [the Previous Tutorial]({{{prev.url}}}), we learned simple call/return function.
+
+Now, we will try using event emitter interface.
+Fire events from actors and receive them on callers.
+
+
+<a href="{{{cur.url}}}">
+  <img src="{{{imgDir}}}/eyecatch-event-emit.jpg"
+       alt="eyecatch"
+       height="{{eyecatchHeight}}"
+       style="height:{{eyecatchHeight}}px"
+  /></a>
+
+{{#if toc}}
+## {{{tocTitle}}}
+{{{toc}}}
+{{/if}}
+
+
+## Try It Out
+
+### Prepare project
+
+For the beginning, prepare project directory.
+
+```bash
+{{{read 'example/tutorial-02/init-project.sh'}}}
+```
+
+Then, install dependencies.
+
+```bash
+{{{read 'example/tutorial-02/install-deps.sh'}}}
+```
+
+### Running Hub Server
+
+Hub server script is same as the previous tutorial.
+
+**hub.js**
+```javascript
+{{{read 'example/tutorial-02/hub.js'}}}
+```
+
+Then, execute with node.
+
+```bash
+{{{read 'example/tutorial-02/run-hub.sh'}}}
+```
+
+### Declaring a Module to Fire Events
+
+Define a module which fires tick each second and say "boom!"
+
+**modules/time-bomb.js**
+```javascript
+{{{read 'example/tutorial-02/modules/time-bomb.js'}}}
+```
+
+The `this` inside module method inherits EventEmitter and has `.on`, `.off` and `.emit()`methods
+
+
+### Setting the Module to Actor and Connect to Hub Server
+
+Create an actor instance
+
+**actor.js**
+```javascript
+{{{read 'example/tutorial-02/actor.js'}}}
+```
+
+```bash
+{{{read 'example/tutorial-02/run-actor.sh'}}}
+```
+
+### Calling from Caller
+
+Call the timeBomb module from caller side.
+The module instance returns from `.get()` on caller side is also an instance of EventEmitter.
+
+**caller.js**
+```javascript
+{{{read 'example/tutorial-02/caller.js'}}}
+```
+
+Note that `yield timeBomb.countDown(10)` waits until the count down finished.
+Internally, promise state is pending until actor returns.
+
+Now, execute the script and do count down.
+
+```bash
+{{{read 'example/tutorial-02/run-caller.sh'}}}
+```
+
+## Conclusion
+
+
++ `this` in module methods is an instance of EventEmitter
++ Fire and receive events via `.on()`, `.off()`, `.emit()` methods.
++ While an promise on actor side is pending, caller also waits
+
+Code snippets of this tutorial are also [available here]({{{links.tutorial-02-example}}})
+
+
+
+## You may Want to Read
+
++ Previous Tutorial: [{{{prev.name}}}]({{{prev.url}}})
++ Next Tutorial: [{{{next.name}}}]({{{next.url}}})
+
+## Links
+
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Hub]({{{links.sugo-hub}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Caller]({{{links.sugo-caller}}})
++ Tutorials
+{{#each markdowns}}
+  + [{{{name}}}]({{{url}}})
+{{/each}}

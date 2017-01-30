@@ -1,0 +1,127 @@
+# {{prefix}} {{{cur.name}}}
+
+
+This is the tutorial [SUGOS]({{{links.sugos}}}) framework.
+
+{{#if toc}}
+## {{{tocTitle}}}
+{{{toc}}}
+{{/if}}
+
+
+## What is SUGOS?
+
++ RPC(Remote Procedure Call) framework
++ It shares function definitions dynamically, so you don't have to care about networks
++ Most of components are written with [Node.js]({{{links.node}}})
++ Supports [EventEmitter]({{{links.event-emitter}}}) interface
++ Developed by [Realglobe, Inc]({{{links.realglobe}}})
+
+<a href="{{{links.sugos}}}">
+  <img src="{{{imgDir}}}/sugos-banner.png"
+       alt="Banner"
+       height="{{bannerHeight}}"
+  />
+</a>
+<a href="{{{links.node}}}">
+  <img src="{{{imgDir}}}/nodejs-banner.png"
+       alt="banner"
+       height="{{bannerHeight}}"
+       style="height:{{bannerHeight}}px"
+  /></a>
+<a href="{{{links.npm}}}">
+  <img src="{{{imgDir}}}/npm-banner.png"
+       alt="banner"
+       height="{{bannerHeight}}"
+       style="height:{{bannerHeight}}px"
+  /></a>
+<a href="{{{links.realglobe}}}">
+  <img src="{{{imgDir}}}/realglboe-logo.png"
+       alt="banner"
+       height="{{bannerHeight}}"
+       style="height:{{bannerHeight}}px"
+  /></a>
+
+
+## What We can Do with SUGOS?
+
+With SUGOS, you can use a function declared in another client. Forget about protocols like HTTP.
+
+<img src="{{{imgDir}}}/sugos-overview.png"
+     alt="Overview"
+/>
+
+
+Let's see some examples.
+
+With actor, client who provides functions:
+
++ Declare a "module", bundle of functions, with methods (`tableTennis#ping`)
++ Give an actor a "key" as identifier and connect hub server ( `my-actor-01@example.sugo-hub.com` )
+
+```javascript
+{{{read 'example/simple-actor.js'}}}
+```
+
+Then, you can access the module with caller, client who invoke functions:
+
+
+```javascript
+{{{read 'example/simple-caller.js'}}}
+```
+
+You never declared the `.ping()` function in the caller-side JavaScript, But SUGOS does in runtime with definitions passed from actor.
+
+Also, SUGOS supports event driven interface like [EventEmitter]({{{links.event-emitter}}}) of Node.js.
+
+Callers and actors can communicate through `.on()` or `.emit()` methods.
+
+
+## How it Works
+
+### Main Components
+
+| Component | Description |
+| ------------ | --- |
+| [SUGO-Hub]({{{links.sugo-hub}}}) | Hub server to who connects actors and callers。Uses [Socket.IO]({{{links.socket-io}}}) and [Koa]({{{links.koa}}}) internally |
+| [SUGO-Actor]({{{links.sugo-actor}}}) | Client who provides functions. Uniquely identified by `key` |
+| [SUGO-Caller]({{{links.sugo-caller}}}) | Client who call functions provided by actors. |
+
+
+Both actors and callers connect hub with WebSocket.
+
+
+&nbsp;&nbsp;&nbsp;&nbsp;**Caller** **<----->** **Hub** **<----->** **Actor**
+
+
+Caller receives module (bundle of functions) definition and dynamically define JavaScript functions
+
+When you execute a function on caller side, caller convert the invocation information into JSON object, and send it to actor via hub.
+On actor side, the function invoked with context given from caller and send the result back to the caller.
+
+All functions implemented with [async/await](https://github.com/yortus/asyncawait#guide-to-asyncawait-v10) interface to handle delay of networking
+
+## Conclusion
+
++ SUGOS is a frame work for RPC(Remote Procedure Call)
++ You can call a function declared on a client from another client
++ JavaScript function is dynamically defined on the caller side
++ Forget about HTTP, WebSocket
+
+
+## You may Want to Read
+
++ Next Tutorial: [{{{next.name}}}]({{{next.url}}})
+
+
+## Links
+
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Hub]({{{links.sugo-hub}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Caller]({{{links.sugo-caller}}})
++ [Realglobe Inc]({{{links.realglobe}}})
++ Tutorials
+{{#each markdowns}}
+  + [{{{name}}}]({{{url}}})
+{{/each}}

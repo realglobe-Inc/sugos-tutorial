@@ -1,0 +1,154 @@
+# {{prefix}} {{{cur.name}}}
+
+In [the Previous Tutorial]({{{prev.url}}}), both of callers and actors run on Node.js.
+
+This time, try it on browsers.
+
+Typing HTML string in a textbox in one browser, and render the HTML in another browser on real time.
+
+
+<a href="{{{cur.url}}}">
+  <img src="{{{imgDir}}}/eyecatch-browser.png"
+       alt="eyecatch"
+       height="{{eyecatchHeight}}"
+       style="height:{{eyecatchHeight}}px"
+/></a>
+
+{{#if toc}}
+## {{{tocTitle}}}
+{{{toc}}}
+{{/if}}
+
+
+## Try It Out
+
+### Prepare project
+
+For the beginning, prepare project directory as usual.
+
+```bash
+{{{read 'example/tutorial-03/init-project.sh'}}}
+```
+
+Then, install dependencies.
+
+This time we needs some extra libraries to build user interface.
+
++ [React.js]({{{links.react}}})
++ [Babel]({{{links.babel}}})
++ [Browserify]({{{links.browserify}}})
+
+
+```bash
+{{{read 'example/tutorial-03/install-deps.sh'}}}
+```
+
+### Running Hub Server
+
+Almost same with the previous tutorial, but now we add `static` option to serve static files.
+
+**hub.js**
+```javascript
+{{{read 'example/tutorial-03/hub.js'}}}
+```
+```bash
+{{{read 'example/tutorial-03/run-hub.sh'}}}
+```
+
+### Creating Actor
+
+Create an actor instance at `componentDidMount`, React.js lifecycle method, and declare a module with name `dynamicHTML`.
+This module enables to rewrite HTML by accessing the component state.
+
+**public/actor.jsx**
+```jsx
+{{{read 'example/tutorial-03/public/actor.jsx'}}}
+```
+
+Note that there is not `host` option with actor creating.
+This is because the actor script it self is served by the hub. Actor find connection info by `localtion` object.
+
+Then, create an HTML file to run this script.
+
+**public/actor.html**
+```html
+{{{read 'example/tutorial-03/public/actor.html'}}}
+```
+
+
+### Creating Caller
+
+On caller side, call `.write()` method of the `dynamicHTML` defined in actor side when never text box changed.
+
+
+**public/caller.jsx**
+```jsx
+{{{read 'example/tutorial-03/public/caller.jsx'}}}
+```
+
+
+**public/caller.html**
+```html
+{{{read 'example/tutorial-03/public/caller.html'}}}
+```
+
+
+### Build the script
+
+The jsx script needs to be compiled. Babel and Browserify would do this.
+
+
+**build.js**
+```js
+{{{read 'example/tutorial-03/build.js'}}}
+```
+
+
+```bash
+{{{read 'example/tutorial-03/run-build.sh'}}}
+```
+
+### Play with Browser
+
+With the hub server running, open actor html from browser:
+
+[http://localhost:3000/actor.html](http://localhost:3000/actor.html)
+
+
+Then、open caller html as well
+
+[http://localhost:3000/caller.html](http://localhost:3000/caller.html)
+
+Type something on caller html textarea and actor html will show the result.
+
+
+<img src="{{{imgDir}}}/tutorial-browser.png"/>
+
+
+## Conclusion
+
++ Callers and actors supports browser
++ Hub has `static` option to serve static files
++ Callers and actors find host from `location` object by default.
+
+Code snippets of this tutorial are also [available here]({{{links.tutorial-03-example}}})
+
+
+## You may Want to Read
+
++ Previous Tutorial: [{{{prev.name}}}]({{{prev.url}}})
++ Next Tutorial: [{{{next.name}}}]({{{next.url}}})
+
+## Links
+
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Hub]({{{links.sugo-hub}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Caller]({{{links.sugo-caller}}})
++ [React]({{{links.react}}})
++ [Babel]({{{links.babel}}})
++ [Browserify]({{{links.browserify}}})
++ Tutorials
+{{#each markdowns}}
+  + [{{{name}}}]({{{url}}})
+{{/each}}

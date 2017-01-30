@@ -1,0 +1,147 @@
+# {{prefix}} {{{cur.name}}}
+
+In [the Previous Tutorial]({{{prev.url}}}), we learned how to run callers and actors on browser.
+
+Until now, we declare most modules on actor creation.
+But most cases in the real world you need to reuse module on another project.
+
+So, this tutorial shows how to create publish a module as npm package. What we are making is a simple Key-Value-Store which save data in to local file system.
+
+
+<a href="{{{cur.url}}}">
+<img src="{{{imgDir}}}/eyecatch-package.jpg"
+     alt="eyecatch"
+     height="{{eyecatchHeight}}"
+     style="height:{{eyecatchHeight}}px"
+/></a>
+
+{{#if toc}}
+## {{{tocTitle}}}
+{{{toc}}}
+{{/if}}
+
+
+## Before Starting
+
+Install [sugo-scaffold]({{{links.sugo-scaffold}}}) CLI tool to generate project structure.
+
+```bash
+{{{read 'example/tutorial-04/install-globals.sh'}}}
+```
+
+## Try It Out
+
+### Generating Scaffold
+
+Run command `sugo-scaffold <type> <dircotry>` on you terminal and it starts interactive shell.
+
+```bash
+{{{read 'example/tutorial-04/init-project.sh'}}}
+```
+
+Set `module_name` as "KeyValueStore".
+
+<img src="{{{imgDir}}}/tutorial-module-scaffold.png"/>
+
+When you answer all questions, project scaffold will be generated.
+
+
+### Implement the Module
+
+
+See a file named "lib/key_value_store.js" in the generated directory.
+
+```javascript
+{{{read 'example/tutorial-04/snippets/generated.js'}}}
+```
+
+There are two methods defined by default.
+
+`.ping()` to test the reachability、`.assert()` to test the environment.
+
+Run `npm test` to test the module.
+
+And you may notice the getter defined in the module class.
+`get $spec () { /* ... */ }`
+
+This is an optional settings to tell how this module works.
+
+
+Well, let's begin to define methods for the KeyValueStore.
+
+```javascript
+{{{read 'example/tutorial-04/snippets/imple.js'}}}
+```
+
+
+Define constructor to take `filename`, the path of json file to store data.
+Then define,
+
++ `._read()` and `._write(data)` to access data internally.
++ `.set(key, value)`、`.get(key)`、`.del(key)` method for public
+
+Not that methods start with underscore are marked as private, and you cannot call it from callers.
+
+
+And don't forget to implement `$spec` for docs.
+
+```javascript
+{{{read 'example/tutorial-04/snippets/spec.js'}}}
+```
+
+
+### Testing the Module
+
+See the "test/key_value_store_test.js" in the generated directory.
+
+```javascript
+{{{read 'example/tutorial-04/snippets/generated_test.js'}}}
+```
+
+Add some tests here
+
+```javascript
+{{{read 'example/tutorial-04/snippets/imple_test.js'}}}
+  ```
+
+
+Then, run it.
+
+```bash
+npm test
+```
+
+
+If you succeed `npm publish` to register the package.
+
+Then, use it from another packages
+
+```javascript
+{{{read 'example/tutorial-04/example/example-usage.js'}}}
+```
+
+
+## Conclusion
+
++ Use [sugo-scaffold]({{{links.sugo-scaffold}}}) to generate project structure
++ Write `$spec` to describe the module (optional)
++ Method starts with underscore works as private (Cannot call from callers)
++ You can test the module without hub nor callers
+
+Code snippets of this tutorial are also [available here]({{{links.tutorial-04-example}}})
+
+
+## You may Want to Read
+
++ Previous Tutorial: [{{{prev.name}}}]({{{prev.url}}})
++ Next Tutorial: [{{{next.name}}}]({{{next.url}}})
+
+## Links
+
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Scaffold]({{{links.sugo-scaffold}}})
++ Tutorials
+{{#each markdowns}}
+  + [{{{name}}}]({{{url}}})
+{{/each}}

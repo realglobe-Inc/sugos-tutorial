@@ -21,6 +21,7 @@ module.exports = {
       }))
       return [
         { title: '日本語コンテンツ', contents: contents('dist/markdown/ja/*.md') },
+        { title: 'English Contents', contents: contents('dist/markdown/en/*.md') }
       ]
     }
   }

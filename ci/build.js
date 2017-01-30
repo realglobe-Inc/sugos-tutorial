@@ -20,7 +20,7 @@ const unorm = require('unorm')
 const pkg = require('../package.json')
 const links = require('../src/links')
 
-let langs = [ 'ja' ]
+let langs = [ 'ja', 'en' ]
 
 runTasks('build', [
   () => coz.render([
