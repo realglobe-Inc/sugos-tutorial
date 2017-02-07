@@ -1,6 +1,6 @@
 {
   "name": "sugos-tutorial",
-  "version": "1.0.0",
+  "version": "1.1.1",
   "description": "Tutorial for SUGOS",
   "main": "index.js",
   "scripts": {
@@ -50,16 +50,13 @@
     "filecopy": "^2.0.2",
     "injectmock": "^2.0.0",
     "markdown-toc": "^1.1.0",
-    "sg-travis": "^1.1.37",
     "sugos-assets": "^2.0.3",
     "sugos-index": "^2.0.2",
+    "sugos-travis": "^2.0.7",
     "unorm": "^1.4.1"
   },
   "engines": {
     "node": ">=6",
     "npm": ">=4"
-  },
-  "publishConfig": {
-    "registry": "https://realglobe.artifactoryonline.com/realglobe/api/npm/npm-local"
   }
 }
