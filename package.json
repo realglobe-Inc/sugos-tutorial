@@ -1,6 +1,6 @@
 {
   "name": "sugos-tutorial",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "description": "Tutorial for SUGOS",
   "main": "index.js",
   "scripts": {

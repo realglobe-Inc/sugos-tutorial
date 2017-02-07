@@ -19,7 +19,8 @@ module.exports = {
   data: {
     pkg,
     markdowns: {
-      ja: markdown('ja')
+      ja: markdown('ja'),
+      en: markdown('en')
     }
   }
 }

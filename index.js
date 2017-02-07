@@ -1,7 +1,7 @@
 /**
  * Tutorial for SUGOS
  * @module sugos-tutorial
- * @version 1.0.0
+ * @version 1.1.0
  */
 'use strict'
 
@@ -25,5 +25,27 @@ exports.ja = [
   {
     title: '04 - Moduleをnpmパッケージ化する',
     filename: 'dist/markdown/ja/04%20-%20Module%E3%82%92npm%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%8C%96%E3%81%99%E3%82%8B.md'
+  }
+]
+exports.en = [
+  {
+    title: '00 - Let us begin with SUGOS',
+    filename: 'dist/markdown/en/00%20-%20Let%20us%20begin%20with%20SUGOS.md'
+  },
+  {
+    title: '01 - Hello World, as always',
+    filename: 'dist/markdown/en/01%20-%20Hello%20World%2C%20as%20always.md'
+  },
+  {
+    title: '02 - Using Event Emit',
+    filename: 'dist/markdown/en/02%20-%20Using%20Event%20Emit.md'
+  },
+  {
+    title: '03 - Communication betweein Browsers',
+    filename: 'dist/markdown/en/03%20-%20Communication%20betweein%20Browsers.md'
+  },
+  {
+    title: '04 - Module as npm package',
+    filename: 'dist/markdown/en/04%20-%20Module%20as%20npm%20package.md'
   }
 ]
