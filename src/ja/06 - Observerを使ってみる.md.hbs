@@ -1,0 +1,92 @@
+# {{prefix}} {{{cur.name}}}
+
+[Sugo Observer](https://github.com/realglobe-Inc/sugo-observer#readme)を使うと、ActorやCallerの接続状態をクライアント側から監視できます。
+これにより、例えばActorがHubで繋がったタイミングで動的にCallerを繋げる、といった処理が可能になります。
+
+今回はActorやCallerの接続時にログを出すだけの簡単な実装をしてみます。
+
+
+<a href="{{{cur.url}}}">
+    <img src="{{{imgDir}}}/eyecatch-dynamic.jpg"
+         alt="eyecatch"
+         height="{{eyecatchHeight}}"
+         style="height:{{eyecatchHeight}}px"
+    /></a>
+
+{{#if toc}}
+    ## {{{tocTitle}}}
+    {{{toc}}}
+{{/if}}
+
+
+## 実装してみる
+
+いつも通り、まずはプロジェクトディレクトリを用意し、
+
+
+```bash
+{{{read 'example/tutorial-06/init-project.sh'}}}
+```
+
+必要なパッケージをインストール。sugo-actorやsugo-callerに加え、sugo-observerもインストールします
+
+```bash
+{{{read 'example/tutorial-06/install-deps.sh'}}}
+```
+
+### Hubサーバを立てる
+
+ここはいつも通り
+
+**hub.js**
+
+```javascript
+{{{read 'example/tutorial-06/hub.js'}}}
+```
+```bash
+{{{read 'example/tutorial-06/run-hub.sh'}}}
+```
+
+### Observerを用意する
+
+observerのファクトリーメソッド（`.sugoObserver(handler, config)`）を利用して、インスタンスを作成します。
+
+
+**observer.js**
+
+```javascript
+{{{read 'example/tutorial-06/observer.js'}}}
+```
+
+```bash
+{{{read 'example/tutorial-06/run-observer.sh'}}}
+```
+
+
+### Actorを用意する
+
+**actor.js**
+
+```javascript
+{{{read 'example/tutorial-06/actor.js'}}}
+```
+
+```bash
+{{{read 'example/tutorial-06/run-actor.sh'}}}
+```
+
+実行すると、observer側のメッセージが表示されます。
+
+### Callerを用意する
+
+
+**caller.js**
+
+```javascript
+{{{read 'example/tutorial-06/caller.js'}}}
+```
+
+```bash
+{{{read 'example/tutorial-06/run-caller.sh'}}}
+
+実行すると、observer側のメッセージが表示されます。

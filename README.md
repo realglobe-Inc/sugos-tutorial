@@ -14,11 +14,12 @@ Tutorial for SUGOS
 日本語コンテンツ
 ---------
 
-+ [00 - SUGOSことはじめ](dist/markdown/ja/00%20-%20SUGOS%E3%81%93%E3%81%A8%E3%81%AF%E3%81%98%E3%82%81.md)
++ [00 - SUGOSことはじめ](dist/markdown/ja/00%20-%20SUGOS%E3%81%93%E3%81%A8%E3%81%AF%E3%81%98%E3%82%81.md)
 + [01 - Hello Worldしてみる](dist/markdown/ja/01%20-%20Hello%20World%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
 + [02 - Event Emitしてみる](dist/markdown/ja/02%20-%20Event%20Emit%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B.md)
-+ [03 - Browser間でやり取りする](dist/markdown/ja/03%20-%20Browser%E9%96%93%E3%81%A7%E3%82%84%E3%82%8A%E5%8F%96%E3%82%8A%E3%81%99%E3%82%8B.md)
-+ [04 - Moduleをnpmパッケージ化する](dist/markdown/ja/04%20-%20Module%E3%82%92npm%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%8C%96%E3%81%99%E3%82%8B.md)
++ [03 - Browser間でやり取りする](dist/markdown/ja/03%20-%20Browser%E9%96%93%E3%81%A7%E3%82%84%E3%82%8A%E5%8F%96%E3%82%8A%E3%81%99%E3%82%8B.md)
++ [04 - Moduleをnpmパッケージ化する](dist/markdown/ja/04%20-%20Module%E3%82%92npm%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%8C%96%E3%81%99%E3%82%8B.md)
++ [05 - ActorやCallerを認証する](dist/markdown/ja/05%20-%20Actor%E3%82%84Caller%E3%82%92%E8%AA%8D%E8%A8%BC%E3%81%99%E3%82%8B.md)
 
 
 English Contents
@@ -28,7 +29,9 @@ English Contents
 + [01 - Hello World, as always](dist/markdown/en/01%20-%20Hello%20World%2C%20as%20always.md)
 + [02 - Using Event Emit](dist/markdown/en/02%20-%20Using%20Event%20Emit.md)
 + [03 - Communication betweein Browsers](dist/markdown/en/03%20-%20Communication%20betweein%20Browsers.md)
++ [03 - Communication between Browsers](dist/markdown/en/03%20-%20Communication%20between%20Browsers.md)
 + [04 - Module as npm package](dist/markdown/en/04%20-%20Module%20as%20npm%20package.md)
++ [05 - Authenticate Actors and Callers](dist/markdown/en/05%20-%20Authenticate%20Actors%20and%20Callers.md)
 
 
 
