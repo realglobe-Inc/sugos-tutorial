@@ -1,0 +1,101 @@
+# {{prefix}} {{{cur.name}}}
+
+This tutorial shows you how to authenticate actors and callers on hub.
+
+
+<a href="{{{cur.url}}}">
+    <img src="{{{imgDir}}}/eyecatch-auth.jpg"
+         alt="eyecatch"
+         height="{{eyecatchHeight}}"
+         style="height:{{eyecatchHeight}}px"
+    /></a>
+
+
+{{#if toc}}
+## {{{tocTitle}}}
+{{{toc}}}
+{{/if}}
+
+
+## Try It Out
+
+### Prepare project
+
+Prepare project directory, as usual.
+
+```bash
+{{{read 'example/tutorial-05/init-project.sh'}}}
+```
+
+Then, install dependencies.
+
+```bash
+{{{read 'example/tutorial-05/install-deps.sh'}}}
+```
+
+### Running Hub Server
+
+Add `authenticate` option on hub creation.
+Passing custom authenticate function enables you to accept/reject connecting sockets.
+
+For now, compare the password hash to conform.
+
+**hub.js**
+
+```javascript
+{{{read 'example/tutorial-05/hub.js'}}}
+```
+```bash
+{{{read 'example/tutorial-05/run-hub.sh'}}}
+```
+
+
+### Connect Actor to Hub
+
+Add `auth` option on actor creation and pass authenticate data as object.
+This data will be the second arguments on hub authenticate functions.
+
+**actor.js**
+
+```javascript
+{{{read 'example/tutorial-05/actor.js'}}}
+```
+
+```bash
+{{{read 'example/tutorial-05/run-actor.sh'}}}
+```
+
+Run this actor script and you will see auth success message on hub side.
+
+
+### Connect Caller to Hub
+
+Caller side as same. Pass authentication data to `auth` options.
+
+**caller.js**
+
+```javascript
+{{{read 'example/tutorial-05/caller.js'}}}
+```
+
+```bash
+{{{read 'example/tutorial-05/run-caller.sh'}}}
+```
+
+### まとめ
+
++ Passing a function to `authenticate` on Hub enables you to authenticate Actors and Callers
++ Signature of authenticate function is `(socket, data) -> Promise.<Boolean/>`
++ Actor and Caller receives authentication data as `auth` option
+
+
+
+## Links
+
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Scaffold]({{{links.sugo-scaffold}}})
++ Tutorials
+{{#each markdowns}}
++ [{{{name}}}]({{{url}}})
+{{/each}}
