@@ -1,4 +1,4 @@
-# 【SUGOSチュートリアル】 
+# 【SUGOSチュートリアル】 06 - Observerを使ってみる
 
 [Sugo Observer](https://github.com/realglobe-Inc/sugo-observer#readme)を使うと、ActorやCallerの接続状態をクライアント側から監視できます。
 これにより、例えばActorがHubで繋がったタイミングで動的にCallerを繋げる、といった処理が可能になります。
@@ -6,13 +6,19 @@
 今回はActorやCallerの接続時にログを出すだけの簡単な実装をしてみます。
 
 
-<a href="">
+<a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/06%20-%20Observer%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.md">
     <img src="../../images/eyecatch-dynamic.jpg"
          alt="eyecatch"
          height="128"
          style="height:128px"
     /></a>
 
+    ## 内容
+    - [実装してみる](#%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B)
+  * [Hubサーバを立てる](#hub%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B)
+  * [Observerを用意する](#observer%E3%82%92%E7%94%A8%E6%84%8F%E3%81%99%E3%82%8B)
+  * [Actorを用意する](#actor%E3%82%92%E7%94%A8%E6%84%8F%E3%81%99%E3%82%8B)
+  * [Callerを用意する](#caller%E3%82%92%E7%94%A8%E6%84%8F%E3%81%99%E3%82%8B)
 
 
 ## 実装してみる
@@ -63,7 +69,7 @@ node ./hub.js
 
 ### Observerを用意する
 
-observerのファクトリーメソッド（`.sugoObserver(handler, config)`）を利用して、インスタンスを作成します。
+SUGO-Observerのファクトリーメソッド（`.sugoObserver(handler, config)`）を利用して、インスタンスを作成します。
 
 
 **observer.js**
@@ -106,9 +112,6 @@ co(function * () {
   yield observer.stop() // Stop observing
 
 }).catch((err) => console.error(err))
-
-
-
 
 ```
 
@@ -197,5 +200,6 @@ co(function * () {
 
 ```bash
 node ./caller.js
+```
 
 実行すると、observer側のメッセージが表示されます。

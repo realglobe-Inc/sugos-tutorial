@@ -29,6 +29,10 @@ exports.ja = [
   {
     title: '05 - ActorやCallerを認証する',
     filename: 'dist/markdown/ja/05%20-%20Actor%E3%82%84Caller%E3%82%92%E8%AA%8D%E8%A8%BC%E3%81%99%E3%82%8B.md'
+  },
+  {
+    title: '06 - Observerを使ってみる',
+    filename: 'dist/markdown/ja/06%20-%20Observer%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.md'
   }
 ]
 exports.en = [
