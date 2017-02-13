@@ -65,12 +65,12 @@ This data will be the second arguments on hub authenticate functions.
 {{{read 'example/tutorial-05/run-actor.sh'}}}
 ```
 
-このActorスクリプトを実行すると、hub側で認証成功のメッセージが出ることが確認できます
+Run this actor script and you will see auth success message on hub side.
 
 
 ### Connect Caller to Hub
 
-Caller側も同様です。`auth`オプションを追加し、認証情報をObject型で渡すことで、認証ができます
+Caller side as same. Pass authentication data to `auth` options.
 
 **caller.js**
 
@@ -84,9 +84,9 @@ Caller側も同様です。`auth`オプションを追加し、認証情報をOb
 
 ### まとめ
 
-+ Hubの`authenticate`に関数を渡すことで接続してくるCallerやActorを認証できる
-+ 認証関数のシグネチャは`(socket, data) -> Promise.<Boolean/>`である
-+ ActorやCallerの`auth`オプションに、認証情報を渡す
++ Passing a function to `authenticate` on Hub enables you to authenticate Actors and Callers
++ Signature of authenticate function is `(socket, data) -> Promise.<Boolean/>`
++ Actor and Caller receives authentication data as `auth` option
 
 
 
