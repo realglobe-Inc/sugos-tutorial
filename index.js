@@ -1,7 +1,7 @@
 /**
  * Tutorial for SUGOS
  * @module sugos-tutorial
- * @version 1.1.0
+ * @version 1.1.1
  */
 'use strict'
 
@@ -25,6 +25,10 @@ exports.ja = [
   {
     title: '04 - Moduleをnpmパッケージ化する',
     filename: 'dist/markdown/ja/04%20-%20Module%E3%82%92npm%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E5%8C%96%E3%81%99%E3%82%8B.md'
+  },
+  {
+    title: '05 - Actorを認証する',
+    filename: 'dist/markdown/ja/05%20-%20Actor%E3%82%92%E8%AA%8D%E8%A8%BC%E3%81%99%E3%82%8B.md'
   }
 ]
 exports.en = [

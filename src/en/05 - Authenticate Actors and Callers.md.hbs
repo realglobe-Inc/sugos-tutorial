@@ -1,0 +1,101 @@
+# {{prefix}} {{{cur.name}}}
+
+This tutorial shows you how to authenticate actors and callers on hub.
+
+
+<a href="{{{cur.url}}}">
+    <img src="{{{imgDir}}}/eyecatch-auth.jpg"
+         alt="eyecatch"
+         height="{{eyecatchHeight}}"
+         style="height:{{eyecatchHeight}}px"
+    /></a>
+
+
+{{#if toc}}
+## {{{tocTitle}}}
+{{{toc}}}
+{{/if}}
+
+
+## Try It Out
+
+### Prepare project
+
+Prepare project directory, as usual.
+
+```bash
+{{{read 'example/tutorial-05/init-project.sh'}}}
+```
+
+Then, install dependencies.
+
+```bash
+{{{read 'example/tutorial-05/install-deps.sh'}}}
+```
+
+### Running Hub Server
+
+Add `authenticate` option on hub creation.
+Passing custom authenticate function enables you to accept/reject connecting sockets.
+
+For now, compare the password hash to conform.
+
+**hub.js**
+
+```javascript
+{{{read 'example/tutorial-05/hub.js'}}}
+```
+```bash
+{{{read 'example/tutorial-05/run-hub.sh'}}}
+```
+
+
+### Connect Actor to Hub
+
+Add `auth` option on actor creation and pass authenticate data as object.
+This data will be the second arguments on hub authenticate functions.
+
+**actor.js**
+
+```javascript
+{{{read 'example/tutorial-05/actor.js'}}}
+```
+
+```bash
+{{{read 'example/tutorial-05/run-actor.sh'}}}
+```
+
+このActorスクリプトを実行すると、hub側で認証成功のメッセージが出ることが確認できます
+
+
+### Connect Caller to Hub
+
+Caller側も同様です。`auth`オプションを追加し、認証情報をObject型で渡すことで、認証ができます
+
+**caller.js**
+
+```javascript
+{{{read 'example/tutorial-05/caller.js'}}}
+```
+
+```bash
+{{{read 'example/tutorial-05/run-caller.sh'}}}
+```
+
+### まとめ
+
++ Hubの`authenticate`に関数を渡すことで接続してくるCallerやActorを認証できる
++ 認証関数のシグネチャは`(socket, data) -> Promise.<Boolean/>`である
++ ActorやCallerの`auth`オプションに、認証情報を渡す
+
+
+
+## Links
+
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Scaffold]({{{links.sugo-scaffold}}})
++ Tutorials
+{{#each markdowns}}
++ [{{{name}}}]({{{url}}})
+{{/each}}
