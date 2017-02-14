@@ -113,7 +113,7 @@ DEBUG=sugos:tutorial:* node ./hub.js
 ```
 
 
-### Connect Actor to Hub
+### Connecting Actor to Hub
 
 Add `auth` option on actor creation and pass authenticate data as object.
 This data will be the second arguments on hub authenticate functions.
@@ -176,7 +176,7 @@ node ./actor.js
 Run this actor script and you will see auth success message on hub side.
 
 
-### Connect Caller to Hub
+### Connecting Caller to Hub
 
 Caller side as same. Pass authentication data to `auth` options.
 
@@ -225,12 +225,16 @@ co(function * () {
 node ./caller.js
 ```
 
-### まとめ
+### Conclusion
 
 + Passing a function to `authenticate` on Hub enables you to authenticate Actors and Callers
 + Signature of authenticate function is `(socket, data) -> Promise.<Boolean/>`
 + Actor and Caller receives authentication data as `auth` option
 
+## You may Want to Read
+
++ Previous Tutorial: [03 - Communication between Browsers](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/03%20-%20Communication%20between%20Browsers.md)
++ Next Tutorial: [05 - Authenticate Actors and Callers](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/05%20-%20Authenticate%20Actors%20and%20Callers.md)
 
 
 ## Links
