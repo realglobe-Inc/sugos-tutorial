@@ -1,0 +1,113 @@
+# {{prefix}} {{{cur.name}}}
+
+[Sugo Observer](https://github.com/realglobe-Inc/sugo-observer#readme) enables you to observe actors and callers on hub from client side.
+
+On this tutorial, emit logs when actor and caller connected to hub.
+
+
+<a href="{{{cur.url}}}">
+    <img src="{{{imgDir}}}/eyecatch-dynamic.jpg"
+         alt="eyecatch"
+         height="{{eyecatchHeight}}"
+         style="height:{{eyecatchHeight}}px"
+    /></a>
+
+{{#if toc}}
+## {{{tocTitle}}}
+{{{toc}}}
+{{/if}}
+
+
+## Try It Out
+
+Prepare project directory, as usual.
+
+
+```bash
+{{{read 'example/tutorial-06/init-project.sh'}}}
+```
+
+Then, install dependencies. Note that we added "sugo-observer" package this time.
+
+```bash
+{{{read 'example/tutorial-06/install-deps.sh'}}}
+```
+
+### Running Hub Server
+
+**hub.js**
+
+```javascript
+{{{read 'example/tutorial-06/hub.js'}}}
+```
+```bash
+{{{read 'example/tutorial-06/run-hub.sh'}}}
+```
+
+### Start Observing
+
+Use SUGO-Observer factory method（`.sugoObserver(handler, config)`) to create an instance
+
+
+**observer.js**
+
+```javascript
+{{{read 'example/tutorial-06/observer.js'}}}
+```
+
+```bash
+{{{read 'example/tutorial-06/run-observer.sh'}}}
+```
+
+
+### Connecting Actor to Hub
+
+**actor.js**
+
+```javascript
+{{{read 'example/tutorial-06/actor.js'}}}
+```
+
+```bash
+{{{read 'example/tutorial-06/run-actor.sh'}}}
+```
+
+Executing this will show message on observer side.
+
+### Connecting Caller to Hub
+
+
+**caller.js**
+
+```javascript
+{{{read 'example/tutorial-06/caller.js'}}}
+```
+
+```bash
+{{{read 'example/tutorial-06/run-caller.sh'}}}
+```
+
+Executing this will show message on observer side.
+
+
+### Conclusion
+
++ SUGO-Observe enables you to observe hub from client side
++ Detects connections of actors/callers
+
+
+## You may Want to Read
+
++ Previous Tutorial: [{{{prev.name}}}]({{{prev.url}}})
++ Next Tutorial: [{{{next.name}}}]({{{next.url}}})
+
+
+## Links
+
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Scaffold]({{{links.sugo-scaffold}}})
++ Tutorials
+{{#each markdowns}}
++ [{{{name}}}]({{{url}}})
+{{/each}}

@@ -50,7 +50,7 @@ For now, compare the password hash to conform.
 ```
 
 
-### Connect Actor to Hub
+### Connecting Actor to Hub
 
 Add `auth` option on actor creation and pass authenticate data as object.
 This data will be the second arguments on hub authenticate functions.
@@ -68,7 +68,7 @@ This data will be the second arguments on hub authenticate functions.
 Run this actor script and you will see auth success message on hub side.
 
 
-### Connect Caller to Hub
+### Connecting Caller to Hub
 
 Caller side as same. Pass authentication data to `auth` options.
 
@@ -82,12 +82,16 @@ Caller side as same. Pass authentication data to `auth` options.
 {{{read 'example/tutorial-05/run-caller.sh'}}}
 ```
 
-### まとめ
+### Conclusion
 
 + Passing a function to `authenticate` on Hub enables you to authenticate Actors and Callers
 + Signature of authenticate function is `(socket, data) -> Promise.<Boolean/>`
 + Actor and Caller receives authentication data as `auth` option
 
+## You may Want to Read
+
++ Previous Tutorial: [{{{prev.name}}}]({{{prev.url}}})
++ Next Tutorial: [{{{next.name}}}]({{{next.url}}})
 
 
 ## Links
