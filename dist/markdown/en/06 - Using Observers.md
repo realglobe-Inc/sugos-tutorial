@@ -1,11 +1,11 @@
-# [SUGOS Tutorial] 
+# [SUGOS Tutorial] 06 - Using Observers
 
 [Sugo Observer](https://github.com/realglobe-Inc/sugo-observer#readme) enables you to observe actors and callers on hub from client side.
 
 On this tutorial, emit logs when actor and caller connected to hub.
 
 
-<a href="">
+<a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/06%20-%20Using%20Observers.md">
     <img src="../../images/eyecatch-dynamic.jpg"
          alt="eyecatch"
          height="128"
@@ -220,3 +220,4 @@ Executing this will show message on observer side.
 + [03 - Communication between Browsers](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/03%20-%20Communication%20between%20Browsers.md)
 + [04 - Module as npm package](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/04%20-%20Module%20as%20npm%20package.md)
 + [05 - Authenticate Actors and Callers](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/05%20-%20Authenticate%20Actors%20and%20Callers.md)
++ [06 - Using Observers](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/06%20-%20Using%20Observers.md)

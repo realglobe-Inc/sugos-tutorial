@@ -59,5 +59,9 @@ exports.en = [
   {
     title: '05 - Authenticate Actors and Callers',
     filename: 'dist/markdown/en/05%20-%20Authenticate%20Actors%20and%20Callers.md'
+  },
+  {
+    title: '06 - Using Observers',
+    filename: 'dist/markdown/en/06%20-%20Using%20Observers.md'
   }
 ]
