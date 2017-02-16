@@ -10,6 +10,8 @@
 
 {{pkg.description}}
 
+{{{render 'doc/guides/00.toc.md.hbs' }}}
+
 {{#each drafts}}
 
 {{{title}}}
@@ -21,31 +23,6 @@
 
 {{/each}}
 
+{{{render 'doc/guides/20.contributing.md.hbs' }}}
+{{{render 'doc/guides/30links.md.hbs' }}}
 
-Contributing
------------
-
-This project itself is a npm package.
-
-
-To contributing, checkout this project to your local and install dependencies.
-
-```bash
-git clone git@github.com:{{pkg.repository}}.git
-cd sugos-tutorial
-npm install
-```
-
-Then, edit articles under `src` directory and run
-
-```bash
-./ci/build.js
-```
-
-This will render articles into `dist` directory.
-
-
-Links
------------
-
-+ [SUGOS]({{{links.sugos}}})

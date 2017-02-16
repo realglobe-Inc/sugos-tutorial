@@ -49,10 +49,6 @@ exports.en = [
     filename: 'dist/markdown/en/02%20-%20Using%20Event%20Emit.md'
   },
   {
-    title: '03 - Communication betweein Browsers',
-    filename: 'dist/markdown/en/03%20-%20Communication%20betweein%20Browsers.md'
-  },
-  {
     title: '03 - Communication between Browsers',
     filename: 'dist/markdown/en/03%20-%20Communication%20between%20Browsers.md'
   },

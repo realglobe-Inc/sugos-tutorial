@@ -79,7 +79,7 @@ window.addEventListener('DOMContentLoaded', function () {
   _reactDom2.default.render(_react2.default.createElement(ActorWorkspace, { actorKey: 'my-actor-01' }), document.getElementById('actor-mount-root'));
 });
 
-},{"babel-polyfill":17,"react":683,"react-dom":532,"sugo-actor":734}],2:[function(require,module,exports){
+},{"babel-polyfill":17,"react":683,"react-dom":532,"sugo-actor":735}],2:[function(require,module,exports){
 module.exports = after
 
 function after(count, callback, err_cb) {
@@ -1012,7 +1012,7 @@ var objectKeys = Object.keys || function (obj) {
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"util/":760}],17:[function(require,module,exports){
+},{"util/":765}],17:[function(require,module,exports){
 (function (global){
 "use strict";
 
@@ -12811,7 +12811,7 @@ Polling.prototype.uri = function () {
   return schema + '://' + (ipv6 ? '[' + this.hostname + ']' : this.hostname) + port + this.path + query;
 };
 
-},{"../transport":472,"component-inherit":59,"debug":479,"engine.io-parser":481,"parseqs":525,"xmlhttprequest-ssl":478,"yeast":762}],477:[function(require,module,exports){
+},{"../transport":472,"component-inherit":59,"debug":479,"engine.io-parser":481,"parseqs":525,"xmlhttprequest-ssl":478,"yeast":767}],477:[function(require,module,exports){
 (function (global){
 /**
  * Module dependencies.
@@ -13100,7 +13100,7 @@ WS.prototype.check = function () {
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"../transport":472,"component-inherit":59,"debug":479,"engine.io-parser":481,"parseqs":525,"ws":49,"yeast":762}],478:[function(require,module,exports){
+},{"../transport":472,"component-inherit":59,"debug":479,"engine.io-parser":481,"parseqs":525,"ws":49,"yeast":767}],478:[function(require,module,exports){
 (function (global){
 // browser shim for xmlhttprequest module
 
@@ -14137,7 +14137,7 @@ exports.decodePayloadAsBinary = function (data, binaryType, callback) {
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./keys":482,"after":2,"arraybuffer.slice":7,"base64-arraybuffer":47,"blob":48,"has-binary":508,"wtf-8":761}],482:[function(require,module,exports){
+},{"./keys":482,"after":2,"arraybuffer.slice":7,"base64-arraybuffer":47,"blob":48,"has-binary":508,"wtf-8":766}],482:[function(require,module,exports){
 
 /**
  * Gets the keys for an object.
@@ -39924,7 +39924,7 @@ module.exports = SgValidator;
  * @typedef {Object} ValidationError
  */
 
-},{"assert":16,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/createClass":37,"tv4":755}],717:[function(require,module,exports){
+},{"assert":16,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/createClass":37,"tv4":760}],717:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -41044,7 +41044,7 @@ Socket.prototype.compress = function (compress) {
   return this;
 };
 
-},{"./on":719,"component-bind":57,"component-emitter":58,"debug":722,"has-binary":508,"socket.io-parser":725,"to-array":754}],721:[function(require,module,exports){
+},{"./on":719,"component-bind":57,"component-emitter":58,"debug":722,"has-binary":508,"socket.io-parser":725,"to-array":759}],721:[function(require,module,exports){
 (function (global){
 
 /**
@@ -42390,10 +42390,31 @@ function create() {
 
 module.exports = create;
 
-},{"./sugo_actor":736}],732:[function(require,module,exports){
+},{"./sugo_actor":739}],732:[function(require,module,exports){
+/**
+ * Emitting modules
+ * @module emitting
+ */
+
+'use strict';
+
+var d = function d(module) {
+  return module && module.default || module;
+};
+
+module.exports = {
+  get messageFormatter() {
+    return d(require('./message_formatter'));
+  },
+  get WsEmitter() {
+    return d(require('./ws_emitter'));
+  }
+};
+
+},{"./message_formatter":733,"./ws_emitter":734}],733:[function(require,module,exports){
 /**
  * Formatter for emit message
- * @module
+ * @module messageFormatter
  */
 'use strict';
 
@@ -42433,10 +42454,10 @@ module.exports = (0, _assign2.default)(exports, {
   }
 });
 
-},{"asenv":10,"babel-runtime/core-js/object/assign":23,"os":523,"sg-socket-constants":708}],733:[function(require,module,exports){
+},{"asenv":10,"babel-runtime/core-js/object/assign":23,"os":523,"sg-socket-constants":708}],734:[function(require,module,exports){
 /**
  * Module emitter for WebSocket
- * @class WSEmitter
+ * @class WsEmitter
  */
 'use strict';
 
@@ -42482,16 +42503,16 @@ var _require3 = require('sg-serializer'),
     parse = _require3.parse,
     format = _require3.format;
 
-/** @lends WSEmitter */
+/** @lends WsEmitter */
 
 
-var WSEmitter = function (_EventEmitter) {
-  (0, _inherits3.default)(WSEmitter, _EventEmitter);
+var WsEmitter = function (_EventEmitter) {
+  (0, _inherits3.default)(WsEmitter, _EventEmitter);
 
-  function WSEmitter(socket, moduleName, defaults) {
-    (0, _classCallCheck3.default)(this, WSEmitter);
+  function WsEmitter(socket, moduleName, defaults) {
+    (0, _classCallCheck3.default)(this, WsEmitter);
 
-    var _this = (0, _possibleConstructorReturn3.default)(this, (WSEmitter.__proto__ || (0, _getPrototypeOf2.default)(WSEmitter)).call(this));
+    var _this = (0, _possibleConstructorReturn3.default)(this, (WsEmitter.__proto__ || (0, _getPrototypeOf2.default)(WsEmitter)).call(this));
 
     var s = _this;
 
@@ -42540,7 +42561,7 @@ var WSEmitter = function (_EventEmitter) {
    */
 
 
-  (0, _createClass3.default)(WSEmitter, [{
+  (0, _createClass3.default)(WsEmitter, [{
     key: 'open',
     value: function open() {
       var s = this;
@@ -42572,16 +42593,16 @@ var WSEmitter = function (_EventEmitter) {
       socket.off(PIPE, pipeHandler);
     }
   }]);
-  return WSEmitter;
+  return WsEmitter;
 }(EventEmitter);
 
-module.exports = WSEmitter;
+module.exports = WsEmitter;
 
-},{"babel-runtime/core-js/object/assign":23,"babel-runtime/core-js/object/get-prototype-of":29,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/createClass":37,"babel-runtime/helpers/inherits":40,"babel-runtime/helpers/possibleConstructorReturn":41,"babel-runtime/helpers/typeof":44,"events":483,"sg-serializer":695,"sg-socket-constants":708}],734:[function(require,module,exports){
+},{"babel-runtime/core-js/object/assign":23,"babel-runtime/core-js/object/get-prototype-of":29,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/createClass":37,"babel-runtime/helpers/inherits":40,"babel-runtime/helpers/possibleConstructorReturn":41,"babel-runtime/helpers/typeof":44,"events":483,"sg-serializer":695,"sg-socket-constants":708}],735:[function(require,module,exports){
 /**
  * Actor component of SUGOS.
  * @module sugo-actor
- * @version 4.5.3
+ * @version 4.6.0
  * @license Apache-2.0
  */
 
@@ -42612,7 +42633,7 @@ var lib = create.bind(undefined);
 
 module.exports = lib;
 
-},{"./create":731,"./module":735,"./sugo_actor":736,"babel-runtime/core-js/object/assign":23}],735:[function(require,module,exports){
+},{"./create":731,"./module":736,"./sugo_actor":739,"babel-runtime/core-js/object/assign":23}],736:[function(require,module,exports){
 /**
  * Module for actor
  * @class SugoActorModule
@@ -42661,7 +42682,79 @@ module.exports = (0, _assign2.default)(function (_Module) {
   compose: compose, modularize: modularize, isModule: isModule
 });
 
-},{"babel-runtime/core-js/object/assign":23,"babel-runtime/core-js/object/get-prototype-of":29,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/inherits":40,"babel-runtime/helpers/possibleConstructorReturn":41,"sugo-module-base":747}],736:[function(require,module,exports){
+},{"babel-runtime/core-js/object/assign":23,"babel-runtime/core-js/object/get-prototype-of":29,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/inherits":40,"babel-runtime/helpers/possibleConstructorReturn":41,"sugo-module-base":752}],737:[function(require,module,exports){
+/**
+ * Parsing modules
+ * @module parsing
+ */
+
+'use strict';
+
+var d = function d(module) {
+  return module && module.default || module;
+};
+
+module.exports = {
+  get parseActorUrl() {
+    return d(require('./parse_actor_url'));
+  }
+};
+
+},{"./parse_actor_url":738}],738:[function(require,module,exports){
+/**
+ * Parse actor URL
+ * @function parseActorUrl
+ * @param {Object}
+ * @returns {string}
+ */
+'use strict';
+
+var _require = require('url'),
+    formatUrl = _require.format,
+    parseUrl = _require.parse,
+    resolveUrl = _require.resolve;
+
+var _require2 = require('bwindow'),
+    get = _require2.get;
+
+var _require3 = require('sugo-constants'),
+    HubUrls = _require3.HubUrls;
+
+/** @lends parseActorUrl */
+
+
+function parseActorUrl(url) {
+  if (typeof url === 'string') {
+    var parsed = parseUrl(url);
+    if (parsed.pathname === '/') {
+      var suggestion = resolveUrl(url, HubUrls.ACTOR_URL);
+      console.warn('[SUGO-Actor][Warning] Passed URL "' + url + '" seems to be wrong. Did you mean "' + suggestion + '"');
+    }
+    return url;
+  }
+  var _url$protocol = url.protocol,
+      protocol = _url$protocol === undefined ? get('location.protocol') || 'http' : _url$protocol,
+      _url$host = url.host,
+      host = _url$host === undefined ? undefined : _url$host,
+      _url$port = url.port,
+      port = _url$port === undefined ? get('location.port') || 80 : _url$port,
+      _url$hostname = url.hostname,
+      hostname = _url$hostname === undefined ? get('location.hostname') || 'localhost' : _url$hostname,
+      _url$pathname = url.pathname,
+      pathname = _url$pathname === undefined ? HubUrls.ACTOR_URL : _url$pathname;
+
+  return formatUrl({
+    protocol: protocol,
+    host: host,
+    port: port,
+    hostname: hostname,
+    pathname: pathname
+  });
+}
+
+module.exports = parseActorUrl;
+
+},{"bwindow":53,"sugo-constants":746,"url":761}],739:[function(require,module,exports){
 /**
  * @class SugoActor
  * @param {string} url - Cloud server url
@@ -42677,6 +42770,10 @@ var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
 
 var _defineProperty3 = _interopRequireDefault(_defineProperty2);
 
+var _getIterator2 = require('babel-runtime/core-js/get-iterator');
+
+var _getIterator3 = _interopRequireDefault(_getIterator2);
+
 var _regenerator = require('babel-runtime/regenerator');
 
 var _regenerator2 = _interopRequireDefault(_regenerator);
@@ -42684,10 +42781,6 @@ var _regenerator2 = _interopRequireDefault(_regenerator);
 var _typeof2 = require('babel-runtime/helpers/typeof');
 
 var _typeof3 = _interopRequireDefault(_typeof2);
-
-var _getIterator2 = require('babel-runtime/core-js/get-iterator');
-
-var _getIterator3 = _interopRequireDefault(_getIterator2);
 
 var _promise = require('babel-runtime/core-js/promise');
 
@@ -42730,20 +42823,19 @@ var asleep = require('asleep');
 var Module = require('./module');
 
 var sgQueue = require('sg-queue');
-var WSEmitter = require('./emitting/ws_emitter');
-var validatePerformConfig = require('./validating/validate_perform_config');
 
-var _require = require('sugo-constants'),
-    ReservedNames = _require.ReservedNames;
+var _require = require('sg-socket-constants'),
+    ReservedEvents = _require.ReservedEvents,
+    AuthEvents = _require.AuthEvents,
+    GreetingEvents = _require.GreetingEvents,
+    RemoteEvents = _require.RemoteEvents;
 
-var _require2 = require('sg-socket-constants'),
-    ReservedEvents = _require2.ReservedEvents,
-    AuthEvents = _require2.AuthEvents,
-    GreetingEvents = _require2.GreetingEvents,
-    RemoteEvents = _require2.RemoteEvents;
+var _require2 = require('events'),
+    EventEmitter = _require2.EventEmitter;
 
-var _require3 = require('events'),
-    EventEmitter = _require3.EventEmitter;
+var _require3 = require('./validating'),
+    validatePerformConfig = _require3.validatePerformConfig,
+    validateModules = _require3.validateModules;
 
 var ERROR = ReservedEvents.ERROR;
 var HI = GreetingEvents.HI,
@@ -42755,22 +42847,21 @@ var AUTHENTICATION = AuthEvents.AUTHENTICATION,
     AUTHENTICATED = AuthEvents.AUTHENTICATED,
     UNAUTHORIZED = AuthEvents.UNAUTHORIZED;
 
-var _require4 = require('./emitting/message_formatter'),
-    ok = _require4.ok,
-    ng = _require4.ng;
+var _require4 = require('./parsing'),
+    _parseActorUrl = _require4.parseActorUrl;
 
-var formatUrl = require('url').format;
+var _require5 = require('./emitting'),
+    messageFormatter = _require5.messageFormatter,
+    WsEmitter = _require5.WsEmitter;
+
+var ok = messageFormatter.ok,
+    ng = messageFormatter.ng;
+
 var argx = require('argx');
 
-var _require5 = require('bwindow'),
-    get = _require5.get;
-
-var _require6 = require('sugo-constants'),
-    HubUrls = _require6.HubUrls;
-
-var _require7 = require('sg-serializer'),
-    parse = _require7.parse,
-    format = _require7.format;
+var _require6 = require('sg-serializer'),
+    parse = _require6.parse,
+    format = _require6.format;
 
 var _connectQueue = sgQueue();
 
@@ -42789,7 +42880,7 @@ var SugoActor = function (_EventEmitter) {
     config = args.shift('object') || {};
 
     if (!url) {
-      url = SugoActor.urlFromConfig(config);
+      url = _parseActorUrl(config);
     }
 
     var _this = (0, _possibleConstructorReturn3.default)(this, (SugoActor.__proto__ || (0, _getPrototypeOf2.default)(SugoActor)).call(this));
@@ -42827,30 +42918,10 @@ var SugoActor = function (_EventEmitter) {
       }
     }
 
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-      for (var _iterator = (0, _getIterator3.default)(ReservedNames.MODULE.split(',')), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var reserved = _step.value;
-
-        if (module.hasOwnProperty(reserved)) {
-          throw new Error('You cannot use "' + reserved + '" as a module name since it is reserved.');
-        }
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
+    {
+      var modulesError = validateModules(modules);
+      if (modulesError) {
+        throw modulesError;
       }
     }
 
@@ -42883,7 +42954,7 @@ var SugoActor = function (_EventEmitter) {
 
       var doConnect = function doConnect() {
         return co(_regenerator2.default.mark(function _callee2() {
-          var socket, hi, payload, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, name;
+          var socket, hi, payload, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, name;
 
           return _regenerator2.default.wrap(function _callee2$(_context2) {
             while (1) {
@@ -42936,24 +43007,24 @@ var SugoActor = function (_EventEmitter) {
                   payload = hi.payload;
 
                   s.key = s.key || payload.key;
-                  _iteratorNormalCompletion2 = true;
-                  _didIteratorError2 = false;
-                  _iteratorError2 = undefined;
+                  _iteratorNormalCompletion = true;
+                  _didIteratorError = false;
+                  _iteratorError = undefined;
                   _context2.prev = 19;
-                  _iterator2 = (0, _getIterator3.default)((0, _keys2.default)(modules || {}));
+                  _iterator = (0, _getIterator3.default)((0, _keys2.default)(modules || {}));
 
                 case 21:
-                  if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
+                  if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
                     _context2.next = 28;
                     break;
                   }
 
-                  name = _step2.value;
+                  name = _step.value;
                   _context2.next = 25;
                   return s.load(name, modules[name]);
 
                 case 25:
-                  _iteratorNormalCompletion2 = true;
+                  _iteratorNormalCompletion = true;
                   _context2.next = 21;
                   break;
 
@@ -42964,26 +43035,26 @@ var SugoActor = function (_EventEmitter) {
                 case 30:
                   _context2.prev = 30;
                   _context2.t0 = _context2['catch'](19);
-                  _didIteratorError2 = true;
-                  _iteratorError2 = _context2.t0;
+                  _didIteratorError = true;
+                  _iteratorError = _context2.t0;
 
                 case 34:
                   _context2.prev = 34;
                   _context2.prev = 35;
 
-                  if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                    _iterator2.return();
+                  if (!_iteratorNormalCompletion && _iterator.return) {
+                    _iterator.return();
                   }
 
                 case 37:
                   _context2.prev = 37;
 
-                  if (!_didIteratorError2) {
+                  if (!_didIteratorError) {
                     _context2.next = 40;
                     break;
                   }
 
-                  throw _iteratorError2;
+                  throw _iteratorError;
 
                 case 40:
                   return _context2.finish(37);
@@ -43064,7 +43135,7 @@ var SugoActor = function (_EventEmitter) {
           loadedModules = s.loadedModules;
 
       return co(_regenerator2.default.mark(function _callee3() {
-        var socket, _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3, name, _iteratorNormalCompletion4, _didIteratorError4, _iteratorError4, _iterator4, _step4, _name, pipe;
+        var socket, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, name, _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3, _name, pipe;
 
         return _regenerator2.default.wrap(function _callee3$(_context3) {
           while (1) {
@@ -43080,24 +43151,24 @@ var SugoActor = function (_EventEmitter) {
                 return _context3.abrupt('return');
 
               case 3:
-                _iteratorNormalCompletion3 = true;
-                _didIteratorError3 = false;
-                _iteratorError3 = undefined;
+                _iteratorNormalCompletion2 = true;
+                _didIteratorError2 = false;
+                _iteratorError2 = undefined;
                 _context3.prev = 6;
-                _iterator3 = (0, _getIterator3.default)((0, _keys2.default)(loadedModules || {}));
+                _iterator2 = (0, _getIterator3.default)((0, _keys2.default)(loadedModules || {}));
 
               case 8:
-                if (_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done) {
+                if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
                   _context3.next = 15;
                   break;
                 }
 
-                name = _step3.value;
+                name = _step2.value;
                 _context3.next = 12;
                 return s.unload(name);
 
               case 12:
-                _iteratorNormalCompletion3 = true;
+                _iteratorNormalCompletion2 = true;
                 _context3.next = 8;
                 break;
 
@@ -43108,26 +43179,26 @@ var SugoActor = function (_EventEmitter) {
               case 17:
                 _context3.prev = 17;
                 _context3.t0 = _context3['catch'](6);
-                _didIteratorError3 = true;
-                _iteratorError3 = _context3.t0;
+                _didIteratorError2 = true;
+                _iteratorError2 = _context3.t0;
 
               case 21:
                 _context3.prev = 21;
                 _context3.prev = 22;
 
-                if (!_iteratorNormalCompletion3 && _iterator3.return) {
-                  _iterator3.return();
+                if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                  _iterator2.return();
                 }
 
               case 24:
                 _context3.prev = 24;
 
-                if (!_didIteratorError3) {
+                if (!_didIteratorError2) {
                   _context3.next = 27;
                   break;
                 }
 
-                throw _iteratorError3;
+                throw _iteratorError2;
 
               case 27:
                 return _context3.finish(24);
@@ -43136,14 +43207,14 @@ var SugoActor = function (_EventEmitter) {
                 return _context3.finish(21);
 
               case 29:
-                _iteratorNormalCompletion4 = true;
-                _didIteratorError4 = false;
-                _iteratorError4 = undefined;
+                _iteratorNormalCompletion3 = true;
+                _didIteratorError3 = false;
+                _iteratorError3 = undefined;
                 _context3.prev = 32;
 
 
-                for (_iterator4 = (0, _getIterator3.default)((0, _keys2.default)(pipes)); !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-                  _name = _step4.value;
+                for (_iterator3 = (0, _getIterator3.default)((0, _keys2.default)(pipes)); !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+                  _name = _step3.value;
                   pipe = pipes[_name];
 
                   pipe.close();
@@ -43155,26 +43226,26 @@ var SugoActor = function (_EventEmitter) {
               case 36:
                 _context3.prev = 36;
                 _context3.t1 = _context3['catch'](32);
-                _didIteratorError4 = true;
-                _iteratorError4 = _context3.t1;
+                _didIteratorError3 = true;
+                _iteratorError3 = _context3.t1;
 
               case 40:
                 _context3.prev = 40;
                 _context3.prev = 41;
 
-                if (!_iteratorNormalCompletion4 && _iterator4.return) {
-                  _iterator4.return();
+                if (!_iteratorNormalCompletion3 && _iterator3.return) {
+                  _iterator3.return();
                 }
 
               case 43:
                 _context3.prev = 43;
 
-                if (!_didIteratorError4) {
+                if (!_didIteratorError3) {
                   _context3.next = 46;
                   break;
                 }
 
-                throw _iteratorError4;
+                throw _iteratorError3;
 
               case 46:
                 return _context3.finish(43);
@@ -43280,7 +43351,7 @@ var SugoActor = function (_EventEmitter) {
           socket = s.socket;
 
       return co(_regenerator2.default.mark(function _callee5() {
-        var $$actor, spec, pipe, _iteratorNormalCompletion5, _didIteratorError5, _iteratorError5, _iterator5, _step5, _key, val, hasEmitter;
+        var $$actor, spec, pipe, _iteratorNormalCompletion4, _didIteratorError4, _iteratorError4, _iterator4, _step4, _key, val, hasEmitter;
 
         return _regenerator2.default.wrap(function _callee5$(_context5) {
           while (1) {
@@ -43301,7 +43372,7 @@ var SugoActor = function (_EventEmitter) {
                 return socket.call(SPEC, { name: moduleName, spec: spec });
 
               case 6:
-                pipe = new WSEmitter(socket, moduleName, { key: key });
+                pipe = new WsEmitter(socket, moduleName, { key: key });
 
                 module.$$registerEmitter(pipe);
                 module.$$actor = s;
@@ -43310,19 +43381,19 @@ var SugoActor = function (_EventEmitter) {
                 s.loadedModules[moduleName] = module;
 
                 // Load sub modules
-                _iteratorNormalCompletion5 = true;
-                _didIteratorError5 = false;
-                _iteratorError5 = undefined;
+                _iteratorNormalCompletion4 = true;
+                _didIteratorError4 = false;
+                _iteratorError4 = undefined;
                 _context5.prev = 15;
-                _iterator5 = (0, _getIterator3.default)((0, _keys2.default)(module));
+                _iterator4 = (0, _getIterator3.default)((0, _keys2.default)(module));
 
               case 17:
-                if (_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done) {
+                if (_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done) {
                   _context5.next = 28;
                   break;
                 }
 
-                _key = _step5.value;
+                _key = _step4.value;
                 val = module[_key];
 
                 if (!Module.isModule(val)) {
@@ -43341,7 +43412,7 @@ var SugoActor = function (_EventEmitter) {
                 return s.loadSub(moduleName, (0, _defineProperty3.default)({}, _key, val));
 
               case 25:
-                _iteratorNormalCompletion5 = true;
+                _iteratorNormalCompletion4 = true;
                 _context5.next = 17;
                 break;
 
@@ -43352,26 +43423,26 @@ var SugoActor = function (_EventEmitter) {
               case 30:
                 _context5.prev = 30;
                 _context5.t0 = _context5['catch'](15);
-                _didIteratorError5 = true;
-                _iteratorError5 = _context5.t0;
+                _didIteratorError4 = true;
+                _iteratorError4 = _context5.t0;
 
               case 34:
                 _context5.prev = 34;
                 _context5.prev = 35;
 
-                if (!_iteratorNormalCompletion5 && _iterator5.return) {
-                  _iterator5.return();
+                if (!_iteratorNormalCompletion4 && _iterator4.return) {
+                  _iterator4.return();
                 }
 
               case 37:
                 _context5.prev = 37;
 
-                if (!_didIteratorError5) {
+                if (!_didIteratorError4) {
                   _context5.next = 40;
                   break;
                 }
 
-                throw _iteratorError5;
+                throw _iteratorError4;
 
               case 40:
                 return _context5.finish(37);
@@ -43401,32 +43472,32 @@ var SugoActor = function (_EventEmitter) {
       var s = this;
       s.assertConnection();
       return co(_regenerator2.default.mark(function _callee6() {
-        var _iteratorNormalCompletion6, _didIteratorError6, _iteratorError6, _iterator6, _step6, subModuleName, fullName;
+        var _iteratorNormalCompletion5, _didIteratorError5, _iteratorError5, _iterator5, _step5, subModuleName, fullName;
 
         return _regenerator2.default.wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
                 subModules = Module.compose(subModules);
-                _iteratorNormalCompletion6 = true;
-                _didIteratorError6 = false;
-                _iteratorError6 = undefined;
+                _iteratorNormalCompletion5 = true;
+                _didIteratorError5 = false;
+                _iteratorError5 = undefined;
                 _context6.prev = 4;
-                _iterator6 = (0, _getIterator3.default)((0, _keys2.default)(subModules));
+                _iterator5 = (0, _getIterator3.default)((0, _keys2.default)(subModules));
 
               case 6:
-                if (_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done) {
+                if (_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done) {
                   _context6.next = 14;
                   break;
                 }
 
-                subModuleName = _step6.value;
+                subModuleName = _step5.value;
                 fullName = [moduleName, subModuleName].join('.');
                 _context6.next = 11;
                 return s.load(fullName, subModules[subModuleName]);
 
               case 11:
-                _iteratorNormalCompletion6 = true;
+                _iteratorNormalCompletion5 = true;
                 _context6.next = 6;
                 break;
 
@@ -43437,26 +43508,26 @@ var SugoActor = function (_EventEmitter) {
               case 16:
                 _context6.prev = 16;
                 _context6.t0 = _context6['catch'](4);
-                _didIteratorError6 = true;
-                _iteratorError6 = _context6.t0;
+                _didIteratorError5 = true;
+                _iteratorError5 = _context6.t0;
 
               case 20:
                 _context6.prev = 20;
                 _context6.prev = 21;
 
-                if (!_iteratorNormalCompletion6 && _iterator6.return) {
-                  _iterator6.return();
+                if (!_iteratorNormalCompletion5 && _iterator5.return) {
+                  _iterator5.return();
                 }
 
               case 23:
                 _context6.prev = 23;
 
-                if (!_didIteratorError6) {
+                if (!_didIteratorError5) {
                   _context6.next = 26;
                   break;
                 }
 
-                throw _iteratorError6;
+                throw _iteratorError5;
 
               case 26:
                 return _context6.finish(23);
@@ -43484,8 +43555,7 @@ var SugoActor = function (_EventEmitter) {
     value: function unload(name) {
       var s = this;
       s.assertConnection();
-      var key = s.key,
-          socket = s.socket,
+      var socket = s.socket,
           loadedModules = s.loadedModules;
 
       return co(_regenerator2.default.mark(function _callee7() {
@@ -43520,30 +43590,30 @@ var SugoActor = function (_EventEmitter) {
     value: function unloadSub(moduleName, subModuleNames) {
       var s = this;
       return co(_regenerator2.default.mark(function _callee8() {
-        var _iteratorNormalCompletion7, _didIteratorError7, _iteratorError7, _iterator7, _step7, subModuleName;
+        var _iteratorNormalCompletion6, _didIteratorError6, _iteratorError6, _iterator6, _step6, subModuleName;
 
         return _regenerator2.default.wrap(function _callee8$(_context8) {
           while (1) {
             switch (_context8.prev = _context8.next) {
               case 0:
-                _iteratorNormalCompletion7 = true;
-                _didIteratorError7 = false;
-                _iteratorError7 = undefined;
+                _iteratorNormalCompletion6 = true;
+                _didIteratorError6 = false;
+                _iteratorError6 = undefined;
                 _context8.prev = 3;
-                _iterator7 = (0, _getIterator3.default)(subModuleNames);
+                _iterator6 = (0, _getIterator3.default)(subModuleNames);
 
               case 5:
-                if (_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done) {
+                if (_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done) {
                   _context8.next = 12;
                   break;
                 }
 
-                subModuleName = _step7.value;
+                subModuleName = _step6.value;
                 _context8.next = 9;
                 return s.unload([moduleName, subModuleName].join('.'));
 
               case 9:
-                _iteratorNormalCompletion7 = true;
+                _iteratorNormalCompletion6 = true;
                 _context8.next = 5;
                 break;
 
@@ -43554,26 +43624,26 @@ var SugoActor = function (_EventEmitter) {
               case 14:
                 _context8.prev = 14;
                 _context8.t0 = _context8['catch'](3);
-                _didIteratorError7 = true;
-                _iteratorError7 = _context8.t0;
+                _didIteratorError6 = true;
+                _iteratorError6 = _context8.t0;
 
               case 18:
                 _context8.prev = 18;
                 _context8.prev = 19;
 
-                if (!_iteratorNormalCompletion7 && _iterator7.return) {
-                  _iterator7.return();
+                if (!_iteratorNormalCompletion6 && _iterator6.return) {
+                  _iterator6.return();
                 }
 
               case 21:
                 _context8.prev = 21;
 
-                if (!_didIteratorError7) {
+                if (!_didIteratorError6) {
                   _context8.next = 24;
                   break;
                 }
 
-                throw _iteratorError7;
+                throw _iteratorError6;
 
               case 24:
                 return _context8.finish(21);
@@ -43595,27 +43665,26 @@ var SugoActor = function (_EventEmitter) {
       var s = this;
       assert.ok(s.socket, '[SUGO-Actor] Not connected!');
     }
+
+    /**
+     * @deprecated
+     */
+
   }], [{
     key: 'urlFromConfig',
-    value: function urlFromConfig(config) {
-      var _config$protocol = config.protocol,
-          protocol = _config$protocol === undefined ? get('location.protocol') || 'http' : _config$protocol,
-          _config$host = config.host,
-          host = _config$host === undefined ? undefined : _config$host,
-          _config$port = config.port,
-          port = _config$port === undefined ? get('location.port') || 80 : _config$port,
-          _config$hostname = config.hostname,
-          hostname = _config$hostname === undefined ? get('location.hostname') || 'localhost' : _config$hostname,
-          _config$pathname = config.pathname,
-          pathname = _config$pathname === undefined ? HubUrls.ACTOR_URL : _config$pathname;
+    value: function urlFromConfig() {
+      console.warn('`SugoActor.urlFromConfig` is now deprecated. Use `SugoActor.parseActorUrl` instead');
+      return this.parseActorUrl.apply(this, arguments);
+    }
 
-      return formatUrl({
-        protocol: protocol,
-        host: host,
-        port: port,
-        hostname: hostname,
-        pathname: pathname
-      });
+    /**
+     * Parse actor url
+     */
+
+  }, {
+    key: 'parseActorUrl',
+    value: function parseActorUrl() {
+      return _parseActorUrl.apply(undefined, arguments);
     }
   }, {
     key: 'connectQueue',
@@ -43628,7 +43697,139 @@ var SugoActor = function (_EventEmitter) {
 
 module.exports = SugoActor;
 
-},{"./emitting/message_formatter":732,"./emitting/ws_emitter":733,"./module":735,"./validating/validate_perform_config":737,"argx":4,"asleep":15,"assert":16,"babel-runtime/core-js/get-iterator":19,"babel-runtime/core-js/object/assign":23,"babel-runtime/core-js/object/get-prototype-of":29,"babel-runtime/core-js/object/keys":30,"babel-runtime/core-js/promise":32,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/createClass":37,"babel-runtime/helpers/defineProperty":38,"babel-runtime/helpers/inherits":40,"babel-runtime/helpers/possibleConstructorReturn":41,"babel-runtime/helpers/typeof":44,"babel-runtime/regenerator":45,"bwindow":53,"co":56,"events":483,"sg-queue":687,"sg-serializer":695,"sg-socket-client":703,"sg-socket-constants":708,"sugo-constants":741,"url":756}],737:[function(require,module,exports){
+},{"./emitting":732,"./module":736,"./parsing":737,"./validating":740,"argx":4,"asleep":15,"assert":16,"babel-runtime/core-js/get-iterator":19,"babel-runtime/core-js/object/assign":23,"babel-runtime/core-js/object/get-prototype-of":29,"babel-runtime/core-js/object/keys":30,"babel-runtime/core-js/promise":32,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/createClass":37,"babel-runtime/helpers/defineProperty":38,"babel-runtime/helpers/inherits":40,"babel-runtime/helpers/possibleConstructorReturn":41,"babel-runtime/helpers/typeof":44,"babel-runtime/regenerator":45,"co":56,"events":483,"sg-queue":687,"sg-serializer":695,"sg-socket-client":703,"sg-socket-constants":708}],740:[function(require,module,exports){
+/**
+ * Validating modules
+ * @module validating
+ */
+
+'use strict';
+
+var d = function d(module) {
+  return module && module.default || module;
+};
+
+module.exports = {
+  get validateModules() {
+    return d(require('./validate_modules'));
+  },
+  get validatePerformConfig() {
+    return d(require('./validate_perform_config'));
+  }
+};
+
+},{"./validate_modules":741,"./validate_perform_config":742}],741:[function(require,module,exports){
+/**
+ * Validate modules to load
+ * @function validateModules
+ * @param {Object} modules
+ * @returns {?Error} - Found errors
+ */
+'use strict';
+
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
+var _getIterator2 = require('babel-runtime/core-js/get-iterator');
+
+var _getIterator3 = _interopRequireDefault(_getIterator2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _require = require('sugo-constants'),
+    ReservedNames = _require.ReservedNames;
+
+/** @lends validateModules */
+
+
+function validateModules(modules) {
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = (0, _getIterator3.default)(ReservedNames.MODULE.split(',')), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var reservedModuleName = _step.value;
+
+      var ng = modules.hasOwnProperty(reservedModuleName);
+      if (ng) {
+        return new Error('[SUGO-Actor] You cannot use "' + reservedModuleName + '" as a module name since it is reserved.');
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  var _iteratorNormalCompletion2 = true;
+  var _didIteratorError2 = false;
+  var _iteratorError2 = undefined;
+
+  try {
+    for (var _iterator2 = (0, _getIterator3.default)((0, _keys2.default)(modules)), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+      var moduleName = _step2.value;
+
+      var _module = modules[moduleName];
+      var _iteratorNormalCompletion3 = true;
+      var _didIteratorError3 = false;
+      var _iteratorError3 = undefined;
+
+      try {
+        for (var _iterator3 = (0, _getIterator3.default)(ReservedNames.METHOD.split(',')), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+          var reservedMethodName = _step3.value;
+
+          var _ng = _module.hasOwnProperty(reservedMethodName);
+          if (_ng) {
+            return new Error('[SUGO-Actor] You cannot use "' + reservedMethodName + ' as a method name ( on module "' + moduleName + '") since it is reserved.');
+          }
+        }
+      } catch (err) {
+        _didIteratorError3 = true;
+        _iteratorError3 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion3 && _iterator3.return) {
+            _iterator3.return();
+          }
+        } finally {
+          if (_didIteratorError3) {
+            throw _iteratorError3;
+          }
+        }
+      }
+    }
+  } catch (err) {
+    _didIteratorError2 = true;
+    _iteratorError2 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion2 && _iterator2.return) {
+        _iterator2.return();
+      }
+    } finally {
+      if (_didIteratorError2) {
+        throw _iteratorError2;
+      }
+    }
+  }
+
+  return null;
+}
+
+module.exports = validateModules;
+
+},{"babel-runtime/core-js/get-iterator":19,"babel-runtime/core-js/object/keys":30,"sugo-constants":746}],742:[function(require,module,exports){
 /**
  * Validate config of perform request.
  * @function validatePerformConfig
@@ -43651,7 +43852,7 @@ function validatePerformConfig(config) {
 
 module.exports = validatePerformConfig;
 
-},{"sg-schemas":689,"sg-validator":715}],738:[function(require,module,exports){
+},{"sg-schemas":689,"sg-validator":715}],743:[function(require,module,exports){
 /**
  * Events for actor
  * @namespace ActorEvents
@@ -43668,7 +43869,7 @@ exports.TEARDOWN = 'actor:teardown';
 /** Update actor */
 exports.UPDATE = 'actor:update';
 
-},{}],739:[function(require,module,exports){
+},{}],744:[function(require,module,exports){
 /**
  * Events for caller
  * @namespace CallerEvents
@@ -43682,7 +43883,7 @@ exports.JOIN = 'caller:join';
 /** Leave caller */
 exports.LEAVE = 'caller:leave';
 
-},{}],740:[function(require,module,exports){
+},{}],745:[function(require,module,exports){
 /**
  * Constants of url
  * @namespace HubUrl
@@ -43706,7 +43907,7 @@ module.exports = (0, _assign2.default)(exports, {
   HUB_URL: '/hubs'
 });
 
-},{"babel-runtime/core-js/object/assign":23}],741:[function(require,module,exports){
+},{"babel-runtime/core-js/object/assign":23}],746:[function(require,module,exports){
 /**
  * Constant variables for SUGOS
  * @module sugo-constants
@@ -43733,7 +43934,7 @@ module.exports = {
   }
 };
 
-},{"./actor_events":738,"./caller_events":739,"./hub_urls":740,"./reserved_names":742}],742:[function(require,module,exports){
+},{"./actor_events":743,"./caller_events":744,"./hub_urls":745,"./reserved_names":747}],747:[function(require,module,exports){
 /**
  *  Names reserved
  */
@@ -43746,7 +43947,7 @@ exports.MODULE = 'module';
 /** Reserved method names */
 exports.METHOD = 'constructor,emit,addListener,removeListener,removeAllListeners,listeners,listenerCount,setMaxListeners,getMaxListeners,eventNames,on,off,once';
 
-},{}],743:[function(require,module,exports){
+},{}],748:[function(require,module,exports){
 /**
  * Compose multiple modules.
  * @function compose
@@ -43813,7 +44014,7 @@ function compose(modules) {
 
 module.exports = compose;
 
-},{"./is_module":748,"./module":753,"babel-runtime/core-js/get-iterator":19,"babel-runtime/core-js/object/keys":30}],744:[function(require,module,exports){
+},{"./is_module":753,"./module":758,"babel-runtime/core-js/get-iterator":19,"babel-runtime/core-js/object/keys":30}],749:[function(require,module,exports){
 /**
  * Normalize a configuration
  * @function normalize
@@ -43842,7 +44043,7 @@ function normalize(config) {
 
 module.exports = normalize;
 
-},{"babel-runtime/core-js/object/assign":23,"defaults":468}],745:[function(require,module,exports){
+},{"babel-runtime/core-js/object/assign":23,"defaults":468}],750:[function(require,module,exports){
 /**
  * Validate configuration
  * @param {Object} config
@@ -43914,7 +44115,7 @@ function validate(config) {
 
 module.exports = validate;
 
-},{"babel-runtime/core-js/get-iterator":19,"babel-runtime/core-js/object/keys":30,"sg-schemas":689,"sg-validator":715,"sugo-constants":741}],746:[function(require,module,exports){
+},{"babel-runtime/core-js/get-iterator":19,"babel-runtime/core-js/object/keys":30,"sg-schemas":689,"sg-validator":715,"sugo-constants":746}],751:[function(require,module,exports){
 /**
  * Create a module instance
  * @function create
@@ -43935,7 +44136,7 @@ function create() {
 
 module.exports = create;
 
-},{"./module":753}],747:[function(require,module,exports){
+},{"./module":758}],752:[function(require,module,exports){
 /**
  * Base module for SUGOS
  * @module sugo-module-base
@@ -43968,7 +44169,7 @@ var lib = create.bind(undefined);
 
 module.exports = lib;
 
-},{"./compose":743,"./create":746,"./is_module":748,"./modularize":752,"./module":753,"babel-runtime/core-js/object/assign":23}],748:[function(require,module,exports){
+},{"./compose":748,"./create":751,"./is_module":753,"./modularize":757,"./module":758,"babel-runtime/core-js/object/assign":23}],753:[function(require,module,exports){
 /**
  * Detect an object is a module or not
  * @function isModule
@@ -43989,7 +44190,7 @@ function isModule(obj) {
 
 module.exports = isModule;
 
-},{"./module":753}],749:[function(require,module,exports){
+},{"./module":758}],754:[function(require,module,exports){
 /**
  * Mix emitter functions
  * @function emitterMixin
@@ -44197,7 +44398,7 @@ function emitterMixin(BaseClass) {
 
 module.exports = emitterMixin;
 
-},{"babel-runtime/core-js/object/get-prototype-of":29,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/createClass":37,"babel-runtime/helpers/inherits":40,"babel-runtime/helpers/possibleConstructorReturn":41,"babel-runtime/helpers/toConsumableArray":43,"defaults":468}],750:[function(require,module,exports){
+},{"babel-runtime/core-js/object/get-prototype-of":29,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/createClass":37,"babel-runtime/helpers/inherits":40,"babel-runtime/helpers/possibleConstructorReturn":41,"babel-runtime/helpers/toConsumableArray":43,"defaults":468}],755:[function(require,module,exports){
 /**
  * Mixin for method invocation
  * @function invokeMixin
@@ -44274,7 +44475,7 @@ function invokeMixin(BaseClass) {
 
 module.exports = invokeMixin;
 
-},{"babel-runtime/core-js/object/get-prototype-of":29,"babel-runtime/core-js/promise":32,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/createClass":37,"babel-runtime/helpers/inherits":40,"babel-runtime/helpers/possibleConstructorReturn":41,"babel-runtime/helpers/toConsumableArray":43}],751:[function(require,module,exports){
+},{"babel-runtime/core-js/object/get-prototype-of":29,"babel-runtime/core-js/promise":32,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/createClass":37,"babel-runtime/helpers/inherits":40,"babel-runtime/helpers/possibleConstructorReturn":41,"babel-runtime/helpers/toConsumableArray":43}],756:[function(require,module,exports){
 /**
  * Mixin for spec
  * @function specMixin
@@ -44431,7 +44632,7 @@ function specMixin(BaseClass) {
 
 module.exports = specMixin;
 
-},{"babel-runtime/core-js/get-iterator":19,"babel-runtime/core-js/object/assign":23,"babel-runtime/core-js/object/get-own-property-names":28,"babel-runtime/core-js/object/get-prototype-of":29,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/createClass":37,"babel-runtime/helpers/get":39,"babel-runtime/helpers/inherits":40,"babel-runtime/helpers/possibleConstructorReturn":41,"babel-runtime/helpers/toConsumableArray":43,"sugo-constants":741}],752:[function(require,module,exports){
+},{"babel-runtime/core-js/get-iterator":19,"babel-runtime/core-js/object/assign":23,"babel-runtime/core-js/object/get-own-property-names":28,"babel-runtime/core-js/object/get-prototype-of":29,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/createClass":37,"babel-runtime/helpers/get":39,"babel-runtime/helpers/inherits":40,"babel-runtime/helpers/possibleConstructorReturn":41,"babel-runtime/helpers/toConsumableArray":43,"sugo-constants":746}],757:[function(require,module,exports){
 /**
  * Create a new module class from existing class object.
  * @function modularize
@@ -44511,7 +44712,7 @@ function modularize(BaseClass) {
 
 module.exports = modularize;
 
-},{"./mixins/emitter_mixin":749,"./mixins/invoke_mixin":750,"./mixins/spec_mixin":751,"babel-runtime/core-js/object/get-prototype-of":29,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/createClass":37,"babel-runtime/helpers/inherits":40,"babel-runtime/helpers/possibleConstructorReturn":41,"babel-runtime/helpers/slicedToArray":42}],753:[function(require,module,exports){
+},{"./mixins/emitter_mixin":754,"./mixins/invoke_mixin":755,"./mixins/spec_mixin":756,"babel-runtime/core-js/object/get-prototype-of":29,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/createClass":37,"babel-runtime/helpers/inherits":40,"babel-runtime/helpers/possibleConstructorReturn":41,"babel-runtime/helpers/slicedToArray":42}],758:[function(require,module,exports){
 /**
  * Demo SUGO-Module
  * @class Module
@@ -44584,7 +44785,7 @@ var Module = function (_modularize) {
 
 module.exports = Module;
 
-},{"./compose":743,"./configure/normalize":744,"./configure/validate":745,"./modularize":752,"babel-runtime/core-js/object/assign":23,"babel-runtime/core-js/object/get-prototype-of":29,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/createClass":37,"babel-runtime/helpers/inherits":40,"babel-runtime/helpers/possibleConstructorReturn":41,"debug":466}],754:[function(require,module,exports){
+},{"./compose":748,"./configure/normalize":749,"./configure/validate":750,"./modularize":757,"babel-runtime/core-js/object/assign":23,"babel-runtime/core-js/object/get-prototype-of":29,"babel-runtime/helpers/classCallCheck":36,"babel-runtime/helpers/createClass":37,"babel-runtime/helpers/inherits":40,"babel-runtime/helpers/possibleConstructorReturn":41,"debug":466}],759:[function(require,module,exports){
 module.exports = toArray
 
 function toArray(list, index) {
@@ -44599,7 +44800,7 @@ function toArray(list, index) {
     return array
 }
 
-},{}],755:[function(require,module,exports){
+},{}],760:[function(require,module,exports){
 /*
 Author: Geraint Luff and others
 Year: 2013
@@ -46277,7 +46478,7 @@ tv4.tv4 = tv4;
 return tv4; // used by _header.js to globalise.
 
 }));
-},{}],756:[function(require,module,exports){
+},{}],761:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -47011,7 +47212,7 @@ Url.prototype.parseHost = function() {
   if (host) this.hostname = host;
 };
 
-},{"./util":757,"punycode":528,"querystring":531}],757:[function(require,module,exports){
+},{"./util":762,"punycode":528,"querystring":531}],762:[function(require,module,exports){
 'use strict';
 
 module.exports = {
@@ -47029,7 +47230,7 @@ module.exports = {
   }
 };
 
-},{}],758:[function(require,module,exports){
+},{}],763:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -47054,14 +47255,14 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],759:[function(require,module,exports){
+},{}],764:[function(require,module,exports){
 module.exports = function isBuffer(arg) {
   return arg && typeof arg === 'object'
     && typeof arg.copy === 'function'
     && typeof arg.fill === 'function'
     && typeof arg.readUInt8 === 'function';
 }
-},{}],760:[function(require,module,exports){
+},{}],765:[function(require,module,exports){
 (function (process,global){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -47651,7 +47852,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./support/isBuffer":759,"_process":527,"inherits":758}],761:[function(require,module,exports){
+},{"./support/isBuffer":764,"_process":527,"inherits":763}],766:[function(require,module,exports){
 (function (global){
 /*! https://mths.be/wtf8 v1.0.0 by @mathias */
 ;(function(root) {
@@ -47889,7 +48090,7 @@ function hasOwnProperty(obj, prop) {
 }(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],762:[function(require,module,exports){
+},{}],767:[function(require,module,exports){
 'use strict';
 
 var alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz-_'.split('')

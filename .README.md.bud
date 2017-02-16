@@ -20,8 +20,8 @@ module.exports = {
         filename: path.join(path.dirname(filename), encodeURIComponent(unorm.nfc(path.basename(filename, '.md'))) + '.md')
       }))
       return [
-        { title: '日本語コンテンツ', contents: contents('dist/markdown/ja/*.md') },
-        { title: 'English Contents', contents: contents('dist/markdown/en/*.md') }
+        { title: 'English Contents', contents: contents('dist/markdown/en/*.md') },
+        { title: '日本語コンテンツ', contents: contents('dist/markdown/ja/*.md') }
       ]
     }
   }
