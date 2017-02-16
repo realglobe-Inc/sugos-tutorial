@@ -1,7 +1,7 @@
 /**
  * Tutorial for SUGOS
  * @module sugos-tutorial
- * @version 1.1.3
+ * @version 1.1.4
  */
 'use strict'
 
@@ -49,10 +49,6 @@ exports.en = [
     filename: 'dist/markdown/en/02%20-%20Using%20Event%20Emit.md'
   },
   {
-    title: '03 - Communication betweein Browsers',
-    filename: 'dist/markdown/en/03%20-%20Communication%20betweein%20Browsers.md'
-  },
-  {
     title: '03 - Communication between Browsers',
     filename: 'dist/markdown/en/03%20-%20Communication%20between%20Browsers.md'
   },
@@ -63,5 +59,9 @@ exports.en = [
   {
     title: '05 - Authenticate Actors and Callers',
     filename: 'dist/markdown/en/05%20-%20Authenticate%20Actors%20and%20Callers.md'
+  },
+  {
+    title: '06 - Using Observers',
+    filename: 'dist/markdown/en/06%20-%20Using%20Observers.md'
   }
 ]

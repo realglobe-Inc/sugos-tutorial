@@ -26,6 +26,7 @@ runTasks('build', [
   () => coz.render([
     '.*.bud',
     'lib/.*.bud',
+    'doc/**/.*.bud',
     'test/.*.bud'
   ]),
   () => co(function * () {

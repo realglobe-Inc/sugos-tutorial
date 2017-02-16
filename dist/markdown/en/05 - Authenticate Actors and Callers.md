@@ -1,9 +1,9 @@
-# [SUGOS Tutorial] 04 - Module as npm package
+# [SUGOS Tutorial] 05 - Authenticate Actors and Callers
 
 This tutorial shows you how to authenticate actors and callers on hub.
 
 
-<a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/04%20-%20Module%20as%20npm%20package.md">
+<a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/05%20-%20Authenticate%20Actors%20and%20Callers.md">
     <img src="../../images/eyecatch-auth.jpg"
          alt="eyecatch"
          height="128"
@@ -11,8 +11,6 @@ This tutorial shows you how to authenticate actors and callers on hub.
     /></a>
 
 
-## Table of Contents
-  * [まとめ](#%E3%81%BE%E3%81%A8%E3%82%81)
 
 
 ## Try It Out
@@ -233,8 +231,8 @@ node ./caller.js
 
 ## You may Want to Read
 
-+ Previous Tutorial: [03 - Communication between Browsers](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/03%20-%20Communication%20between%20Browsers.md)
-+ Next Tutorial: [05 - Authenticate Actors and Callers](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/05%20-%20Authenticate%20Actors%20and%20Callers.md)
++ Previous Tutorial: [04 - Module as npm package](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/04%20-%20Module%20as%20npm%20package.md)
++ Next Tutorial: [06 - Using Observers](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/06%20-%20Using%20Observers.md)
 
 
 ## Links
@@ -246,7 +244,7 @@ node ./caller.js
 + [00 - Let us begin with SUGOS](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/00%20-%20Let%20us%20begin%20with%20SUGOS.md)
 + [01 - Hello World, as always](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/01%20-%20Hello%20World%2C%20as%20always.md)
 + [02 - Using Event Emit](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/02%20-%20Using%20Event%20Emit.md)
-+ [03 - Communication betweein Browsers](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/03%20-%20Communication%20betweein%20Browsers.md)
 + [03 - Communication between Browsers](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/03%20-%20Communication%20between%20Browsers.md)
 + [04 - Module as npm package](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/04%20-%20Module%20as%20npm%20package.md)
 + [05 - Authenticate Actors and Callers](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/05%20-%20Authenticate%20Actors%20and%20Callers.md)
++ [06 - Using Observers](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/06%20-%20Using%20Observers.md)
