@@ -200,6 +200,7 @@ co(function * () {
   let tableTennis = myActor01.get('tableTennis')
 
   let pong = yield tableTennis.ping('hello world!')
+  console.log(pong)
   console.log(`Pong from myActor01/tableTennis: "${pong}"`)
 }).catch((err) => console.error(err))
 

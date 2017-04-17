@@ -1,6 +1,6 @@
 # [SUGOS Tutorial] 06 - Using Observers
 
-[Sugo Observer](https://github.com/realglobe-Inc/sugo-observer#readme) enables you to observe actors and callers on hub from client side.
+[SUGO-Observer](https://github.com/realglobe-Inc/sugo-observer#readme) enables you to observe actors and callers on hub from client side.
 
 On this tutorial, emit logs when actor and caller connected to hub.
 

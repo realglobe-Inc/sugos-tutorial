@@ -13,9 +13,9 @@
     "co": "^4.6.0",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
-    "sugo-actor": "^4.2.3",
-    "sugo-caller": "^2.1.14",
-    "sugo-hub": "^3.0.13"
+    "sugo-actor": "latest",
+    "sugo-caller": "latest",
+    "sugo-hub": "latest"
   },
   "devDependencies": {
     "babel-preset-es2015": "^6.13.2",

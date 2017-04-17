@@ -1,0 +1,112 @@
+# {{prefix}} {{{cur.name}}}
+
+
+This tutorials shows you to how to scale out [SUGO-Hub](https://github.com/realglobe-Inc/sugo-hub#readme).
+Hub instances connected same redis server act like same instance.
+
+
+<a href="{{{cur.url}}}">
+    <img src="{{{imgDir}}}/eyecatch-dynamic.jpg"
+         alt="eyecatch"
+         height="{{eyecatchHeight}}"
+         style="height:{{eyecatchHeight}}px"
+    /></a>
+
+{{#if toc}}
+## {{{tocTitle}}}
+{{{toc}}}
+{{/if}}
+
+
+## Try It Out
+
+Prepare project directory, as usual.
+
+
+```bash
+{{{read 'example/tutorial-07/init-project.sh'}}}
+```
+
+Then, install dependencies.
+
+
+```bash
+{{{read 'example/tutorial-07/install-deps.sh'}}}
+```
+
+### Running Redis Server
+
+Start [Redis]({{{links.sugos}}}) on locale。By default, it listens port 6379.
+
+```bash
+{{{read 'example/tutorial-07/run-redis.sh'}}}
+```
+
+
+### Running Hub Server
+
+This time create 2 hub instances with different pots.
+
+**hub.js**
+
+```javascript
+{{{read 'example/tutorial-07/hub.js'}}}
+```
+```bash
+{{{read 'example/tutorial-07/run-hub.sh'}}}
+```
+
+### Connecting Actor to Hub
+
+Prepare actors for each hubs
+
+**actor.js**
+
+```javascript
+{{{read 'example/tutorial-07/actor.js'}}}
+```
+
+```bash
+{{{read 'example/tutorial-07/run-actor.sh'}}}
+```
+
+
+### Connecting Caller to Hub
+
+Prepare a caller and connect to each actors.
+
+
+**caller.js**
+
+```javascript
+{{{read 'example/tutorial-07/caller.js'}}}
+```
+
+```bash
+{{{read 'example/tutorial-07/run-caller.sh'}}}
+```
+
+However the caller is on the hub01 (with port 3000), it can connect to the actor who is on hub01 (with port 3001).
+
+
+### Conclusion
+
++ SUGO-Hub can be scaled out with Redis
++ Scaled hubs act like a single hub
+
+
+## You may Want to Read
+
++ Previous Tutorial: [{{{prev.name}}}]({{{prev.url}}})
++ Next Tutorial: [{{{next.name}}}]({{{next.url}}})
+
+
+## Links
+
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Scaffold]({{{links.sugo-scaffold}}})
++ Tutorials
+{{#each markdowns}}
++ [{{{name}}}]({{{url}}})
+{{/each}}
