@@ -1,6 +1,6 @@
 {
   "name": "sugos-tutorial",
-  "version": "1.1.4",
+  "version": "1.2.0",
   "description": "Tutorial for SUGOS",
   "main": "index.js",
   "scripts": {
@@ -29,14 +29,14 @@
     "debug": "^2.6.1",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",
-    "sugo-actor": "^4.5.4",
-    "sugo-caller": "^3.2.2",
-    "sugo-hub": "^5.2.0",
+    "sugo-actor": "^5.0.1",
+    "sugo-caller": "^4.0.1",
+    "sugo-hub": "^6.0.1",
     "sugo-observer": "^2.0.11"
   },
   "devDependencies": {
-    "aglob": "^1.0.2",
-    "amocha": "^1.0.13",
+    "aglob": "^2.0.1",
+    "amocha": "^2.0.0",
     "ape-formatting": "^1.0.2",
     "ape-releasing": "^4.0.1",
     "ape-reporting": "^3.0.1",
@@ -49,7 +49,7 @@
     "browserify": "^14.0.0",
     "browserify-incremental": "^3.1.1",
     "coz": "^6.0.5",
-    "filecopy": "^2.0.2",
+    "filecopy": "^3.0.1",
     "injectmock": "^2.0.0",
     "markdown-toc": "^1.1.0",
     "sugos-assets": "^2.0.3",

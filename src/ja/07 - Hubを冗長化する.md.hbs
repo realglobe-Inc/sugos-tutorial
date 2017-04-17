@@ -1,0 +1,112 @@
+# {{prefix}} {{{cur.name}}}
+
+
+今回は[SUGO-Hub](https://github.com/realglobe-Inc/sugo-hub#readme)をスケールアウトしてみます。
+複数のHubインスタンスを同一のRedisサーバに接続することによって、CallerやActorからHubの違いを意識せずに済むようになります。
+
+
+
+<a href="{{{cur.url}}}">
+    <img src="{{{imgDir}}}/eyecatch-spread.jpg"
+         alt="eyecatch"
+         height="{{eyecatchHeight}}"
+         style="height:{{eyecatchHeight}}px"
+    /></a>
+
+{{#if toc}}
+## {{{tocTitle}}}
+{{{toc}}}
+{{/if}}
+
+
+## 実装してみる
+
+いつも通り、まずはプロジェクトディレクトリを用意し、
+
+
+```bash
+{{{read 'example/tutorial-07/init-project.sh'}}}
+```
+
+
+```bash
+{{{read 'example/tutorial-07/install-deps.sh'}}}
+```
+
+### Redisサーバを立てる
+
+ローカルで[Redis]({{{links.sugos}}})を実行します。デフォルトで6379ポートをlistenします
+
+```bash
+{{{read 'example/tutorial-07/run-redis.sh'}}}
+```
+
+
+### Hubサーバを立てる
+
+今回は異なる二つのportそれぞれに大してhubサーバを立てます
+
+**hub.js**
+
+```javascript
+{{{read 'example/tutorial-07/hub.js'}}}
+```
+```bash
+{{{read 'example/tutorial-07/run-hub.sh'}}}
+```
+
+### Actorを用意する
+
+それぞれのサーバに大してactorを用意します。
+
+**actor.js**
+
+```javascript
+{{{read 'example/tutorial-07/actor.js'}}}
+```
+
+```bash
+{{{read 'example/tutorial-07/run-actor.sh'}}}
+```
+
+
+### Callerを用意する
+
+Callerから先に用意した二つのactorに接続します。
+
+
+**caller.js**
+
+```javascript
+{{{read 'example/tutorial-07/caller.js'}}}
+```
+
+```bash
+{{{read 'example/tutorial-07/run-caller.sh'}}}
+```
+
+Callerそのものは3000ポートのhub01に接続しているにも関わらず、3001ポートのhub02上のactorにも接続できることが確認できます
+
+
+
+### まとめ
+
++ Redisを使うことでSUGO-Hubを冗長化できる
++ ActorやCallerからは、どのHubインスタンスいるかを気にしなくて良い
+
+
+
+## これも読みたい
+
++ 前回: [{{{prev.name}}}]({{{prev.url}}})
++ 次回: [{{{next.name}}}]({{{next.url}}})
+
+## リンク
+
++ [SUGOS]({{{links.sugos}}})
++ [SUGO-Actor]({{{links.sugo-actor}}})
++ [SUGO-Scaffold]({{{links.sugo-scaffold}}})
++ Tutorials
+{{#each markdowns}}
+  + [{{{name}}}]({{{url}}})
+{{/each}}

@@ -1,8 +1,8 @@
 {
-  "name": "sugos-tutorial-01",
+  "name": "sugos-tutorial-07",
   "version": "1.0.0",
   "private": true,
-  "description": "Example for tutorial-01",
+  "description": "Example for tutorial-07",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

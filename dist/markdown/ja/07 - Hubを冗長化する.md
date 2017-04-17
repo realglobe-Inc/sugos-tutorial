@@ -1,13 +1,13 @@
-# 【SUGOSチュートリアル】 06 - Observerを使ってみる
-
-[SUGO-Observer](https://github.com/realglobe-Inc/sugo-observer#readme)を使うと、ActorやCallerの接続状態をクライアント側から監視できます。
-これにより、例えばActorがHubで繋がったタイミングで動的にCallerを繋げる、といった処理が可能になります。
-
-今回はActorやCallerの接続時にログを出すだけの簡単な実装をしてみます。
+# 【SUGOSチュートリアル】 07 - Hubを冗長化する
 
 
-<a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/06%20-%20Observer%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.md">
-    <img src="../../images/eyecatch-dynamic.jpg"
+今回は[SUGO-Hub](https://github.com/realglobe-Inc/sugo-hub#readme)をスケールアウトしてみます。
+複数のHubインスタンスを同一のRedisサーバに接続することによって、CallerやActorからHubの違いを意識せずに済むようになります。
+
+
+
+<a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/07%20-%20Hub%E3%82%92%E5%86%97%E9%95%B7%E5%8C%96%E3%81%99%E3%82%8B.md">
+    <img src="../../images/eyecatch-spread.jpg"
          alt="eyecatch"
          height="128"
          style="height:128px"
@@ -15,8 +15,8 @@
 
 ## 内容
 - [実装してみる](#%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%A6%E3%81%BF%E3%82%8B)
+  * [Redisサーバを立てる](#redis%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B)
   * [Hubサーバを立てる](#hub%E3%82%B5%E3%83%BC%E3%83%90%E3%82%92%E7%AB%8B%E3%81%A6%E3%82%8B)
-  * [Observerを用意する](#observer%E3%82%92%E7%94%A8%E6%84%8F%E3%81%99%E3%82%8B)
   * [Actorを用意する](#actor%E3%82%92%E7%94%A8%E6%84%8F%E3%81%99%E3%82%8B)
   * [Callerを用意する](#caller%E3%82%92%E7%94%A8%E6%84%8F%E3%81%99%E3%82%8B)
   * [まとめ](#%E3%81%BE%E3%81%A8%E3%82%81)
@@ -36,15 +36,23 @@ npm init -y
 
 ```
 
-必要なパッケージをインストール。sugo-actorやsugo-callerに加え、sugo-observerもインストールします
 
 ```bash
 npm install sugo-actor sugo-caller sugo-hub sugo-observer co asleep -S
 ```
 
+### Redisサーバを立てる
+
+ローカルで[Redis](https://github.com/realglobe-Inc/sugos)を実行します。デフォルトで6379ポートをlistenします
+
+```bash
+redis-server
+```
+
+
 ### Hubサーバを立てる
 
-ここはいつも通り
+今回は異なる二つのportそれぞれに大してhubサーバを立てます
 
 **hub.js**
 
@@ -56,10 +64,25 @@ npm install sugo-actor sugo-caller sugo-hub sugo-observer co asleep -S
 const sugoHub = require('sugo-hub')
 const co = require('co')
 
+const ports = [ 3000, 3001 ]
+
 co(function * () {
-  let hub = sugoHub({})
-  yield hub.listen(3000)
-  console.log(`SUGO Cloud started at port: ${hub.port}`)
+  // Start hub server for each ports
+  for (let port of ports) {
+    let hub = sugoHub({
+      storage: {
+        // Use redis as storage
+        // See https://github.com/realglobe-Inc/sugo-hub#using-redis-server
+        redis: {
+          host: 'localhost',
+          port: '6379',
+          db: 1
+        }
+      }
+    })
+    yield hub.listen(port)
+    console.log(`SUGO Cloud started at port: ${hub.port}`)
+  }
 }).catch((err) => {
   console.error(err)
   process.exit(1)
@@ -70,60 +93,9 @@ co(function * () {
 node ./hub.js
 ```
 
-### Observerを用意する
-
-SUGO-Observerのファクトリーメソッド（`.sugoObserver(handler, config)`）を利用して、インスタンスを作成します。
-
-
-**observer.js**
-
-```javascript
-#!/usr/bin/env node
-/**
- * Use sugo observer
- * @see https://github.com/realglobe-Inc/sugo-observer#readme
- */
-'use strict'
-
-const sugoObserver = require('sugo-observer')
-const asleep = require('asleep')
-const co = require('co')
-
-co(function * () {
-  let observer = sugoObserver(({ event, data }) => {
-    switch (event) {
-      case 'actor:setup': {
-        let { key } = data
-        console.log(`New actor joined: ${key}`)
-        break
-      }
-      case 'caller:join': {
-        let { actor } = data
-        console.log(`New called joined to actor: ${actor.key}`)
-        break
-      }
-      default:
-        break
-    }
-  }, {
-    host: 'localhost:3000'
-  })
-
-  yield observer.start() // Start observing
-  /* ... */
-  yield asleep(200000)
-  yield observer.stop() // Stop observing
-
-}).catch((err) => console.error(err))
-
-```
-
-```bash
-node ./observer.js
-```
-
-
 ### Actorを用意する
+
+それぞれのサーバに大してactorを用意します。
 
 **actor.js**
 
@@ -137,28 +109,40 @@ const { Module } = sugoActor
 const co = require('co')
 const asleep = require('asleep')
 
+const HUB_O1 = 'localhost:3000'
+const HUB_O2 = 'localhost:3001'
+
 co(function * () {
-  let actor = sugoActor({
-    host: 'localhost:3000',
-    key: 'my-actor-06',
-    /** Modules to load */
-    modules: {
-      tableTennis: new Module({
-        ping (message = '') {
-          // Just wait 500ms and return pong.
-          return co(function * () {
-            yield asleep(500)
-            return `pong! ${message}`
-          })
-        }
+  const tableTennis = () => new Module({
+    ping (message = '') {
+      // Just wait 500ms and return pong.
+      return co(function * () {
+        yield asleep(500)
+        return `pong! ${message}`
       })
     }
   })
 
-// Connect to hub
-  yield actor.connect()
+  // Prepare actors for each hubs
+  let actors = [
+    sugoActor({
+      host: HUB_O1,
+      key: 'my-actor-07@hub01',
+      modules: { tableTennis: tableTennis() }
+    }),
+    sugoActor({
+      host: HUB_O2,
+      key: 'my-actor-07@hub02',
+      modules: { tableTennis: tableTennis() }
+    })
+  ]
 
-  console.log(`Actor connected to: ${actor.socket.io.uri}`)
+  for (let actor of actors) {
+    // Connect to hub
+    yield actor.connect()
+
+    console.log(`Actor connected to: ${actor.socket.io.uri}`)
+  }
 }).catch((err) => console.error(err))
 
 ```
@@ -167,9 +151,10 @@ co(function * () {
 node ./actor.js
 ```
 
-実行すると、observer側のメッセージが表示されます。
 
 ### Callerを用意する
+
+Callerから先に用意した二つのactorに接続します。
 
 
 **caller.js**
@@ -185,17 +170,27 @@ node ./actor.js
 const sugoCaller = require('sugo-caller')
 const co = require('co')
 
+const HUB_O1 = 'localhost:3000'
+
 co(function * () {
   let caller = sugoCaller({
-    host: 'localhost:3000'
+    host: HUB_O1
   })
 
-  // Connect to actor
-  let myActor06 = yield caller.connect('my-actor-06')
-  let tableTennis = myActor06.get('tableTennis')
+  // Try actors on each hub
+  let actorKeys = [
+    'my-actor-07@hub01',
+    'my-actor-07@hub02'
+  ]
 
-  let pong = yield tableTennis.ping('hello world!')
-  console.log(`Pong from myActor06/tableTennis: "${pong}"`)
+  for (let actorKey of actorKeys) {
+    // Connect to actor
+    let myActor07 = yield caller.connect(actorKey)
+    let tableTennis = myActor07.get('tableTennis')
+
+    let pong = yield tableTennis.ping('hello world!')
+    console.log(`Pong from ${actorKey}/tableTennis: "${pong}"`)
+  }
 }).catch((err) => console.error(err))
 
 
@@ -205,20 +200,21 @@ co(function * () {
 node ./caller.js
 ```
 
-実行すると、observer側のメッセージが表示されます。
+Callerそのものは3000ポートのhub01に接続しているにも関わらず、3001ポートのhub02上のactorにも接続できることが確認できます
+
 
 
 ### まとめ
 
-+ SUGO-Observerを使うことで、クライアントからHubを監視できる
-+ ActorやCallerの接続を検知できる
++ Redisを使うことでSUGO-Hubを冗長化できる
++ ActorやCallerからは、どのHubインスタンスいるかを気にしなくて良い
 
 
 
 ## これも読みたい
 
-+ 前回: [05 - ActorやCallerを認証する](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/05%20-%20Actor%E3%82%84Caller%E3%82%92%E8%AA%8D%E8%A8%BC%E3%81%99%E3%82%8B.md)
-+ 次回: [07 - Hubを冗長化する](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/07%20-%20Hub%E3%82%92%E5%86%97%E9%95%B7%E5%8C%96%E3%81%99%E3%82%8B.md)
++ 前回: [06 - Observerを使ってみる](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/06%20-%20Observer%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.md)
++ 次回: []()
 
 ## リンク
 

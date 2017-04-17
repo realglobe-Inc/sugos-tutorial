@@ -1,7 +1,7 @@
 /**
  * Tutorial for SUGOS
  * @module sugos-tutorial
- * @version 1.1.4
+ * @version 1.2.0
  */
 'use strict'
 
@@ -33,6 +33,10 @@ exports.ja = [
   {
     title: '06 - Observerを使ってみる',
     filename: 'dist/markdown/ja/06%20-%20Observer%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B.md'
+  },
+  {
+    title: '07 - Hubを冗長化する',
+    filename: 'dist/markdown/ja/07%20-%20Hub%E3%82%92%E5%86%97%E9%95%B7%E5%8C%96%E3%81%99%E3%82%8B.md'
   }
 ]
 exports.en = [
@@ -63,5 +67,9 @@ exports.en = [
   {
     title: '06 - Using Observers',
     filename: 'dist/markdown/en/06%20-%20Using%20Observers.md'
+  },
+  {
+    title: '07 - Scaling Out Hubs',
+    filename: 'dist/markdown/en/07%20-%20Scaling%20Out%20Hubs.md'
   }
 ]

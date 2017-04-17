@@ -200,6 +200,7 @@ co(function * () {
   let tableTennis = myActor01.get('tableTennis')
 
   let pong = yield tableTennis.ping('hello world!')
+  console.log(pong)
   console.log(`Pong from myActor01/tableTennis: "${pong}"`)
 }).catch((err) => console.error(err))
 
@@ -243,3 +244,4 @@ Code snippets of this tutorial are also [available here](https://github.com/real
   + [04 - Module as npm package](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/04%20-%20Module%20as%20npm%20package.md)
   + [05 - Authenticate Actors and Callers](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/05%20-%20Authenticate%20Actors%20and%20Callers.md)
   + [06 - Using Observers](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/06%20-%20Using%20Observers.md)
+  + [07 - Scaling Out Hubs](https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/en/07%20-%20Scaling%20Out%20Hubs.md)
