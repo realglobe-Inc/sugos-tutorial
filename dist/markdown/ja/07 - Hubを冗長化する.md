@@ -7,7 +7,7 @@
 
 
 <a href="https://github.com/realglobe-Inc/sugos-tutorial/blob/master/dist/markdown/ja/07%20-%20Hub%E3%82%92%E5%86%97%E9%95%B7%E5%8C%96%E3%81%99%E3%82%8B.md">
-    <img src="../../images/eyecatch-dynamic.jpg"
+    <img src="../../images/eyecatch-spread.jpg"
          alt="eyecatch"
          height="128"
          style="height:128px"

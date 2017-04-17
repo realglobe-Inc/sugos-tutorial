@@ -1,7 +1,7 @@
 /**
  * Tutorial for SUGOS
  * @module sugos-tutorial
- * @version 1.1.4
+ * @version 1.2.0
  */
 'use strict'
 
