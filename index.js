@@ -67,5 +67,9 @@ exports.en = [
   {
     title: '06 - Using Observers',
     filename: 'dist/markdown/en/06%20-%20Using%20Observers.md'
+  },
+  {
+    title: '07 - Scaling Out Hubs',
+    filename: 'dist/markdown/en/07%20-%20Scaling%20Out%20Hubs.md'
   }
 ]

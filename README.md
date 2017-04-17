@@ -30,6 +30,7 @@ English Contents
 + [04 - Module as npm package](dist/markdown/en/04%20-%20Module%20as%20npm%20package.md)
 + [05 - Authenticate Actors and Callers](dist/markdown/en/05%20-%20Authenticate%20Actors%20and%20Callers.md)
 + [06 - Using Observers](dist/markdown/en/06%20-%20Using%20Observers.md)
++ [07 - Scaling Out Hubs](dist/markdown/en/07%20-%20Scaling%20Out%20Hubs.md)
 
 
 日本語コンテンツ
