@@ -107,6 +107,7 @@ node ./hub.js
 ### Moduleを宣言する
 
 次にActorにつなぐためのModuleを宣言します。
+
 ここではpingを打つとpongを返すだけの簡単なものを用意します。
 
 **modules/table-tennis.js**
